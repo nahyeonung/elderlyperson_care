@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 export default function View1({ navigation }) {
   return (
     <View style={styles.container}>
-      <Button title='Go to another page' onPress={() => navigation.navigate('view2')}/>
+      <Button title='Go to another page' onPress={() => navigation.navigate('login')}/>
     </View>
   );
 }
