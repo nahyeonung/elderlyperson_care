@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View, Alert } from 'react-native';
 import React, { useState } from 'react';
 import {
   KakaoOAuthToken,
@@ -10,15 +10,21 @@ import {
 } from '@react-native-seoul/kakao-login';
 import IntroView from './IntroView';
 
-export default function kakaologin() {
+export default function Kakaologin({navigation}) {
   const [result, setResult] = useState<string>('');
 
   const signInWithKakao = async (): Promise<void> => {
     try {
       const token = await login();
-      setResult(JSON.stringify(token));
+      const profile = await getKakaoProfile();
+      if(profile){
+        navigation.navigate('View2')
+      }
+      setResult(JSON.stringify(profile));
+      //setResult(JSON.stringify(token));
     } catch (err) {
       console.error('login err', err);
+      
     }
   };
 
@@ -91,22 +97,6 @@ export default function kakaologin() {
       </Pressable>
     </View>
   );
-  // const signInWithKakao = async (): Promise<void> => {
-  //   try{
-  //     console.log('형님 제발');
-  //     const token: KakaoOAuthToken = await login()
-  //     console.log(token)
-  //   }catch(e){
-  //     console.log(e)
-  //   }
-  // };
-
-
-  // return (
-  //   <View>
-  //     <Button title="로그인" onPress={signInWithKakao} />
-  //   </View>
-  // );
 }
 
 const styles = StyleSheet.create({

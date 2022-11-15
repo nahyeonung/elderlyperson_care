@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button, Pressable } from 'react-native';
-export default function HomeScreen({navigation}) {
-    return(
-       <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
-           <Pressable
-            style={styles.button}
-            title="To User Screen"
-              onPress={
-                  ()=> navigation.navigate('Kakaologin')  
-              } >
-             <Text style={styles.text}>안녕하세요</Text>
-             
-            </Pressable>
+export default function Nextpage({navigation}) {
+     return(
+        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
             
-         
-       </View>
-    )
- }
+            <Pressable
+             style={styles.button}
+             title="To User Screen"
+               onPress={
+                   ()=> navigation.navigate('Kakaologin') 
+                  
+               } >
+              <Text style={styles.text}>잘가세요</Text>
+              
+             </Pressable>
+             
+          
+        </View>
+     )
+   }
  
  const styles = StyleSheet.create({
 

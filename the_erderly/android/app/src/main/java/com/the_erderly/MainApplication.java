@@ -33,7 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
         if (packageInfo == null)
             Log.e("KeyHash", "KeyHash:null");
 
-1        for (Signature signature : packageInfo.signatures) {
+        for (Signature signature : packageInfo.signatures) {
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
