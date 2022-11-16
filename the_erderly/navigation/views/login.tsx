@@ -9,18 +9,25 @@ import {
   unlink,
 } from '@react-native-seoul/kakao-login';
 import IntroView from './IntroView';
+import database from '@react-native-firebase/database';
 
 export default function Kakaologin({navigation}) {
-  const [result, setResult] = useState<string>('');
-
+  const [nickname, setNickname] = useState<string>('');
+  const [photo, setPhoto] = useState<string>('');
+  console.log(nickname)
   const signInWithKakao = async (): Promise<void> => {
     try {
       const token = await login();
       const profile = await getKakaoProfile();
+      setNickname(JSON.stringify(profile['nickname']));
+      setPhoto(JSON.stringify(profile['profileImageUrl']))
+
+      database().ref('users/').push({
+        name: profile['nickname'],
+      });
       if(profile){
         navigation.navigate('View2')
       }
-      setResult(JSON.stringify(profile));
       //setResult(JSON.stringify(token));
     } catch (err) {
       console.error('login err', err);
@@ -32,7 +39,7 @@ export default function Kakaologin({navigation}) {
     try {
       const message = await logout();
 
-      setResult(message);
+      setNickname(message);
     } catch (err) {
       console.error('signOut error', err);
     }
@@ -42,7 +49,7 @@ export default function Kakaologin({navigation}) {
     try {
       const profile = await getKakaoProfile();
 
-      setResult(JSON.stringify(profile));
+      setNickname(JSON.stringify(profile));
     } catch (err) {
       console.error('signOut error', err);
     }
@@ -52,7 +59,7 @@ export default function Kakaologin({navigation}) {
     try {
       const message = await unlink();
 
-      setResult(message);
+      setNickname(message);
     } catch (err) {
       console.error('signOut error', err);
     }
@@ -60,7 +67,7 @@ export default function Kakaologin({navigation}) {
 
   return (
     <View style={styles.container}>
-      <IntroView result={result} />
+      <IntroView result={nickname} />
       <Pressable
         style={styles.button}
         onPress={() => {

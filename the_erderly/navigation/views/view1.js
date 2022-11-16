@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, Button, Pressable } from 'react-native';
 import database from '@react-native-firebase/database';
 
 export default function HomeScreen({navigation}) {
-  database()
-  .ref('/name')
-  .once('value')
-  .then(snapshot => {
-    console.log('User data: ', snapshot.val());
-  });
+  const [name, Setname] = useState('')
+  // database()
+  // .ref('/users')
+  // .once('value')
+  // .then(snapshot => {
+  //   Setname(snapshot.val())
+  // });
+
     return(
        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
            <Pressable
@@ -17,7 +19,7 @@ export default function HomeScreen({navigation}) {
               onPress={
                   ()=> navigation.navigate('Kakaologin')  
               } >
-             <Text style={styles.text}>안녕하세요</Text>
+             <Text style={styles.text}>{name}</Text>
              
             </Pressable>
             
