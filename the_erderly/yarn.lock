@@ -1388,7 +1388,7 @@
   "resolved" "https://registry.npmjs.org/@react-native-community/eslint-plugin/-/eslint-plugin-1.3.0.tgz"
   "version" "1.3.0"
 
-"@react-native-firebase/app@^16.4.4":
+"@react-native-firebase/app@^16.4.4", "@react-native-firebase/app@16.4.4":
   "integrity" "sha512-9nDhdfwvcN6f/UL+gp8G62TWzwxGKv11WYDYIhUA7HZQ9Ha4gBwMRKMtWJskUCp016k7Rj76b8Wwxca4fTm+iQ=="
   "resolved" "https://registry.npmjs.org/@react-native-firebase/app/-/app-16.4.4.tgz"
   "version" "16.4.4"
@@ -1396,6 +1396,11 @@
     "@expo/config-plugins" "^5.0.4"
     "opencollective-postinstall" "^2.0.1"
     "superstruct" "^0.6.2"
+
+"@react-native-firebase/database@^16.4.4":
+  "integrity" "sha512-F5qkaCZBgter2lgUU8P34cK5TFGu8gKg765xC3r2VfkUpt6BjlSZ/jUfU4DVn7YwCq0/a7epPjpwmwZstGfIYA=="
+  "resolved" "https://registry.npmjs.org/@react-native-firebase/database/-/database-16.4.4.tgz"
+  "version" "16.4.4"
 
 "@react-native-seoul/kakao-login@^5.2.4":
   "integrity" "sha512-8A0LilkjuZGckZvBBeYVnlpzfGuxl1ExYTKnrVXh8B9A/7X8ygT18zE8CL3fUceotZOH6nNjBtt7krOsU95/EQ=="

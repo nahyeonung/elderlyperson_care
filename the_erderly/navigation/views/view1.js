@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button, Pressable } from 'react-native';
+import database from '@react-native-firebase/database';
+
 export default function HomeScreen({navigation}) {
+  database()
+  .ref('/name')
+  .once('value')
+  .then(snapshot => {
+    console.log('User data: ', snapshot.val());
+  });
     return(
        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
            <Pressable
