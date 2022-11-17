@@ -5,11 +5,16 @@ import View1Svg from './Naver.svg';
 export default function HomeScreen({navigation}) {
   const [name, Setname] = useState('')
   // database()
-  // .ref('/users')
+  // .ref('/users/-NH41wzw7H4DflcxblCD')
   // .once('value')
   // .then(snapshot => {
-  //   Setname(snapshot.val())
+  //   console.log(snapshot.val())
   // });
+  database()
+  .ref('/users')
+  .on('value', snapshot => {
+    console.log('User data: ', snapshot.val());
+  });
 
     return(
        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>

@@ -14,19 +14,24 @@ import database from '@react-native-firebase/database';
 export default function Kakaologin({navigation}) {
   const [nickname, setNickname] = useState<string>('');
   const [photo, setPhoto] = useState<string>('');
+  const [id, setId] = useState<string>('');
   console.log(nickname)
   const signInWithKakao = async (): Promise<void> => {
     try {
       const token = await login();
       const profile = await getKakaoProfile();
+      console.log(profile)
       setNickname(JSON.stringify(profile['nickname']));
       setPhoto(JSON.stringify(profile['profileImageUrl']))
+      setId(JSON.stringify(profile['id']))
 
-      database().ref('users/').push({
+
+      database().ref('users/' + profile['nickname']+profile['id']).set({
         name: profile['nickname'],
+        imageUri: profile['profileImageUrl']
       });
       if(profile){
-        navigation.navigate('View2')
+        navigation.navigate('View2', profile['profileImageUrl'])
       }
       //setResult(JSON.stringify(token));
     } catch (err) {
