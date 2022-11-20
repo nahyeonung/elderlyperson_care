@@ -14,18 +14,22 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import loginview from './navigation/views/login';
 import start from './navigation/views/view1';
 import end from './navigation/views/view2';
+import { Provider } from 'react-redux';
+import { Store } from './navigation/redux/store';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
     return(
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="View1" component={start} />
-          <Stack.Screen name="View2" component={end} />
-          <Stack.Screen name="Kakaologin" component={loginview} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={Store}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="View1" component={start} />
+            <Stack.Screen name="View2" component={end} />
+            <Stack.Screen name="Kakaologin" component={loginview} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     )
 }
 

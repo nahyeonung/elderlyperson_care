@@ -10,25 +10,31 @@ import {
 } from '@react-native-seoul/kakao-login';
 import IntroView from './IntroView';
 import database from '@react-native-firebase/database';
+import { useSelector, useDispatch } from 'react-redux';
+import { setId } from '../redux/action';
 
 export default function Kakaologin({navigation}) {
-  const [nickname, setNickname] = useState<string>('');
-  const [photo, setPhoto] = useState<string>('');
-  const [id, setId] = useState<string>('');
+  const {id} = useSelector(state => state.userReducer);
+  const dispatch = useDispatch();
+  const [nickname, setNickname] = useState('');
+  const [photo, setPhoto] = useState('');
+  const [id2, setId2] = useState('');
   console.log(nickname)
-  const signInWithKakao = async (): Promise<void> => {
+  const signInWithKakao = async ()  => {
     try {
       const token = await login();
       const profile = await getKakaoProfile();
       console.log(profile)
+      dispatch(setId(profile['id']));
       setNickname(JSON.stringify(profile['nickname']));
       setPhoto(JSON.stringify(profile['profileImageUrl']))
-      setId(JSON.stringify(profile['id']))
+      setId2(JSON.stringify(profile['id']))
 
 
       database().ref('users/' + profile['nickname']+profile['id']).set({
         name: profile['nickname'],
-        imageUri: profile['profileImageUrl']
+        imageUri: profile['profileImageUrl'],
+        id: profile['id']
       });
       if(profile){
         navigation.navigate('View2', profile['profileImageUrl'])
@@ -40,7 +46,7 @@ export default function Kakaologin({navigation}) {
     }
   };
 
-  const signOutWithKakao = async (): Promise<void> => {
+  const signOutWithKakao = async ()  => {
     try {
       const message = await logout();
 
@@ -50,7 +56,7 @@ export default function Kakaologin({navigation}) {
     }
   };
 
-  const getProfile = async (): Promise<void> => {
+  const getProfile = async ()  => {
     try {
       const profile = await getKakaoProfile();
 
@@ -60,7 +66,7 @@ export default function Kakaologin({navigation}) {
     }
   };
 
-  const unlinkKakao = async (): Promise<void> => {
+  const unlinkKakao = async ()  => {
     try {
       const message = await unlink();
 
