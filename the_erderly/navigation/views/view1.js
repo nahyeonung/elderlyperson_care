@@ -20,6 +20,12 @@ export default function HomeScreen({navigation}) {
     console.log('User data: ', snapshot.val());
   });
 
+
+  const move = () => {
+    if(id) navigation.navigate('View2')
+    else navigation.navigate('Kakaologin')
+   }
+
     return(
        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
            <View1Svg/>
@@ -28,7 +34,7 @@ export default function HomeScreen({navigation}) {
             style={styles.button}
             title="To User Screen"
               onPress={
-                  ()=> navigation.navigate('Kakaologin')  
+                  ()=> move()
               } >
              <Text style={styles.text}>이용 시작</Text>  
              
@@ -38,6 +44,7 @@ export default function HomeScreen({navigation}) {
        </View>
     )
  }
+
  
  const styles = StyleSheet.create({
 

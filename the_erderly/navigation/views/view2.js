@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, Button, Pressable, Image } from 'react-native';
 import View2Svg from './Naver_main.svg';
 import View2_logoSvg from './revan_logo.svg';
+import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
 import { setId } from '../redux/action';
 
 export default function Nextpage({navigation}) {
   const {id} = useSelector(state => state.userReducer);
+  const [image, setImage] = useState('');
   const dispatch = useDispatch();
+  database()
+  .ref('/users/'+id+"/imageUri")
+  .once('value')
+  .then(snapshot => {
+    setImage(snapshot.val())
+  });
   const call = () =>{
     //   database()
     // .ref('/users')
@@ -27,7 +35,7 @@ export default function Nextpage({navigation}) {
           <View style={{flex: 2,alignItems:'center', justifyContent:'center'}}>
             <Image
               style={styles.image} 
-              source={{uri : 'https://k.kakaocdn.net/dn/k7OJG/btrMPfJkoLA/Ylatl8V0KiQT4a4oz62WJ0/img_640x640.jpg'}} />
+              source={{uri : image}} />
             <Text style={styles.text}>{id}</Text>
           </View>
           <View style={{flex: 0.5, marginLeft:30}}>

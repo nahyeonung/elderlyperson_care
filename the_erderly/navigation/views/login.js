@@ -31,7 +31,7 @@ export default function Kakaologin({navigation}) {
       setId2(JSON.stringify(profile['id']))
 
 
-      database().ref('users/' + profile['nickname']+profile['id']).set({
+      database().ref('users/' + profile['id']).set({
         name: profile['nickname'],
         imageUri: profile['profileImageUrl'],
         id: profile['id']
