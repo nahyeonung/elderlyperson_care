@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button, Pressable, Image } from 'react-native';
 import View2Svg from './Naver_main.svg';
 import View2_logoSvg from './revan_logo.svg';
+import { useSelector, useDispatch } from 'react-redux';
+import { setId } from '../redux/action';
 
 export default function Nextpage({navigation}) {
+  const {id} = useSelector(state => state.userReducer);
+  const dispatch = useDispatch();
   const call = () =>{
     //   database()
     // .ref('/users')
@@ -24,6 +28,7 @@ export default function Nextpage({navigation}) {
             <Image
               style={styles.image} 
               source={{uri : 'https://k.kakaocdn.net/dn/k7OJG/btrMPfJkoLA/Ylatl8V0KiQT4a4oz62WJ0/img_640x640.jpg'}} />
+            <Text style={styles.text}>{id}</Text>
           </View>
           <View style={{flex: 0.5, marginLeft:30}}>
              <View2Svg/>
@@ -67,7 +72,7 @@ export default function Nextpage({navigation}) {
     justifyContent: "center",
     fontSize: 20,
     fontWeight:"bold",
-    color:"white",
+    color:"black",
   },
   image:{
     width: 200,

@@ -23,7 +23,7 @@ export default function App() {
     return(
       <Provider store={Store}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="View1" component={start} />
             <Stack.Screen name="View2" component={end} />
             <Stack.Screen name="Kakaologin" component={loginview} />

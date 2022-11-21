@@ -2,7 +2,11 @@ import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, Button, Pressable } from 'react-native';
 import database from '@react-native-firebase/database';
 import View1Svg from './Naver.svg';
+import { useSelector, useDispatch } from 'react-redux';
+import { setId } from '../redux/action';
+
 export default function HomeScreen({navigation}) {
+  const {id} = useSelector(state => state.userReducer);
   const [name, Setname] = useState('')
   // database()
   // .ref('/users/-NH41wzw7H4DflcxblCD')
@@ -19,6 +23,7 @@ export default function HomeScreen({navigation}) {
     return(
        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
            <View1Svg/>
+           <Text style={styles.text2}>{id}</Text>
            <Pressable
             style={styles.button}
             title="To User Screen"
@@ -55,6 +60,14 @@ export default function HomeScreen({navigation}) {
     fontSize: 20,
     fontWeight: "bold",
     color: "white",
+    paddingTop: -3,
+  },
+  text2: {
+    alignItems: 'center' ,
+    justifyContent: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "black",
     paddingTop: -3,
   }
  })
