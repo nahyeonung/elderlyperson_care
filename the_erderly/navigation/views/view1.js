@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setId } from '../redux/action';
 
 export default function HomeScreen({navigation}) {
-  const {id} = useSelector(state => state.userReducer);
+  const {id, friendId} = useSelector(state => state.userReducer);
   const [name, Setname] = useState('')
   // database()
   // .ref('/users/-NH41wzw7H4DflcxblCD')
@@ -30,7 +30,7 @@ export default function HomeScreen({navigation}) {
     return(
        <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
            <View1Svg/>
-           <Text style={styles.text2}>{id}</Text>
+           <Text style={styles.text2}>{friendId}</Text>
            <Pressable
             style={styles.button}
             title="To User Screen"

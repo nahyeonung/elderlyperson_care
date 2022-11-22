@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { StyleSheet, View, Text, Button, Pressable, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Button, Pressable, TextInput, Alert } from 'react-native';
 import database from '@react-native-firebase/database';
 import RectangleSvg from '../../src/svgFile/Rectangle.svg';
 import RegisterSvg from '../../src/svgFile/register.svg';
@@ -8,10 +8,14 @@ import { setId } from '../redux/action';
 
 
 export default function Registration({navigation}) {
+    const {id} = useSelector(state => state.userReducer);
     const [number, setNumber] = useState('')
     const onChange = (e) => {
         console.log(e);
         setNumber(e)
+    }
+    const save = () =>{
+        Alert.alert('번호 확인',number+'맞습니까?')
     }
     
     return(
@@ -25,9 +29,7 @@ export default function Registration({navigation}) {
                 <Pressable
                     style={styles.button}
                     title="To User Screen"
-                    onPress={
-                        console.log('hi')
-                      }>
+                        onPress={() => save()}>
                     <Text>다음</Text>
                 </Pressable>
             </View>
