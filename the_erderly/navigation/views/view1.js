@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, Button, Pressable } from 'react-native';
 import database from '@react-native-firebase/database';
-import View1Svg from './Naver.svg';
+import View1Svg from '../../src/svgFile/Naver.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { setId } from '../redux/action';
 
@@ -15,9 +15,10 @@ export default function HomeScreen({navigation}) {
   //   console.log(snapshot.val())
   // });
   database()
-  .ref('/users')
-  .on('value', snapshot => {
-    console.log('User data: ', snapshot.val());
+  .ref('users/')
+  .on('child_added', snapshot => {
+    if (id == snapshot.val().id) console.log(snapshot.val().name)
+    // console.log('User data: ', snapshot.val().name);
   });
 
 

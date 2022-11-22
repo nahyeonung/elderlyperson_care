@@ -30,14 +30,19 @@ export default function Kakaologin({navigation}) {
       setPhoto(JSON.stringify(profile['profileImageUrl']))
       setId2(JSON.stringify(profile['id']))
 
-
-      database().ref('users/' + profile['id']).set({
-        name: profile['nickname'],
-        imageUri: profile['profileImageUrl'],
-        id: profile['id']
+      database()
+      .ref('users/' + profile['id'])
+      .on('value', snapshot => {
+        if(snapshot.val() == null){
+          database().ref('users/' + profile['id']).set({
+            name: profile['nickname'],
+            imageUri: profile['profileImageUrl'],
+            id: profile['id']
+          });
+        }else{}
       });
       if(profile){
-        navigation.navigate('View2', profile['profileImageUrl'])
+        navigation.navigate('registerScreen')
       }
       //setResult(JSON.stringify(token));
     } catch (err) {
@@ -132,7 +137,8 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    marginTop: 10
+    marginTop: 10,
+    textAlignVertical: "center"
   },
   text: {
     textAlign: "center"

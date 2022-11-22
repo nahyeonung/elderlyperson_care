@@ -15,6 +15,7 @@ import loginview from './navigation/views/login';
 import start from './navigation/views/view1';
 import end from './navigation/views/view2';
 import voice from './navigation/views/voice';
+import register from './navigation/views/registration_phone';
 import { Provider } from 'react-redux';
 import { Store } from './navigation/redux/store';
 
@@ -29,6 +30,7 @@ export default function App() {
             <Stack.Screen name="View2" component={end} />
             <Stack.Screen name="Kakaologin" component={loginview} />
             <Stack.Screen name="VoiceScreen" component={voice} />
+            <Stack.Screen name="registerScreen" component={register} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

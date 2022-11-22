@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, Button, Pressable, Image } from 'react-native';
-import View2Svg from './Naver_main.svg';
-import View2_logoSvg from './revan_logo.svg';
+import View2Svg from '../../src/svgFile/Naver_main.svg';
+import View2_logoSvg from '../../src/svgFile/revan_logo.svg';
 import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
 import { setId } from '../redux/action';
