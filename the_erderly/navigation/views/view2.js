@@ -23,7 +23,7 @@ export default function Nextpage({navigation}) {
     // .then(snapshot => {
     //   Setname(snapshot.val())
     // });
-    navigation.navigate('VoiceScreen') 
+    navigation.navigate('Education') 
   }
      return(
      
