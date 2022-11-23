@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setId } from '../redux/action';
 
 
-export default function Registration({navigation}) {
+export default function PhoneLink({navigation}) {
     const {id} = useSelector(state => state.userReducer);
     const [number, setNumber] = useState('')
     const onChange = (e) => {
@@ -29,14 +29,15 @@ export default function Registration({navigation}) {
     }
     const update = () =>{
         database().ref('users/' + id).update({
-            phone: number,
+            f_phone: number,
         });
+        navigation.navigate('Education');
     }
     
     return(
         <View style={{flex:1}}>
             <View style={{flex: 2,alignItems:'center', justifyContent:'center'}}>
-                <RegisterSvg />
+                <Text style={{fontSize: 20}}>연동하고 싶은{'\n'} 핸드폰 번호를 적어주세요.</Text>
             </View>
             <View style={{flex: 3,alignItems:'center', justifyContent:'center', flexDirection:'row'}}>
                 <TextInput style={styles.input} placeholder="-없이 전화번호를 입력해주세요." value={number}

@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { StyleSheet, View, Text, Button, Pressable, Image } from 'react-native';
+import { StyleSheet, View, Text, Button, Pressable, Image, Alert } from 'react-native';
 import View2Svg from '../../src/svgFile/Naver_main.svg';
 import View2_logoSvg from '../../src/svgFile/revan_logo.svg';
 import database from '@react-native-firebase/database';
@@ -17,13 +17,16 @@ export default function Nextpage({navigation}) {
     setImage(snapshot.val())
   });
   const call = () =>{
-    //   database()
-    // .ref('/users')
-    // .once('value')
-    // .then(snapshot => {
-    //   Setname(snapshot.val())
-    // });
-    navigation.navigate('Education') 
+      database()
+    .ref('/users/'+id+"/f_phone")
+    .once('value')
+    .then(snapshot => {
+      if(snapshot.val() == null) navigation.navigate('PhoneLink');
+      else {
+        Alert.alert('이미 연동된 핸드폰이 있어요!!')
+        navigation.navigate('Education');
+      }
+    });
   }
      return(
      
@@ -49,9 +52,17 @@ export default function Nextpage({navigation}) {
              style={styles.button}
              title="To User Screen"
                onPress={
-                   () => call()  
+                   () => navigation.navigate('Education')
                }>
-                <Text style={styles.text}>다음</Text>
+                <Text style={styles.text}>시작하기</Text>
+             </Pressable>
+             <Pressable
+             style={styles.button}
+             title="To User Screen"
+               onPress={
+                   () => call()
+               }>
+                <Text style={styles.text}>자식 핸드폰 연동하기</Text>
              </Pressable>
              
           

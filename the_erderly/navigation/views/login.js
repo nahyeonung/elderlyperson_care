@@ -39,11 +39,11 @@ export default function Kakaologin({navigation}) {
             imageUri: profile['profileImageUrl'],
             id: profile['id']
           });
-        }else{}
+        }
+        if(snapshot.val().phone == null){
+          navigation.navigate('registerScreen')
+        }else navigation.navigate('View2')
       });
-      if(profile){
-        navigation.navigate('registerScreen')
-      }
       //setResult(JSON.stringify(token));
     } catch (err) {
       console.error('login err', err);
