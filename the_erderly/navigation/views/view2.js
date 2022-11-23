@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setId } from '../redux/action';
 
 export default function Nextpage({navigation}) {
-  const {id} = useSelector(state => state.userReducer);
+  const {id} = useSelector(state => state.userReducer);  // redux스토어에서 아이디값  가져오기..!
   const [image, setImage] = useState('');
   const dispatch = useDispatch();
   database()

@@ -18,6 +18,7 @@ import voice from './navigation/views/voice';
 import register from './navigation/views/registration_phone';
 import education from './navigation/views/education';
 import phone from './navigation/views/phoneLink';
+import reservation from './navigation/views/reservation';
 import { Provider } from 'react-redux';
 import { Store } from './navigation/redux/store';
 
@@ -35,7 +36,9 @@ export default function App() {
             <Stack.Screen name="registerScreen" component={register} />
             <Stack.Screen name="PhoneLink" component={phone} />
             <Stack.Screen name="Education" component={education} />
+            <Stack.Screen name="Reservation" component={reservation} />
           </Stack.Navigator>
+      
         </NavigationContainer>
       </Provider>
     )
