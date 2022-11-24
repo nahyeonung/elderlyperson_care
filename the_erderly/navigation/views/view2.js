@@ -56,7 +56,7 @@ export default function Nextpage({navigation}) {
              style={styles.button}
              title="To User Screen"
                onPress={
-                   () => navigation.navigate('Education')
+                   () => navigation.navigate('Main')
                }>
                 <Text style={styles.text}>시작하기</Text>
              </Pressable>

@@ -17,6 +17,7 @@ import end from './navigation/views/view2';
 import voice from './navigation/views/voice';
 import register from './navigation/views/registration_phone';
 import education from './navigation/views/education';
+import main from './navigation/views/main';
 import phone from './navigation/views/phoneLink';
 import reservation from './navigation/views/reservation';
 import mypage from './navigation/views/myPage';
@@ -36,9 +37,11 @@ export default function App() {
             <Stack.Screen name="VoiceScreen" component={voice} />
             <Stack.Screen name="registerScreen" component={register} />
             <Stack.Screen name="PhoneLink" component={phone} />
+            <Stack.Screen name="Main" component={main} />
             <Stack.Screen name="Education" component={education} />
             <Stack.Screen name="Reservation" component={reservation} />
             <Stack.Screen name="MyPage" component={mypage} />
+           
           </Stack.Navigator>
       
         </NavigationContainer>
