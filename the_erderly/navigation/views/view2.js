@@ -31,7 +31,11 @@ export default function Nextpage({navigation}) {
      return(
      
       <View style={{flex:1}}>
-          
+          <Pressable style={{backgroundColor: "#03CF5D", width:50, height:50, marginTop: 10, 
+            marginLeft:'80%', borderColor: "#03CF5D",}}
+            onPress={() => navigation.navigate('MyPage')}>
+            <Text style={{fontWeight:"bold",color:"black",}}>마이{'\n'}페이지</Text>
+          </Pressable>
           <View style={{flex: 3,alignItems:'center', justifyContent:'center'}}>
             <View2_logoSvg/>
           </View>
