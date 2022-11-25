@@ -21,7 +21,7 @@ export default function HomeScreen({navigation}) {
     // console.log('User data: ', snapshot.val().name);
   });
 
-
+  console.log('haha',id)
   const move = () => {
     if(id) navigation.navigate('View2')
     else navigation.navigate('Kakaologin')

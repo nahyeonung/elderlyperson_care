@@ -19,7 +19,7 @@ export default function Kakaologin({navigation}) {
   const [nickname, setNickname] = useState('');
   const [photo, setPhoto] = useState('');
   const [id2, setId2] = useState('');
-  console.log(nickname)
+  console.log(id)
   const signInWithKakao = async ()  => {
     try {
       const token = await login();
@@ -83,18 +83,29 @@ export default function Kakaologin({navigation}) {
 
   return (
     <View style={styles.container}>
-      <IntroView result={nickname} />
+      <Text style={{fontSize:30, fontWeight:'bold', marginTop:200, marginRight:200, color:'black'}}>로그인</Text>
+      {/* <IntroView result={nickname} /> */}
       <Pressable
         style={styles.button}
         onPress={() => {
           signInWithKakao();
         }}
       >
-        <Text style={styles.text}>
+        <Text style={{textAlign:'center', fontSize:30}}>
           카카오 로그인
         </Text>
       </Pressable>
       <Pressable
+        style={styles.button2}
+        onPress={() => {
+          console.log('이음 간편 로그인')
+        }}
+      >
+        <Text style={{color:'white', textAlign:'center', fontSize:30}}>
+          이음 간편 로그인
+        </Text>
+      </Pressable>
+      {/* <Pressable
         style={styles.button}
         onPress={() => getProfile()}
       >
@@ -117,30 +128,40 @@ export default function Kakaologin({navigation}) {
         <Text style={styles.text}>
           카카오 로그아웃
         </Text>
-      </Pressable>
+      </Pressable> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
     justifyContent: "flex-end",
     alignItems: 'center',
-    paddingBottom: 100
   },
   button: {
     backgroundColor: '#FEE500',
+    borderColor: '#FEE500',
     borderRadius: 40,
     borderWidth: 1,
-    width: 250,
-    height: 40,
+    width: 300,
+    height: 60,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    marginTop: 10,
+    marginTop: 20,
+    marginBottom: 20,
     textAlignVertical: "center"
   },
-  text: {
-    textAlign: "center"
-  }
+  button2: {
+    backgroundColor: '#676767',
+    borderColor: '#676767',
+    borderRadius: 40,
+    borderWidth: 1,
+    width: 300,
+    height: 60,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginTop: 20,
+    marginBottom: 20,
+    textAlignVertical: "center"
+  },
 });
