@@ -21,6 +21,8 @@ import main from './navigation/views/main';
 import phone from './navigation/views/phoneLink';
 import reservation from './navigation/views/reservation';
 import mypage from './navigation/views/myPage';
+import emlogin from './navigation/views/emLogin';
+import registration from './navigation/views/registration';
 import { Provider } from 'react-redux';
 import { Store } from './navigation/redux/store';
 
@@ -41,6 +43,8 @@ export default function App() {
             <Stack.Screen name="Education" component={education} />
             <Stack.Screen name="Reservation" component={reservation} />
             <Stack.Screen name="MyPage" component={mypage} />
+            <Stack.Screen name="EmLogin" component={emlogin} />
+            <Stack.Screen name="Registration" component={registration} />
            
           </Stack.Navigator>
       

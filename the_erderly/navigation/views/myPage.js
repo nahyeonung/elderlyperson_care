@@ -2,10 +2,11 @@ import React, { Component, useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Button, Pressable, Image, Alert } from 'react-native';
 import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
-import { setId, setFriendId } from '../redux/action';
+import { setId, setFriendId, setSign } from '../redux/action';
 import { logout } from '@react-native-seoul/kakao-login';
 export default function MyPage({navigation}){
     const {id} = useSelector(state => state.userReducer);
+    const {sign} = useSelector(state => state.userReducer);
     const [image,setImage] = useState('')
     const [name, setName] = useState('')
     const [msg, setMsg] = useState('')
@@ -29,19 +30,23 @@ export default function MyPage({navigation}){
     console.log(loading)
     const signOutWithKakao = async ()  => {
         try {
-          const message = await logout();
-          dispatch(setId(''));
-          dispatch(setFriendId(''));
-          setLoading(!loading);
-          setMsg(message);
-          console.log(message);
-          database()
-          .ref('users/')
-          .on('value', snapshot => {
-            if(message){
-              navigation.navigate('View1');
-            }
-          });
+          if(sign == ''){
+            const message = await logout();
+            dispatch(setId(''));
+            dispatch(setFriendId(''));
+            setLoading(!loading);
+            setMsg(message);
+            console.log(message);
+            database()
+            .ref('users/')
+            .on('value', snapshot => {
+              if(message){
+                navigation.navigate('View1');
+              }
+            });
+          }else if(sign == 1){
+            Alert.alert('이음으로 로그인한 사람');
+          }
         } catch (err) {
           console.error('signOut error', err);
         }

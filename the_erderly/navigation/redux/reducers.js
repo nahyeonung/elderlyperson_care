@@ -1,9 +1,11 @@
 import { SET_USER_ID } from "./action";
 import { SET_FRIEND_ID } from "./action";
+import { SET_SIGN } from "./action";
 
 const initialState = {
     id: '',
     friendId: '',
+    SET_SIGN: '',
 }
 
 function userReducer(state = initialState, action){
@@ -12,6 +14,8 @@ function userReducer(state = initialState, action){
             return {...state, id: action.payload}
         case SET_FRIEND_ID:
             return {...state, friendId: action.payload}
+        case SET_SIGN:
+            return {...state, sign: action.payload}
         default:
             return state;
     }

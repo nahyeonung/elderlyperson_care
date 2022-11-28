@@ -28,9 +28,20 @@ export default function Registration({navigation}) {
         ])
     }
     const update = () =>{
-        database().ref('users/' + id).update({
-            phone: number,
-        });
+        database().ref('users/').orderByChild('phone').equalTo(number)
+        .once('value', snapshot => {
+            if(snapshot.val() == null){
+                database().ref('users/' + id).update({
+                    phone: number,
+                });
+            }else{
+                database().ref('users/'+number).remove();
+                database().ref('users/' + id).update({
+                    phone: number,
+                });
+            }
+        })
+        
     }
     
     return(

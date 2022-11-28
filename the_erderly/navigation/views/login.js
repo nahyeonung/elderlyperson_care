@@ -98,7 +98,7 @@ export default function Kakaologin({navigation}) {
       <Pressable
         style={styles.button2}
         onPress={() => {
-          console.log('이음 간편 로그인')
+          navigation.navigate('EmLogin')
         }}
       >
         <Text style={{color:'white', textAlign:'center', fontSize:30}}>
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#FEE500',
     borderColor: '#FEE500',
-    borderRadius: 40,
+    borderRadius: 15,
     borderWidth: 1,
     width: 300,
     height: 60,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   button2: {
     backgroundColor: '#676767',
     borderColor: '#676767',
-    borderRadius: 40,
+    borderRadius: 15,
     borderWidth: 1,
     width: 300,
     height: 60,
