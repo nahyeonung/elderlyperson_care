@@ -58,7 +58,10 @@ function VoiceScreen({navigation}) {
     </View>
   );
 }
-
+let fileReader = new FileReader();
+fileReader.onload = () => {
+  console.log('노두',fileReader.result);
+}
 const styles = StyleSheet.create({
   views: {marginTop: 50},
 });
