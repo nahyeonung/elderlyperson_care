@@ -1,8 +1,9 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable,Image,} from 'react-native';
+import {View, Text, Button, StyleSheet, Pressable,Image,TouchableOpacity} from 'react-native';
 import Mic from '../../src/svgFile/mic_Logo';
 import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
+import Modal from 'react-native-simple-modal';
 
 export default function Main({navigation}){
     const [mic,setMic] = useState(true);
@@ -11,6 +12,7 @@ export default function Main({navigation}){
     const {id} = useSelector(state => state.userReducer);
     const [image,setImage] = useState('')
     const [name, setName] = useState('')
+    const [state, setState] = useState(false);
       database()
     .ref('/users/'+id)
     .once('value')
@@ -31,6 +33,7 @@ export default function Main({navigation}){
     function set () {
         setMic(!mic);
     }
+    console.log(state);
     return(
         <View style={{flex:1, backgroundColor: "white"}}>
           
@@ -64,12 +67,12 @@ export default function Main({navigation}){
 
         {!mic?(<View style={{flex: 1,flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
             <Pressable style={styles.Button2} onPress={
-                   () => navigation.navigate('Education')
+                   () => setState(!state)
                }>
                 <Text style={styles.text7}>사랑딸</Text>
                 <Text style={styles.text8}>2022.11.26</Text>
             </Pressable>
-            <Pressable style={styles.Button2}>
+            <Pressable style={styles.Button2} onPress={() => setState(!state)}>
                 <Text style={styles.text7}>사랑딸</Text>
                 <Text style={styles.text8}>2022.11.26</Text>
             </Pressable>
@@ -77,12 +80,12 @@ export default function Main({navigation}){
 
         {!mic?(<View style={{flex: 1,flexDirection: 'row', alignItems:'baseline', justifyContent:'center'}}>
             <Pressable style={styles.Button2} onPress={
-                   () => navigation.navigate('Education')
+                   () => setState(!state)
                }>
                 <Text style={styles.text7}>사랑딸</Text>
                 <Text style={styles.text8}>2022.11.26</Text>
             </Pressable>
-            <Pressable style={styles.Button2}>
+            <Pressable style={styles.Button2} onPress={() => setState(!state)}>
                 <Text style={styles.text7}>사랑딸</Text>
                 <Text style={styles.text8}>2022.11.26</Text>
             </Pressable>
@@ -109,6 +112,21 @@ export default function Main({navigation}){
               
            
         </View>) : null}
+        <TouchableOpacity onPress={() => setState(!state)}>
+            <Text>Open modal</Text>
+        </TouchableOpacity>
+        <Modal
+            offset={100}
+            open={state}
+            modalDidOpen={() => console.log('modal did open')}
+            modalDidClose={() => setState(!state)}
+            style={{alignItems: 'center', borderColor:'yellow'}}>
+            <View style={{height:'100%', color:'black'}}>
+              <Text style={{fontSize: 30, marginBottom: 10}}>사랑하는 우리 딸</Text>
+              <Text style={{fontSize: 20, marginBottom: 10}}>우리 딸 학교다니느라 많이 힘들지?{'\n'}조금만 더 힘내</Text>
+              <Button title='헬로'></Button>
+            </View>
+        </Modal>
 
 
         </View>
