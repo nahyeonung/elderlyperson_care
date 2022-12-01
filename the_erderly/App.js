@@ -24,6 +24,9 @@ import mypage from './navigation/views/myPage';
 import emlogin from './navigation/views/emLogin';
 import registration from './navigation/views/registration';
 import test from './navigation/views/test';
+import maru from './navigation/views/maru';
+import find from './navigation/views/findWay';
+import bus from './navigation/views/bus_reservation';
 import { Provider } from 'react-redux';
 import { Store } from './navigation/redux/store';
 
@@ -43,10 +46,15 @@ export default function App() {
             <Stack.Screen name="Main" component={main} />
             <Stack.Screen name="Education" component={education} />
             <Stack.Screen name="Reservation" component={reservation} />
+            <Stack.Screen name="Maru" component={maru} />
             <Stack.Screen name="MyPage" component={mypage} />
             <Stack.Screen name="EmLogin" component={emlogin} />
             <Stack.Screen name="Registration" component={registration} />
             <Stack.Screen name="Test" component={test} />
+            <Stack.Screen name="Find" component={find} />
+            <Stack.Screen name="Bus" component={bus} />
+
+
            
           </Stack.Navigator>
       

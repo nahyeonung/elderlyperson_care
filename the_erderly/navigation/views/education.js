@@ -153,9 +153,13 @@ export default function Education({navigation}){
   }
 
   function onPressStart(){
-    if(value == 2 ){
+    if(value == 3 ){
       navigation.navigate('Reservation');
     }
+      else if(value == 2){
+        navigation.navigate('Find');
+      }
+ 
   }
 
 return(

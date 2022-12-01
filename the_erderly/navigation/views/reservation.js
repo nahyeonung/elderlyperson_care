@@ -43,7 +43,7 @@ export default function Reservation({navigation}){
 
   function onPressHandle2() {
     if(color2 == "#F8F8F8"){
-      setColor2("yellow")
+      setColor2("#03CF5D")
       setColor("#F8F8F8")
       setColor3("#F8F8F8")
       setColor4("#F8F8F8")
@@ -182,7 +182,7 @@ export default function Reservation({navigation}){
 
   function onPressStart(){
     if(value == 2 ){
-      navigation.navigate('Kakaologin');
+      navigation.navigate('Maru');
     }
   }
 
@@ -220,8 +220,8 @@ return(
           </Pressable>
         </View>
         
-        <View style={{flex:1 , backgroundColor: "white",alignItems:'center' , justifyContent: "center"}}>
-            <Pressable style={styles.startBtn} onPress={onPressStart}>
+        <View style={{flex:1 ,alignItems:'center' , justifyContent: "center"}}>
+              <Pressable style={styles.startBtn} onPress={onPressStart}>
                 <Text style={styles.text4}> 배워보기</Text>
               </Pressable>
         </View>
@@ -245,6 +245,6 @@ const styles = StyleSheet.create({
            
             width: 139.57 , height: 187.94, margin: 5 , alignItems:'center' ,justifyContent: "flex-end"}, 
 
- startBtn: { width: 288.02, height:50.66 , borderRadius: 15, backgroundColor: "yellow", borderColor:"yellow", alignItems:'center' , justifyContent: "center" 
+ startBtn: { width: 288.02, height:50.66 , borderRadius: 15, backgroundColor:"#03CF5D",borderColor:"#03CF5D", alignItems:'center' , justifyContent: "center" 
  ,marginBottom: 10}          
 });

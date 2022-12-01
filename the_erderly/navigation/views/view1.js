@@ -36,7 +36,7 @@ export default function HomeScreen({navigation}) {
             title="To User Screen"
               onPress={
                   // ()=> move()
-                  () => navigation.navigate('Test')
+                  () => navigation.navigate('View2')
               } >
              <Text style={styles.text}>이용 시작</Text>  
              
