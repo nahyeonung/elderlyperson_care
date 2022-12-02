@@ -44,12 +44,10 @@ export default function Maru({navigation}){
 
           </View>
 
-          <View style={{flex:0.5, backgroundColor: "black"}}>
-          <Pressable style={[styles.box,{backgroundColor: no ? "#787878" : "#03CF5D"}]} onPress={color2}>
-            <Text style={styles.text3}>아니오</Text>
+          <View style={{flex:0.5, justifyContent:"center", alignContent: "baseline"}}>
+            <Pressable style={[styles.box2 ,{backgroundColor: no ? "#787878" : "#03CF5D"}]} onPress={color2}>
+            <Text style={styles.text5}>건너뛰기</Text>
             </Pressable>
-
-          
           </View>
           
         </View>
@@ -90,7 +88,22 @@ const styles = StyleSheet.create({
 
   },
 
+  text5: {
+    
+    fontWeight:"bold",
+    fontSize: 18,
+    justifyContent:"center", 
+    alignContent: "center",
+    marginLeft: 117,
+
+  },
+
+
   box:{ width:139.57, height: 235.4, borderRadius:15, borderColor: "#787878",justifyContent:"center", alignContent: "center",marginTop: 80,
 margin:20},
+
+  box2: {
+    width:288.02, height:70.66, backgroundColor:"#787878", borderRadius:30, justifyContent:"center", alignContent: "center", marginLeft: 60
+  }
 
 })
