@@ -1,8 +1,9 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable,Image,} from 'react-native';
+import {View, Text, Button, StyleSheet, Pressable,Image,TouchableOpacity, Modal, Animated} from 'react-native';
 import Mic from '../../src/svgFile/mic_Logo';
 import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
+// import Modal from 'react-native-simple-modal';
 
 export default function Main({navigation}){
     const [mic,setMic] = useState(true);
@@ -11,6 +12,7 @@ export default function Main({navigation}){
     const {id} = useSelector(state => state.userReducer);
     const [image,setImage] = useState('')
     const [name, setName] = useState('')
+    const [modalVisible, setModalVisible] = useState(false);
       database()
     .ref('/users/'+id)
     .once('value')
@@ -64,12 +66,12 @@ export default function Main({navigation}){
 
         {!mic?(<View style={{flex: 1,flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
             <Pressable style={styles.Button2} onPress={
-                   () => navigation.navigate('Education')
+                   () => setModalVisible(!modalVisible)
                }>
                 <Text style={styles.text7}>사랑딸</Text>
                 <Text style={styles.text8}>2022.11.26</Text>
             </Pressable>
-            <Pressable style={styles.Button2}>
+            <Pressable style={styles.Button2} onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={styles.text7}>사랑딸</Text>
                 <Text style={styles.text8}>2022.11.26</Text>
             </Pressable>
@@ -77,12 +79,12 @@ export default function Main({navigation}){
 
         {!mic?(<View style={{flex: 1,flexDirection: 'row', alignItems:'baseline', justifyContent:'center'}}>
             <Pressable style={styles.Button2} onPress={
-                   () => navigation.navigate('Education')
+                   () => setModalVisible(!modalVisible)
                }>
                 <Text style={styles.text7}>사랑딸</Text>
                 <Text style={styles.text8}>2022.11.26</Text>
             </Pressable>
-            <Pressable style={styles.Button2}>
+            <Pressable style={styles.Button2} onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={styles.text7}>사랑딸</Text>
                 <Text style={styles.text8}>2022.11.26</Text>
             </Pressable>
@@ -109,6 +111,42 @@ export default function Main({navigation}){
               
            
         </View>) : null}
+        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+            <Text>Open modal</Text>
+        </TouchableOpacity>
+        {/* <Modal
+            offset={100}
+            open={state}
+            modalDidOpen={() => console.log('modal did open')}
+            modalDidClose={() => setState(!state)}
+            style={{alignItems: 'center', borderColor:'yellow'}}>
+            <View style={{height:'100%', color:'black'}}>
+              <Text style={{fontSize: 30, marginBottom: 10}}>사랑하는 우리 딸</Text>
+              <Text style={{fontSize: 20, marginBottom: 10}}>우리 딸 학교다니느라 많이 힘들지?{'\n'}조금만 더 힘내</Text>
+              <Button title='헬로'></Button>
+            </View>
+        </Modal> */}
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible(!modalVisible);
+            }}
+        >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Hello World!</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={styles.textStyle}>Hide Modal</Text>
+                </Pressable>
+              </View>
+            </View>
+        </Modal>
 
 
         </View>
@@ -128,6 +166,48 @@ const styles = StyleSheet.create({
     text6: {fontWeight: "bold", fontSize:20, color: "white"},
     text7: {fontWeight:"bold", fontSize: 17,},
     text8:{fontWeight:"bold", fontSize:13},
+    textContainer:{
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 30,
+        backgroundColor: 'yellow'
+    },
+    modalView: {
+      margin: 20,
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5
+    },
+    button: {
+      borderRadius: 20,
+      padding: 10,
+      elevation: 2
+    },
+    buttonOpen: {
+      backgroundColor: "#F194FF",
+    },
+    buttonClose: {
+      backgroundColor: "#2196F3",
+    },
+    textStyle: {
+      color: "white",
+      fontWeight: "bold",
+      textAlign: "center"
+    },
+    modalText: {
+      marginBottom: 15,
+      textAlign: "center"
+    },
 
 
     Button: { borderRadius: 15,  borderColor: '#F8F8F8', backgroundColor:"#F8F8F8",
