@@ -1,5 +1,5 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert} from 'react-native';
+import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TouchableOpacity} from 'react-native';
 
 export default function Maru({navigation}){
 
@@ -28,27 +28,22 @@ export default function Maru({navigation}){
     }
   }
   return(
-        <View style={{flex:1,backgroundColor:"white"}}>
-          <View style={{flex:0.5,justifyContent:'flex-end', alignContent: "center"}}>
-            <Text style={styles.text1}>잠깐!!</Text>
+        <View style={{flex:1,backgroundColor:"white",}}>
+          <View style={{flex:0.5,justifyContent:'flex-end', alignContent: "center",bottom:100, left:30}}>
+            <Text style={styles.text1}>잠깐!</Text>
             <Text style={styles.text2}>네이버페이 등록이 되어있나요??</Text>
 
           </View>
           <View style={{flex:1, flexDirection:"row", justifyContent:"center", alignContent: "center"}}>
-            <Pressable style={[styles.box,{backgroundColor: yes ? "#787878" : "#03CF5D"}]} onPress={color}>
+            <TouchableOpacity style={[styles.box,{backgroundColor: yes ? "#787878" : "#03CF5D"}]} onPress={color}>
               <Text style={styles.text4}>예</Text>
-            </Pressable>
-            <Pressable style={[styles.box,{backgroundColor: no ? "#787878" : "#03CF5D"}]} onPress={color2}>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.box,{backgroundColor: no ? "#787878" : "#03CF5D"}]} onPress={color2}>
             <Text style={styles.text3}>아니오</Text>
-            </Pressable>
+            </TouchableOpacity>
 
           </View>
 
-          <View style={{flex:0.5, justifyContent:"center", alignContent: "baseline"}}>
-            <Pressable style={[styles.box2 ,{backgroundColor: no ? "#787878" : "#03CF5D"}]} onPress={color2}>
-            <Text style={styles.text5}>건너뛰기</Text>
-            </Pressable>
-          </View>
           
         </View>
   )    
@@ -68,6 +63,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     fontSize: 18,
     marginLeft:20,
+    top:40
   },
 
   text3: {

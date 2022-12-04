@@ -1,5 +1,5 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable} from 'react-native';
+import {View, Text, Button, StyleSheet, Pressable,TouchableOpacity} from 'react-native';
 import Bus_green from '../../src/svgFile/Bus_green.svg';
 import Bus2_green from '../../src/svgFile/Bus2_green.svg';
 import Air_green from '../../src/svgFile/Air_green.svg';
@@ -66,7 +66,7 @@ export default function Reservation({navigation}){
       setHeight4("100")
 
     }
-    else if (color2 == "yellow"){
+    else if (color2 == "#03CF5D"){
       setColor2("#F8F8F8");
       
       setWidth("0")
@@ -78,7 +78,7 @@ export default function Reservation({navigation}){
 
   function onPressHandle() {
     if(color == "#F8F8F8"){
-      setColor("yellow");
+      setColor("#03CF5D");
       setColor2("#F8F8F8")
       setColor3("#F8F8F8")
       setColor4("#F8F8F8")
@@ -101,7 +101,7 @@ export default function Reservation({navigation}){
       setHeight8("100")
       
     }
-    else if (color == "yellow"){
+    else if (color == "#03CF5D"){
       setColor("#F8F8F8");
       setWidth3("0")
       setHeight3("0")
@@ -112,7 +112,7 @@ export default function Reservation({navigation}){
 
   function onPressHandle3() {
     if(color3 == "#F8F8F8"){
-      setColor3("yellow");
+      setColor3("#03CF5D");
       setColor2("#F8F8F8")
       setColor("#F8F8F8")
       setColor4("#F8F8F8")
@@ -135,7 +135,7 @@ export default function Reservation({navigation}){
       setHeight4("100")
     
     }
-    else if (color3 == "yellow"){
+    else if (color3 == "#03CF5D"){
       setColor3("#F8F8F8");
       setWidth5("0")
       setHeight5("0")
@@ -147,7 +147,7 @@ export default function Reservation({navigation}){
 
   function onPressHandle4() {
     if(color4 == "#F8F8F8"){
-      setColor4("yellow");
+      setColor4("#03CF5D");
       setColor2("#F8F8F8")
       setColor("#F8F8F8")
       setColor3("#F8F8F8")
@@ -171,7 +171,7 @@ export default function Reservation({navigation}){
       
       setValue(4)
     }
-    else if (color4 == "yellow"){
+    else if (color4 == "#03CF5D"){
       setColor4("#F8F8F8");
       setWidth7("0")
       setHeight7("0")
@@ -181,7 +181,7 @@ export default function Reservation({navigation}){
   }
 
   function onPressStart(){
-    if(value == 2 ){
+    if(value == 1 ){
       navigation.navigate('Maru');
     }
   }
@@ -221,9 +221,9 @@ return(
         </View>
         
         <View style={{flex:1 ,alignItems:'center' , justifyContent: "center"}}>
-              <Pressable style={styles.startBtn} onPress={onPressStart}>
+              <TouchableOpacity style={styles.startBtn} onPress={onPressStart}>
                 <Text style={styles.text4}> 배워보기</Text>
-              </Pressable>
+              </TouchableOpacity>
         </View>
     </View>
     
@@ -235,10 +235,10 @@ return(
 
 const styles = StyleSheet.create({
 
-  text1: {fontSize:30, fontWeight:"bold", color: 'black', marginRight: 190, marginTop: 50},
-  text2: {fontWeight:"bold", marginRight: 40, marginTop:30},
+  text1: {fontSize:30, fontWeight:"bold", color: '#4E4E4E', marginRight: 190, marginTop: 50},
+  text2: {fontWeight:"bold", marginRight: 40, marginTop:30,color:"#C4C4C4"},
 
-  text3: {fontWeight:"bold", fontSize: 13, marginBottom: 20},
+  text3: {fontWeight:"bold", fontSize: 15, marginBottom: 20,color:"#787878"},
   text4: {fontWeight:"bold", fontSize: 13},
  
   Button: { borderRadius: 15,  borderColor: '#F8F8F8',

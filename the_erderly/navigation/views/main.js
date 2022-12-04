@@ -34,7 +34,7 @@ export default function Main({navigation}){
         setMic(!mic);
     }
     return(
-        <View style={{flex:1, backgroundColor: "white"}}>
+        <View style={{flex:1, backgroundColor:"white"}}>
           
         {/* <View style={{flex: 0.2,alignItems:'center', justifyContent:'center', backgroundColor: "yellow"}}>
          <Text>네비게이션 탭 자리</Text>
@@ -51,17 +51,17 @@ export default function Main({navigation}){
             <Pressable style={styles.Button_div}>
                 <Text style={styles.text5}>사랑하는 딸</Text>
                 <Text></Text>
-                <Text>오늘 엄마랑 같이 듣고 싶은 노래가 생겼어!</Text>
-                <Text>한번 들어 봐바!!</Text>
+                <Text style={{color:"#636363"}}>오늘 엄마랑 같이 듣고 싶은 노래가 생겼어!</Text>
+                <Text style={{color:"#636363"}}>한번 들어 봐바!!</Text>
 
             </Pressable>
         </View>
         <View style={{flex: 0.3,flexDirection: 'row', justifyContent:'center'}}>
-         <Pressable style={styles.Button_letter} onPress={()=> {
+         <TouchableOpacity style={styles.Button_letter} onPress={()=> {
             lett() , set()
          }}>
                 <Text style={styles.text6}>{letter}</Text>
-            </Pressable>
+            </TouchableOpacity>
         </View>
 
         {!mic?(<View style={{flex: 1,flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
@@ -92,22 +92,22 @@ export default function Main({navigation}){
 
 
         {mic ? (<View style={{flex: 1.2,flexDirection: 'row', alignItems:'baseline', justifyContent:'center', marginTop:30}}>
-            <Pressable style={styles.Button} onPress={
+            <TouchableOpacity style={styles.Button} onPress={
                    () => navigation.navigate('Education')
                }>
                 <Text style={styles.text4}>교육 컨텐츠</Text>
-            </Pressable>
-            <Pressable style={styles.Button} onPress={
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.Button} onPress={
                    () => navigation.navigate('VoiceScreen')}>
                 <Text style={styles.text4}>찜한교육</Text>
-            </Pressable>
+            </TouchableOpacity>
         </View>) : null}
 
         {mic ?(<View style={{flex: 0.5, alignItems:'center', justifyContent:'center', backgroundColor:"#F8F8F8", borderRadius: 15}}>
             
-            <Pressable style={styles.Button_ce}>
+            <TouchableOpacity style={styles.Button_ce}>
                 <Mic></Mic>
-            </Pressable>
+            </TouchableOpacity>
               
            
         </View>) : null}
@@ -157,15 +157,15 @@ export default function Main({navigation}){
 
 const styles = StyleSheet.create({
 
-    text1: {fontSize:30, fontWeight:"bold", color: 'black', marginRight: 100, marginTop: 0},
+    text1: {fontSize:30, fontWeight:"bold", color: 'black', marginRight: 100, marginTop: 0,color:"#636363"},
     text2: {fontWeight:"bold", marginRight: 40, marginTop:30},
   
     text3: {fontWeight:"bold", fontSize: 13, marginBottom: 20},
-    text4: {fontWeight:"bold", fontSize: 25},
-    text5: {fontWeight: "bold", fontSize:20, marginRight:10},
+    text4: {fontWeight:"bold", fontSize: 25,color:"#636363"},
+    text5: {fontWeight: "bold", fontSize:20, marginRight:10,color:"#636363"},
     text6: {fontWeight: "bold", fontSize:20, color: "white"},
-    text7: {fontWeight:"bold", fontSize: 17,},
-    text8:{fontWeight:"bold", fontSize:13},
+    text7: {fontWeight:"bold", fontSize: 17,color:"#636363"},
+    text8:{fontWeight:"bold", fontSize:13,color:"#636363"},
     textContainer:{
         flexDirection: 'column',
         justifyContent: 'center',

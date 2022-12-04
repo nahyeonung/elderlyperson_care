@@ -1,11 +1,17 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TextInput,ScrollView} from 'react-native';
+import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TextInput,ScrollView,TouchableOpacity} from 'react-native';
 
 
 export default function Bus({navigation}){
 
  const [depart,setDepart] = useState(true)
  const [departPage,setDepartPage] = useState(false)
+ const [arrive,setArrive] = useState(false)
+ const [day,setDay] = useState(false)
+ const [adult,setAdult] =useState(false)
+ const [seat,setSeat] =useState(false)
+ const [schedule,setSchedule] = useState(false)
+
  const onPressDepart = () => {
   if(depart == true){
     setDepart(false)
@@ -14,6 +20,45 @@ export default function Bus({navigation}){
   else if (depart == false){
     setDepart(true);
     setDepartPage(false)
+  }
+ }
+
+ const onPressArrive = () => {
+  if(depart == true){
+    setDepart(false)
+    setArrive(true)
+  }
+  else if (depart == false){
+    setDepart(true);
+  }
+ }
+
+ const onPressDay = () => {
+  if(depart == true){
+    setDepart(false)
+    setDay(true)
+  }
+  else if (depart == false){
+    setDepart(true);
+  }
+ }
+
+ const onPressAdult = () => {
+  if(depart == true){
+    setDepart(false)
+    setAdult(true)
+  }
+  else if (depart == false){
+    setDepart(true);
+  }
+ }
+ const onPressSeat = () => {
+  if(depart == true){
+    setDepart(false)
+    setSeat(true)
+  }
+  else if (depart == false){
+    setDepart(true);
   }
  }
 
@@ -27,18 +72,63 @@ export default function Bus({navigation}){
     setDepart(false)
   }
  }
+
+ const onPressArrive2 = () => {
+  if(arrive == true){
+    setDepart(true)
+    setArrive(false)
+  }
+  else if (depart == false){
+    setDepart(true);
+  }
+ }
+
+ const onPressDay2 = () => {
+  if(day == true){
+    setDepart(true)
+    setDay(false)
+  }
+  else if (depart == false){
+    setDepart(true);
+  }
+ }
+
+ const onPressAdult2 = () => {
+  if(adult == true){
+    setDepart(true)
+    setAdult(false)
+  }
+  else if (depart == false){
+    setDepart(true);
+  }
+ }
+
+ const onPressSeat2 = () => {
+  if(seat == true){
+    setDepart(true)
+    setSeat(false)
+  }
+  else if (depart == false){
+    setDepart(true);
+  }
+ }
+ 
  
   return(
-        <View style={{flex:1, backgroundColor: "gray"}}>
+        <View style={{flex:1, backgroundColor: "white"}}>
+        {day ?  <Button title="가는날!" onPress={onPressDay2}></Button> : null}
+        {adult ?  <Button title="성인!" onPress={onPressAdult2}></Button> : null}
+        {seat ?  <Button title="좌석!"  onPress={onPressSeat2} ></Button> : null}
+        {schedule ?  <Button title="시간표 조회!!"></Button> : null}
 
-        {departPage ? <View style={{flex:1, borderTopRightRadius:30, borderTopLeftRadius:30, backgroundColor: "white", top:20,borderColor:"white",}}>
+        {arrive ? <View style={{flex:1, borderTopRightRadius:30, borderTopLeftRadius:30, backgroundColor: "white", top:20,borderColor:"white",}}>
                           <View  style={{flex:0.2,flexDirection: "row", backgroundColor:"#F8F8F8",borderTopRightRadius:30, borderTopLeftRadius:30,}}>
-                            <Text style={styles.text9}>출발지 선택</Text>
-                            <Pressable style={styles.box12} onPress={onPressDepartPage}>
+                            <Text style={styles.text9}>도착지 선택</Text>
+                            <Pressable style={styles.box12} onPress={onPressArrive2}>
                               <Text style={styles.text10}>X</Text>
                             </Pressable>
 
-                            <TextInput style={styles.input} placeholder='출발역 검색'  placeholderTextColor="gray"></TextInput>
+                            <TextInput style={styles.input} placeholder='도착역 검색'  placeholderTextColor="gray"></TextInput>
                           </View>
                           <View style={{flex:0.1,flexDirection: "row", backgroundColor:"#F8F8F8",justifyContent:"center", alignContent:"center"}}>
                             <Text style={[styles.text12,{color:"blue"}]}>지역순</Text>
@@ -110,13 +200,94 @@ export default function Bus({navigation}){
 
 
 
+        {departPage ? <View style={{flex:1, borderTopRightRadius:30, borderTopLeftRadius:30, backgroundColor: "white", top:20,borderColor:"white",}}>
+                          <View  style={{flex:0.2,flexDirection: "row", backgroundColor:"#F8F8F8",borderTopRightRadius:30, borderTopLeftRadius:30,}}>
+                            <Text style={styles.text9}>출발지 선택</Text>
+                            <Pressable style={styles.box12} onPress={onPressDepartPage}>
+                              <Text style={styles.text10}>X</Text>
+                            </Pressable>
+
+                            <TextInput style={styles.input} placeholder='출발역 검색'  placeholderTextColor="gray"></TextInput>
+                          </View>
+                          <View style={{flex:0.1,flexDirection: "row", backgroundColor:"#F8F8F8",justifyContent:"center", alignContent:"center"}}>
+                            <Text style={[styles.text12,{color:"#add8e6"}]}>지역순</Text>
+                            
+                            <Text style={[styles.text12,{color:"#add8e6"}]}>가나다순</Text>
+                          </View>
+
+                          <View style={{flex:0.09,flexDirection: "row", backgroundColor:"#F8F8F8",}}>
+                          <ScrollView style={{flexDirection: "row",backgroundColor:"#F8F8F8",}} horizontal={true}>
+
+                           <Pressable style={styles.box13}>
+                              <Text style={styles.text13}>최근|주변</Text>
+                           </Pressable>
+
+                           <Pressable style={styles.box13}>
+                              <Text style={styles.text14}>인천</Text>
+                           </Pressable>
+                           <Pressable style={styles.box13}>
+                              <Text style={styles.text14}>대전</Text>
+                           </Pressable>
+                           <Pressable style={styles.box13}>
+                              <Text style={styles.text14}>서울</Text>
+                           </Pressable>
+
+                          </ScrollView>
+                          </View>
+                          <View style={{flex: 0.008, backgroundColor: "lightgray"}}></View>
+                          
+                          <View style={{flex: 0.08, backgroundColor:"white", borderBottomWidth:2, borderColor: "#d3d3d3", flexDirection:"row"}}>
+                           <Text style={{fontSize:20, fontWeight:"bold", margin:20, color:"black"}}>대덕구 오정동</Text>
+                           <Text style={{fontSize:15, fontWeight:"bold", margin:23, left: 90, color:"black"}}>내위치</Text>
+                           <Text style={{fontSize:15, fontWeight:"bold", margin:23,left: 90, color:"black"}}>변경</Text>
+
+                          </View>
+
+                          <View style={{flex: 0.08, backgroundColor:"white", flexDirection:"row",borderBottomWidth:2, borderColor:"#d3d3d3"}}>
+                           <Text style={{fontSize:20, fontWeight:"bold", margin:15,}}>대전역</Text>
+                           <Pressable style={styles.KtxBox}>
+                            <Text style={styles.text15}>KTX</Text>
+                           </Pressable>
+                           
+                          </View>
+
+                          <View style={{flex: 0.08, backgroundColor:"white", flexDirection:"row",borderBottomWidth:2, borderColor:"#d3d3d3"}}>
+                           <Text style={{fontSize:20, fontWeight:"bold", margin:15}}>서대전역</Text>
+                           <Pressable style={styles.KtxBox}>
+                            <Text style={styles.text15}>KTX</Text>
+                           </Pressable>
+                           
+                          </View>
+
+                          <View style={{flex: 0.08, backgroundColor:"white", flexDirection:"row",borderBottomWidth:2, borderColor:"#d3d3d3"}}>
+                           <Text style={{fontSize:20, fontWeight:"bold", margin:15}}>신탄진역</Text>
+                           <Pressable style={styles.KtxBox}>
+                            <Text style={styles.text15}>KTX</Text>
+                           </Pressable>
+                           
+                          </View>
+                          <View style={{flex: 0.08, backgroundColor:"white", flexDirection:"row",borderBottomWidth:2, borderColor:"#d3d3d3"}}>
+                           <Text style={{fontSize:20, fontWeight:"bold", margin:15}}>역전할매</Text>
+                           <Pressable style={styles.KtxBox}>
+                            <Text style={styles.text15}>KTX</Text>
+                           </Pressable>
+                           
+                          </View>
+
+                      </View> : null}
 
 
 
 
 
-        { depart ? (<View style={{flex:0.5,justifyContent:'center', alignContent: "center",backgroundColor:"#03CF5D"}}>
-           
+
+
+
+
+        { depart ? (<View style={{flex:0.34, justifyContent:'center', alignContent: "center",backgroundColor:"#03CF5D"}}>
+            <Pressable style={{justifyContent:'center', alignSelf: "center"}}>
+            <Text style={{fontSize:25,fontWeight:"700",color:"white",}}>기차 조회 & 예매</Text>
+            </Pressable>
 
           </View>) : null}
         
@@ -127,27 +298,27 @@ export default function Bus({navigation}){
                 <Text style={styles.text6}>출발</Text>
                 <Text style={styles.text7}>출발 기차역</Text>
                 </Pressable>
-                <Pressable style={styles.box5}>
+                <Pressable style={styles.box5} onPress={onPressArrive}>
                 <Text style={styles.text6}>도착</Text>
                 <Text style={styles.text7}>도착 기차역</Text>
                 </Pressable>
               </Pressable>
 
               <Pressable style={styles.box7}>
-                <Pressable style={styles.box8}>
+                <Pressable style={styles.box8} onPress={onPressDay}>
                 <Text style={styles.text8}>가는날</Text>
                 </Pressable>
-                <Pressable style={styles.box9}>
+                <Pressable style={styles.box9} onPress={onPressAdult}>
                 <Text style={styles.text8}>어른1명</Text>
                 </Pressable>
 
-                <Pressable style={styles.box10}>
+                <Pressable style={styles.box10} onPress={onPressSeat}>
                   <Text style={styles.text8}>일반좌석</Text>
                 </Pressable>
 
-                <Pressable style={styles.box11}>
-                  <Text style={styles.text5}>시간표 조회</Text>
-                </Pressable>
+                <TouchableOpacity style={styles.box11}>
+                  <Text style={styles.text5} activeOpacity={0.8}>시간표 조회</Text>
+                </TouchableOpacity>
 
              
               </Pressable>
@@ -196,7 +367,7 @@ const styles = StyleSheet.create({
   },
 
   text5: {
-    
+    color:"white",
     fontWeight:"bold",
     fontSize: 18,
     justifyContent:"center", alignContent: "center",
@@ -205,7 +376,7 @@ const styles = StyleSheet.create({
   },
 
   text6: {
-    
+    color:"#636363",
     fontWeight:"bold",
     fontSize: 16,
     justifyContent:"center", alignContent: "center",
@@ -216,7 +387,7 @@ const styles = StyleSheet.create({
   },
 
   text7: {
-    
+    color:"#636363",
     fontWeight:"bold",
     fontSize: 13,
     justifyContent:"center", alignContent: "center",
@@ -226,17 +397,16 @@ const styles = StyleSheet.create({
   },
 
   text8: {
-    
+    color:"#636363",
     fontWeight:"bold",
     fontSize: 13,
-    justifyContent:"center", alignContent: "center",
-    left:45
+    alignSelf:"center"
     
 
   },
 
   text9: {
-    
+    color:"#636363",
     fontWeight:"bold",
     fontSize: 25,
     left:15,
@@ -264,21 +434,22 @@ const styles = StyleSheet.create({
 
     fontSize:20,
     fontWeight:"bold",
-    left:8,
-    top:5,
-    color:"black"
+    color:"black",
+    alignSelf: "center",
 
   },
   text14: {
 
     fontSize:20,
     fontWeight:"bold",
-    left:27,
-    top:5,
+    alignSelf: "center",
     color:"black"
 
   },
 
+  text15: {
+    color:"white", fontSize:17,fontWeight:"bold", justifyContent:"center",alignSelf:"center"
+  },
 
 
 
@@ -287,10 +458,10 @@ const styles = StyleSheet.create({
 margin:20},
 
   box2:{
-    width:379.24 , height : 600.76, borderRadius: 15, borderColor: "white", backgroundColor: "white" 
+    width:379.24 , height : 600.76, borderRadius: 15, 
   },
   box3:{
-  left:25, width:330.24 , height : 160, borderRadius: 15, borderColor: "white", backgroundColor: "lightgray" , top:20
+  left:25, width:330.24 , height : 160, borderRadius: 15, borderColor: "white", backgroundColor: "#F8F8F8" , top:20
   },
 
   box4:{
@@ -305,11 +476,11 @@ margin:20},
     width:379.24 , height : 465.76, borderRadius: 15, borderColor: "white", backgroundColor: "white" 
   },
   box7:{
-  left:25, width:330.24 , height : 320, borderRadius: 15, borderColor: "white", backgroundColor: "lightgray" , top:35,justifyContent:"center", alignContent: "center"
+  left:25, width:330.24 , height : 320, borderRadius: 15, borderColor: "white", backgroundColor: "#F8F8F8" , top:35,justifyContent:"center", alignContent: "center"
   },
 
   box8:{
-    left:23, width:290 , height : 60, borderRadius:15, borderColor: "white", backgroundColor: "white",
+     width:290 , height : 60, borderRadius:15, borderColor: "white", backgroundColor: "white",justifyContent:'center', alignSelf: "center"
     },
 
     box9:{
@@ -321,14 +492,14 @@ margin:20},
       
 
        box11:{
-         width:290 , height : 60, borderRadius:30, borderColor: "white", backgroundColor: "white",top:5, left:20,justifyContent:"center", alignContent: "center"
+         width:290 , height : 60, borderRadius:30, borderColor: "white", backgroundColor: "#03CF5D",top:5, justifyContent:'center', alignSelf: "center"
         },
        
         box12:{
-          width:40 , height : 40, borderColor: "white",justifyContent:"center", alignContent: "center", left:200, top:10
+          width:40 , height : 40,justifyContent:"center", alignContent: "center", left:200, top:10
          },
         box13:{
-          width:100, height:40,backgroundColor:"tomato", borderRadius:10,margin:20
+          width:100, height:40,backgroundColor:"#e6e6fa", borderRadius:10,margin:20, justifyContent:"center", alignSelf: "center"
         },
 
         KtxBox:{
@@ -356,7 +527,8 @@ margin:20},
           width:380,
           height: 60,
           borderColor: "#03CF5D",
-          borderWidth: 2
+          borderWidth: 2,
+          color:"black"
         },
       
 
