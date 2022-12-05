@@ -1,6 +1,6 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
 import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TextInput,ScrollView,TouchableOpacity} from 'react-native';
-
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 export default function Bus({navigation}){
 
@@ -11,6 +11,87 @@ export default function Bus({navigation}){
  const [adult,setAdult] =useState(false)
  const [seat,setSeat] =useState(false)
  const [schedule,setSchedule] = useState(false)
+
+ 
+  const [count, setCount] = useState(0);
+  const [ad,setAd] = useState(0);
+  const [ua,setUa] = useState(0);
+  const [baby,setBaby] = useState(0);
+  const [gyon,setGyon] = useState(0);
+  const [jang,setJang] = useState(0);
+  const [jang2,setJang2] = useState(0);
+ 
+
+  const uaIncreaseAd = () => {
+    setCount(prevCount => prevCount + 1);
+    setUa(prevCount => prevCount + 1);
+    
+  };
+  const uaDecreaseAd = () => {
+    setCount(prevCount => prevCount - 1);
+    setUa(prevCount => prevCount - 1);
+  };
+
+  const babyIncreaseAd = () => {
+    setCount(prevCount => prevCount + 1);
+    setBaby(prevCount => prevCount + 1);
+    
+  };
+  const babyDecreaseAd = () => {
+    setCount(prevCount => prevCount - 1);
+    setBaby(prevCount => prevCount - 1);
+  };
+
+  const gyonIncreaseAd = () => {
+    setCount(prevCount => prevCount + 1);
+    setGyon(prevCount => prevCount + 1);
+    
+  };
+  const gyonDecreaseAd = () => {
+    setCount(prevCount => prevCount - 1);
+    setGyon(prevCount => prevCount - 1);
+  };
+
+  const jangIncreaseAd = () => {
+    setCount(prevCount => prevCount + 1);
+    setJang(prevCount => prevCount + 1);
+    
+  };
+  const jangDecreaseAd = () => {
+    setCount(prevCount => prevCount - 1);
+    setJang(prevCount => prevCount - 1);
+  };
+
+  const jang2IncreaseAd = () => {
+    setCount(prevCount => prevCount + 1);
+    setJang2(prevCount => prevCount + 1);
+    
+  };
+  const jang2DecreaseAd = () => {
+    setCount(prevCount => prevCount - 1);
+    setJang2(prevCount => prevCount - 1);
+  };
+
+  
+ 
+
+
+
+
+  const onIncreaseAd = () => {
+    setCount(prevCount => prevCount + 1);
+    setAd(prevCount => prevCount + 1);
+    
+  };
+  const onDecreaseAd = () => {
+    setCount(prevCount => prevCount - 1);
+    setAd(prevCount => prevCount - 1);
+  };
+
+
+
+
+
 
  const onPressDepart = () => {
   if(depart == true){
@@ -117,8 +198,208 @@ export default function Bus({navigation}){
   return(
         <View style={{flex:1, backgroundColor: "white"}}>
         {day ?  <Button title="가는날!" onPress={onPressDay2}></Button> : null}
-        {adult ?  <Button title="성인!" onPress={onPressAdult2}></Button> : null}
-        {seat ?  <Button title="좌석!"  onPress={onPressSeat2} ></Button> : null}
+        
+        
+        {adult ?  <View style={{flex:1, backgroundColor:"white",borderTopRightRadius:30, borderTopLeftRadius:30,}}>
+                      <View style={{flex:0.1, backgroundColor:"#F8F8F8",borderTopRightRadius:30, top:30,borderTopLeftRadius:30, borderBottomWidth:3, borderColor:"black", justifyContent:"center"}}>
+                        <Text style={styles.text16}>인원선택</Text>
+                      </View>
+                      <View style={{flex:0.1, backgroundColor:"#F8F8F8",top:30, flexDirection:"row",alignItems:"center",justifyContent:"flex-start"}}>
+                        <Pressable style={styles.fellBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center"}}>!</Text></Pressable>
+                        <Text style={{color:"black", fontWeight:"bold", left:15 }}>1~9명까지 선택 가능합니다.</Text>
+                      </View>
+                      
+
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        <View style={{justifyContent:"center",alignItems:"center"}}><Text style={styles.text17}>어른 {ad}명</Text>
+                        <Text style={styles.text18}>만 13세 이상</Text>
+                        </View>
+                        <View style={{flexDirection:"row",alignSelf:"center",left:"50%"}}>
+                        <Pressable style={styles.minusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={onDecreaseAd}>ㅡ</Text></Pressable>
+                        <Text style={styles.text19}>{ad}</Text>
+                        <Pressable style={styles.plusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={onIncreaseAd}>+</Text></Pressable>
+                        </View>
+                      </View>
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        <View style={{justifyContent:"center",alignItems:"center"}}><Text style={styles.text17}>어린이 {ua}명</Text>
+                        <Text style={styles.text18}>만 6~12세</Text>
+                        </View>
+                        <View style={{flexDirection:"row", alignSelf:"center",left:"45%"}}>
+                        <Pressable style={styles.minusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={uaDecreaseAd}>ㅡ</Text></Pressable>
+                        <Text style={styles.text19}>{ua}</Text>
+                        <Pressable style={styles.plusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={uaIncreaseAd}>+</Text></Pressable>
+                        </View>
+                        
+                      </View>
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        <View style={{justifyContent:"center",alignItems:"center"}}><Text style={styles.text17}>유아 {baby}명</Text>
+                        <Text style={styles.text18}>만 8세 미만</Text>
+                        </View>
+                        <View style={{flexDirection:"row", left:"50%"}}>
+                        <Pressable style={styles.minusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={babyDecreaseAd}>ㅡ</Text></Pressable>
+                        <Text style={styles.text19}>{baby}</Text>
+                        <Pressable style={styles.plusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={uaIncreaseAd}>+</Text></Pressable>
+                        </View>
+                        
+                      </View>
+
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        <View style={{justifyContent:"center",alignItems:"center"}}><Text style={styles.text17}>경로 {gyon}명</Text>
+                        <Text style={styles.text18}>만 65세이상</Text>
+                        </View>
+                        <View style={{flexDirection:"row", left:"50%"}}>
+                        <Pressable style={styles.minusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={gyonDecreaseAd}>ㅡ</Text></Pressable>
+                        <Text style={styles.text19}>{gyon}</Text>
+                        <Pressable style={styles.plusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={gyonIncreaseAd}>+</Text></Pressable>
+                        </View>
+                      </View>
+
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        <View style={{justifyContent:"center",alignItems:"center"}}><Text style={styles.text17}>중증 장애인 {jang}명</Text>
+                        <Text style={styles.text18}>장애 1~3급</Text>
+                        </View>
+                        <View style={{flexDirection:"row", left:"35%"}}>
+                        <Pressable style={styles.minusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={jangDecreaseAd}>ㅡ</Text></Pressable>
+                        <Text style={styles.text19}>{jang}</Text>
+                        <Pressable style={styles.plusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={jangIncreaseAd}>+</Text></Pressable>
+                        </View>
+                      </View>
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        <View style={{justifyContent:"center",alignItems:"center"}}><Text style={styles.text17}>경증 장애인 {jang2}명</Text>
+                        <Text style={styles.text18}>장애 4~6 급</Text>
+                        </View>
+                        <View style={{flexDirection:"row", left:"35%"}}>
+                        <Pressable style={styles.minusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPress={jang2DecreaseAd}>ㅡ</Text></Pressable>
+                        <Text style={styles.text19}>{jang2}</Text>
+                        <Pressable style={styles.plusBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center",fontSize:13}} onPres={jang2IncreaseAd}>+</Text></Pressable>
+                        </View>
+                      </View>
+                      <View style ={{flex:0.2 , justifyContent:"center",alignItems:"center"}}>
+                        <TouchableOpacity style={styles.box11} onPress={onPressAdult2}>
+                           <Text style={styles.text20} activeOpacity={0.8}> {count} 명 예약</Text>
+                        </TouchableOpacity>
+                      </View>
+                    
+                  </View> : null}
+        
+        
+        
+        
+        
+        
+        {seat ? <View style={{flex:1, backgroundColor:"#F8F8F8",borderTopRightRadius:30, borderTopLeftRadius:30,}}>
+                      <View style={{flex:0.1, backgroundColor:"white",borderTopRightRadius:30, top:30,borderTopLeftRadius:30, borderBottomWidth:3, borderColor:"black", justifyContent:"center"}}>
+                        <Text style={styles.text16}>좌석유형 선택</Text>
+                      </View>
+                      <View style={{flex:0.1, backgroundColor:"white",top:30, flexDirection:"row",alignItems:"center",justifyContent:"flex-start"}}>
+                        <Pressable style={styles.fellBox}><Text style={{color:"white", fontWeight:"bold", alignSelf:"center"}}>!</Text></Pressable>
+                        <Text style={{color:"black", fontWeight:"bold", left:15 }}>선택한 유형의 좌석으로 기차를 조회하고 예매합니다.</Text>
+                      </View>
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        
+                        <View style={{justifyContent:"center",alignItems:"flex-start"}}>
+                        <BouncyCheckbox
+                              style={{alignSelf:"flex-start",top: 35, left: 5}}
+                              size={25}
+                              fillColor="#03CF5D"
+                              unfillColor="#FFFFFF"
+                              iconStyle={{ borderColor: "#03CF5D" }}
+                              textStyle={{ fontFamily: "JosefinSans-Regular" }}
+                        />
+                        <Text style={styles.text21}>일반좌석</Text>
+                        <Text style={styles.text22}>1인 기본 좌석 입니다.</Text>
+                        </View>
+                        
+                      </View>
+
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        
+                        <View style={{justifyContent:"center",alignItems:"flex-start"}}>
+                        <BouncyCheckbox
+                              style={{alignSelf:"flex-start",top: 35, left: 5}}
+                              size={25}
+                              fillColor="#03CF5D"
+                              unfillColor="#FFFFFF"
+                              iconStyle={{ borderColor: "#03CF5D" }}
+                              textStyle={{ fontFamily: "JosefinSans-Regular" }}
+                        />
+                        <Text style={styles.text21}>유아동반석</Text>
+                        <Text style={styles.text22}>유아동반 또는 편화대화 객차입니다..</Text>
+                        </View>
+                        
+                      </View>
+                      
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        
+                        <View style={{justifyContent:"center",alignItems:"flex-start"}}>
+                        <BouncyCheckbox
+                              style={{alignSelf:"flex-start",top: 35, left: 5}}
+                              size={25}
+                              fillColor="#03CF5D"
+                              unfillColor="#FFFFFF"
+                              iconStyle={{ borderColor: "#03CF5D" }}
+                              textStyle={{ fontFamily: "JosefinSans-Regular" }}
+                        />
+                        <Text style={styles.text21}>휠체어석</Text>
+                        <Text style={styles.text22}>휠체어석과 일행을 위한 일반좌석이 자동배정됩니다.</Text>
+                        </View>
+                        
+                      </View>
+
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        
+                        <View style={{justifyContent:"center",alignItems:"flex-start"}}>
+                        <BouncyCheckbox
+                              style={{alignSelf:"flex-start",top: 35, left: 5}}
+                              size={25}
+                              fillColor="#03CF5D"
+                              unfillColor="#FFFFFF"
+                              iconStyle={{ borderColor: "#03CF5D" }}
+                              textStyle={{ fontFamily: "JosefinSans-Regular" }}
+                        />
+                        <Text style={styles.text21}>전동휠체어석</Text>
+                        <Text style={styles.text22}>전동휠체어석과 일행을 위한 일반좌석이 자동배정됩니다.</Text>
+                        </View>
+                        
+                      </View>
+
+                      <View style={{flex:0.1, backgroundColor:"white",alignItems:"center",justifyContent:"flex-start",flexDirection:"row",borderColor:"gray", borderBottomWidth:2}}>
+                        
+                        <View style={{justifyContent:"center",alignItems:"flex-start"}}>
+                        <BouncyCheckbox
+                              style={{alignSelf:"flex-start",top: 35, left: 5}}
+                              size={25}
+                              fillColor="#03CF5D"
+                              unfillColor="#FFFFFF"
+                              iconStyle={{ borderColor: "#03CF5D" }}
+                              textStyle={{ fontFamily: "JosefinSans-Regular" }}
+                        />
+                        <Text style={styles.text21}>2층석</Text>
+                        <Text style={styles.text22}>ITX 청춘 열차에만 존재하는 좌석입니다.</Text>
+                        </View>
+                        
+                      </View>
+
+                        <View style ={{flex:0.2 , justifyContent:"center",alignItems:"center"}}>
+                            <TouchableOpacity style={styles.box11} onPress={onPressAdult2}>
+                               <Text style={styles.text20} activeOpacity={0.8}>일반좌석 적용</Text>
+                            </TouchableOpacity>
+                         </View>
+                      </View>
+                       : null}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         {schedule ?  <Button title="시간표 조회!!"></Button> : null}
 
         {arrive ? <View style={{flex:1, borderTopRightRadius:30, borderTopLeftRadius:30, backgroundColor: "white", top:20,borderColor:"white",}}>
@@ -128,7 +409,7 @@ export default function Bus({navigation}){
                               <Text style={styles.text10}>X</Text>
                             </Pressable>
 
-                            <TextInput style={styles.input} placeholder='도착역 검색'  placeholderTextColor="gray"></TextInput>
+                            <TextInput style={styles.input} placeholder='도착역'  placeholderTextColor="gray"></TextInput>
                           </View>
                           <View style={{flex:0.1,flexDirection: "row", backgroundColor:"#F8F8F8",justifyContent:"center", alignContent:"center"}}>
                             <Text style={[styles.text12,{color:"blue"}]}>지역순</Text>
@@ -309,7 +590,7 @@ export default function Bus({navigation}){
                 <Text style={styles.text8}>가는날</Text>
                 </Pressable>
                 <Pressable style={styles.box9} onPress={onPressAdult}>
-                <Text style={styles.text8}>어른1명</Text>
+                <Text style={styles.text8}>어른{count}명</Text>
                 </Pressable>
 
                 <Pressable style={styles.box10} onPress={onPressSeat}>
@@ -451,6 +732,35 @@ const styles = StyleSheet.create({
     color:"white", fontSize:17,fontWeight:"bold", justifyContent:"center",alignSelf:"center"
   },
 
+  text16:{
+    color:"black", fontSize:20, justifyContent:"center", alignSelf:"flex-start",left:20,fontWeight:"bold"
+  },
+  text17:{
+    color:"black",fontSize:20, fontWeight:"bold",left:15
+  },
+  text18:{
+    color:"gray",fontSize:13, fontWeight:"bold",alignSelf:"flex-start", left:15
+  },
+
+  text19:{
+    color:"black",fontSize:15, fontWeight:"bold",left:5, bottom:2
+  },
+
+  text20: {
+    color:"white",
+    fontWeight:"bold",
+    fontSize: 18,
+    justifyContent:"center",
+    alignSelf:"center"
+
+  },
+
+  text21:{
+    color:"black",fontSize:20, fontWeight:"bold",left:40,alignSelf:"flex-start"
+  },
+  text22:{
+    color:"gray",fontSize:13, fontWeight:"bold",alignSelf:"flex-start", left:40
+  },
 
 
 
@@ -505,6 +815,18 @@ margin:20},
         KtxBox:{
           backgroundColor:"blue", width:40, height: 30, borderRadius: 4 , top: 16,
         },
+        fellBox:{
+          backgroundColor:"gray", borderRadius:100, width:20 ,height:20, left:10
+        },
+
+        plusBox:{
+          backgroundColor:"gray", borderRadius:100, width:20 ,height:20,left:10 
+        },
+
+        minusBox:{
+          backgroundColor:"gray", borderRadius:100, width:20 ,height:20,
+        },
+        
 
 
 
