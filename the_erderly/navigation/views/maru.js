@@ -1,7 +1,19 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
 import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TouchableOpacity} from 'react-native';
+import Sound from 'react-native-sound';
+
+let path = require('../../mp3/naver_pay.mp3');
+let music = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
+    if (error) { console.log('play failed') }
+}) 
+
 
 export default function Maru({navigation}){
+
+  useEffect(() => {
+    music.play();
+   
+  },[])
 
   const[yes,setYes] = useState(true);
   const[no,setNo] = useState(true);

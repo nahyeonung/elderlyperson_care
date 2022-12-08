@@ -1,9 +1,23 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
 import {View, Text, Button, StyleSheet, Pressable, TouchableOpacity} from 'react-native';
+import Sound from 'react-native-sound';
+
+let path = require('../../mp3/education_intro.mp3');
+let path2 = require('../../mp3/baewu.mp3');
+let music = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
+    if (error) { console.log('play failed') }
+}) 
+let music2 = new Sound(path2, Sound.MAIN_BUNDLE, (error) => {
+  if (error) { console.log('play failed') }
+}) 
 
 
 export default function Education({navigation}){
   
+  useEffect(() => {
+    music.play();
+   
+  },[])
   const[color,setColor] = useState("#F8F8F8");
   const[color2,setColor2] = useState("#F8F8F8");
   const[color3,setColor3] = useState("#F8F8F8");
@@ -61,6 +75,7 @@ export default function Education({navigation}){
       setColor7("#F8F8F8")
       setColor8("#F8F8F8")
       setValue(3)
+      music2.play();
     }
     else if (color3 == "#03CF5D"){
       setColor3("#F8F8F8");

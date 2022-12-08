@@ -8,9 +8,23 @@ import Train_green from '../../src/svgFile/Train_green.svg';
 import Bus_white from '../../src/svgFile/Bus_white.svg';
 import Bus2_white from '../../src/svgFile/Bus2_white.svg';
 import Air_white from '../../src/svgFile/Air_white.svg';
+import Sound from 'react-native-sound';
 
+let path = require('../../mp3/reservation_intro.mp3');
+let path2 = require('../../mp3/baewu2.mp3');
+let music = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
+    if (error) { console.log('play failed') }
+}) 
+let music2 = new Sound(path2, Sound.MAIN_BUNDLE, (error) => {
+  if (error) { console.log('play failed') }
+}) 
 
 export default function Reservation({navigation}){
+  
+  useEffect(() => {
+    music.play();
+   
+  },[])
   
   const[color,setColor] = useState("#F8F8F8");
   const[color2,setColor2] = useState("#F8F8F8");
@@ -99,6 +113,7 @@ export default function Reservation({navigation}){
       setHeight7("0")
       setWidth8("100")
       setHeight8("100")
+      music2.play();
       
     }
     else if (color == "#03CF5D"){
