@@ -1,11 +1,21 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable,Image,TouchableOpacity, Modal, Animated} from 'react-native';
+import {View, Text, Button, StyleSheet, Pressable,Image,TouchableOpacity, Modal, Animated,PermissionsAndroid,ActivityIndicator} from 'react-native';
 import Mic from '../../src/svgFile/mic_Logo';
 import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
+import GoogleCloudSpeechToText, {
+  SpeechRecognizeEvent,
+  VoiceStartEvent,
+  SpeechErrorEvent,
+  VoiceEvent,
+  SpeechStartEvent,
+} from 'react-native-google-cloud-speech-to-text';
+import typescript from 'react-native-svg';
 // import Modal from 'react-native-simple-modal';
 
 export default function Main({navigation}){
+    const [spinner, setSpinner] = useState('');
+    const [transcript, setResult] = useState('');
     const [mic,setMic] = useState(true);
     const [cate,setCate] = useState(false);
     const [letter,setLetter] = useState("편지함가기");
@@ -21,6 +31,78 @@ export default function Main({navigation}){
       setName(snapshot.val().name)
     });
 
+    useEffect(() => {
+      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO, {
+        title: 'Cool Photo App Camera Permission',
+        message:
+          'Cool Photo App needs access to your camera ' +
+          'so you can take awesome pictures.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      });
+    }, []);
+    useEffect(() => {
+      GoogleCloudSpeechToText.setApiKey('AIzaSyBMnUbVg1fC9fuhiffj_5OoQYYtLn6Uzvc');
+      GoogleCloudSpeechToText.onVoice(onVoice);
+      GoogleCloudSpeechToText.onVoiceStart(onVoiceStart);
+      GoogleCloudSpeechToText.onVoiceEnd(onVoiceEnd);
+      GoogleCloudSpeechToText.onSpeechError(onSpeechError);
+      GoogleCloudSpeechToText.onSpeechRecognized(onSpeechRecognized);
+      GoogleCloudSpeechToText.onSpeechRecognizing(onSpeechRecognizing);
+      return () => {
+        GoogleCloudSpeechToText.removeListeners();
+      };
+    }, []);
+    useEffect(() => {
+      if(transcript == '예매'){
+        navigation.navigate('Reservation');
+      }
+      setSpinner('');
+      setResult('');
+    }, [transcript]);
+
+    const onSpeechError = (_error) => {
+      console.log('onSpeechError: ', _error);
+    };
+
+    const onSpeechRecognized = (result) => {
+      console.log('onSpeechRecognized: ', result);
+      setResult(result.transcript);
+      stopRecognizing();
+    };
+  
+    const onSpeechRecognizing = (result) => {
+      console.log('onSpeechRecognizing: ', result);
+      // setResult(result.transcript);
+      // stopRecognizing();
+    };
+  
+    const onVoiceStart = (_event) => {
+      console.log('onVoiceStart', _event);
+    };
+  
+    const onVoice = (_event) => {
+      console.log('onVoice', _event);
+    };
+  
+    const onVoiceEnd = () => {
+      console.log('onVoiceEnd: ');
+    };
+  
+    const startRecognizing = async () => {
+      setSpinner('1');
+      const result = await GoogleCloudSpeechToText.start({
+        speechToFile: true,
+        languageCode: 'ko'
+      });
+      console.log('startRecognizing', result);
+    };
+    console.log('스피너',spinner);
+    const stopRecognizing = async () => {
+      await GoogleCloudSpeechToText.stop();
+    };
+
     function lett () {
         if(letter == "편지함가기"){
             setLetter("미션확인하기")
@@ -33,6 +115,7 @@ export default function Main({navigation}){
     function set () {
         setMic(!mic);
     }
+    console.log('이동할 곳', transcript);
     return(
         <View style={{flex:1, backgroundColor:"white"}}>
           
@@ -105,8 +188,10 @@ export default function Main({navigation}){
 
         {mic ?(<View style={{flex: 0.5, alignItems:'center', justifyContent:'center', backgroundColor:"#F8F8F8", borderRadius: 15}}>
             
-            <TouchableOpacity style={styles.Button_ce}>
-                <Mic></Mic>
+            <TouchableOpacity onPress={startRecognizing} style={styles.Button_ce}>
+              {spinner == ''?
+              (<Mic></Mic>)
+              :(<ActivityIndicator size="large" />)}
             </TouchableOpacity>
               
            
