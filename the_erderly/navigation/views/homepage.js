@@ -1,6 +1,6 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TouchableOpacity,ImageBackground,ScrollView} from 'react-native';
-
+import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TouchableOpacity,Modal,ImageBackground,ScrollView,PermissionsAndroid,ActivityIndicator} from 'react-native';
+import Mic from '../../src/svgFile/mic_Logo';
 import Sound from 'react-native-sound';
 import BackSvg from '../../src/svgFile/more.svg';
 import OneSvg from '../../src/svgFile/hanso.svg';
@@ -10,10 +10,19 @@ import Home from '../../src/svgFile/home.svg';
 import Home2 from '../../src/svgFile/home2.svg';
 
 import { color } from 'react-native-reanimated';
+import GoogleCloudSpeechToText, {
+  SpeechRecognizeEvent,
+  VoiceStartEvent,
+  SpeechErrorEvent,
+  VoiceEvent,
+  SpeechStartEvent,
+} from 'react-native-google-cloud-speech-to-text';
 // let path = require('../../mp3/naver_pay.mp3');
 // let music = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
 //     if (error) { console.log('play failed') }
 // }) 
+
+
 
 const data = new Date();
   const hours = String(data.getHours());
@@ -25,8 +34,86 @@ const data = new Date();
   let week =  ['일','월','화','수','목','금','토'];
   let dayOfWeek = week[data.getDay()];
   const daysTo = String(data.getDate());
+
+
 export default function HomePage({navigation}){
-  const[mic,setMiC] = useState(true);
+const [modalVisible, setModalVisible] = useState(false);
+const[mic,setMiC] = useState(true);
+const [spinner, setSpinner] = useState('');
+const [transcript, setResult] = useState('');
+
+useEffect(() => {
+  PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO, {
+    title: 'Cool Photo App Camera Permission',
+    message:
+      'Cool Photo App needs access to your camera ' +
+      'so you can take awesome pictures.',
+    buttonNeutral: 'Ask Me Later',
+    buttonNegative: 'Cancel',
+    buttonPositive: 'OK',
+  });
+}, []);
+useEffect(() => {
+  GoogleCloudSpeechToText.setApiKey('AIzaSyBMnUbVg1fC9fuhiffj_5OoQYYtLn6Uzvc');
+  GoogleCloudSpeechToText.onVoice(onVoice);
+  GoogleCloudSpeechToText.onVoiceStart(onVoiceStart);
+  GoogleCloudSpeechToText.onVoiceEnd(onVoiceEnd);
+  GoogleCloudSpeechToText.onSpeechError(onSpeechError);
+  GoogleCloudSpeechToText.onSpeechRecognized(onSpeechRecognized);
+  GoogleCloudSpeechToText.onSpeechRecognizing(onSpeechRecognizing);
+  return () => {
+    GoogleCloudSpeechToText.removeListeners();
+  };
+}, []);
+useEffect(() => {
+  if(transcript == '예매'){
+    navigation.navigate('Reservation');
+  }
+  setSpinner('');
+  setResult('');
+}, [transcript]);
+
+const onSpeechError = (_error) => {
+  console.log('onSpeechError: ', _error);
+};
+
+const onSpeechRecognized = (result) => {
+  console.log('onSpeechRecognized: ', result);
+  setResult(result.transcript);
+  stopRecognizing();
+};
+
+const onSpeechRecognizing = (result) => {
+  console.log('onSpeechRecognizing: ', result);
+  // setResult(result.transcript);
+  // stopRecognizing();
+};
+
+const onVoiceStart = (_event) => {
+  console.log('onVoiceStart', _event);
+};
+
+const onVoice = (_event) => {
+  console.log('onVoice', _event);
+};
+
+const onVoiceEnd = () => {
+  console.log('onVoiceEnd: ');
+};
+
+const startRecognizing = async () => {
+  setSpinner('1');
+  const result = await GoogleCloudSpeechToText.start({
+    speechToFile: true,
+    languageCode: 'ko'
+  });
+  console.log('startRecognizing', result);
+};
+console.log('스피너',spinner);
+const stopRecognizing = async () => {
+  await GoogleCloudSpeechToText.stop();
+};
+  
 function onPressMic(){
   setMiC(!mic);
 }
@@ -117,9 +204,10 @@ function onPressMic(){
                 <Text style={{color:"#636363",fontSize:14,alignSelf:"center"}}>   읽음</Text>
                 </View>
                 <Text style={{color:'black',fontSize:14,alignSelf:"center",left:46,bottom:35}}>2022. 12. 14(수) 오후:{hours}:28분</Text>
-                <Pressable style={{width:88.44,height:31.2,backgroundColor:"#03CF5D",borderRadius:8,justifyContent:"center",alignSelf:"flex-end",bottom:20, right:20}}>
+                <TouchableOpacity style={{width:88.44,height:31.2,backgroundColor:"#03CF5D",borderRadius:8,justifyContent:"center",alignSelf:"flex-end",bottom:20, right:20}}
+                onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={{fontSize:16,color:"white",alignSelf:"center"}}>편지 보기</Text>
-                </Pressable>
+                </TouchableOpacity>
               </View>
               <View style={{width:305,height:130.82,borderRadius:15,backgroundColor:"white",alignSelf:"center",bottom:50,justifyContent:"center",marginLeft:20}}>
                 <OneSvg style={{left:"4%",top:35}}></OneSvg>
@@ -128,9 +216,10 @@ function onPressMic(){
                 <Text style={{color:"#636363",fontSize:14,alignSelf:"center"}}>   읽음</Text>
                 </View>
                 <Text style={{color:'black',fontSize:14,alignSelf:"center",left:46,bottom:35}}>2022. 12. 14(수) 오후:{hours}:28분</Text>
-                <Pressable style={{width:88.44,height:31.2,backgroundColor:"#03CF5D",borderRadius:8,justifyContent:"center",alignSelf:"flex-end",bottom:20, right:20}}>
+                <TouchableOpacity style={{width:88.44,height:31.2,backgroundColor:"#03CF5D",borderRadius:8,justifyContent:"center",alignSelf:"flex-end",bottom:20, right:20}}
+                onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={{fontSize:16,color:"white",alignSelf:"center"}}>편지 보기</Text>
-                </Pressable>
+                </TouchableOpacity>
               </View>
               <View style={{width:305,height:130.82,borderRadius:15,backgroundColor:"white",alignSelf:"center",bottom:50,justifyContent:"center",marginLeft:20}}>
                 <OneSvg style={{left:"4%",top:35}}></OneSvg>
@@ -139,9 +228,10 @@ function onPressMic(){
                 <Text style={{color:"#636363",fontSize:14,alignSelf:"center"}}>   읽음</Text>
                 </View>
                 <Text style={{color:'black',fontSize:14,alignSelf:"center",left:46,bottom:35}}>2022. 12. 14(수) 오후:{hours}:28분</Text>
-                <Pressable style={{width:88.44,height:31.2,backgroundColor:"#03CF5D",borderRadius:8,justifyContent:"center",alignSelf:"flex-end",bottom:20, right:20}}>
+                <TouchableOpacity style={{width:88.44,height:31.2,backgroundColor:"#03CF5D",borderRadius:8,justifyContent:"center",alignSelf:"flex-end",bottom:20, right:20}}
+                onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={{fontSize:16,color:"white",alignSelf:"center"}}>편지 보기</Text>
-                </Pressable>
+                </TouchableOpacity>
               </View>
               
               
@@ -150,7 +240,35 @@ function onPressMic(){
             </View>
           </ScrollView>
 
-            {mic ?<View style={{height:175}}><Home style={{}} onPress={onPressMic}></Home></View> : <View style={{height:170,right:3}}><Home2 onPress={onPressMic}></Home2></View>}
+            <View style={{height:175, alignItems:'center',borderTopLeftRadius:15, borderBottomRightRadius:15}}>
+              <TouchableOpacity onPress={startRecognizing} style={styles.Button_ce}>
+                {spinner == ''?
+                (<Home></Home>)
+                :(<ActivityIndicator size="large" />)}
+              </TouchableOpacity>
+            </View> 
+            <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible(!modalVisible);
+            }}
+        >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Hello World!</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={styles.textStyle}>Hide Modal</Text>
+                </Pressable>
+              </View>
+            </View>
+        </Modal>
+
             
         </View>
   )    
@@ -164,7 +282,13 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginLeft:20,
   },
-
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  Button_ce: { borderRadius: 100,  borderColor: '', backgroundColor:"white",           
+  width: 138 , height: 139, margin: 5 , alignItems:'center' ,justifyContent: "center", marginBottom: 100},
   text2: {
     color: "#787878",
     fontWeight:"bold",
@@ -187,6 +311,33 @@ const styles = StyleSheet.create({
     justifyContent:"center", alignContent: "center",
     marginLeft: 60
 
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
   },
 
   text5: {
