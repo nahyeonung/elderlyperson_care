@@ -9,6 +9,8 @@ import MicSvg from '../../src/svgFile/miclogo.svg';
 import DotSvg from '../../src/svgFile/dot.svg';
 import DotgraySvg from '../../src/svgFile/dotgray.svg';
 import AirPersonSvg from '../../src/svgFile/airline_seat_recline_extra.svg';
+import NaverSvg from '../../src/svgFile/naver_pay.svg';
+
 import { Calendar,CalendarList, Agenda } from "react-native-calendars";
 import {LocaleConfig} from 'react-native-calendars';
 import Day from 'react-native-calendars/src/calendar/day';
@@ -117,6 +119,7 @@ export default function Bus({navigation}){
   const [vava,setVava]= useState("일반좌석");
   const [name, setName] = useState('출발 기차역')
   const [name2, setName2] = useState('도착 기차역')
+  const [pay,setPay] = useState(false);
   //글자 색
   const [departColor,setDepartColor] = useState("red");
   const [textColor,setTextColor] = useState("red");
@@ -315,6 +318,17 @@ function dayPlus() {
   }
  }
 
+ const onPressPay = () => {
+  if(schedule == true){
+    setSchedule(false)
+    setPay(true)
+  }
+  if (eduCount == 14){
+    music2.play();
+    setEduCount(15);
+  }
+ }
+
  const onPressDepartPage = () => {
   if(departPage == true){
     setDepartPage(false)
@@ -505,10 +519,26 @@ function replay() {
                  : null}
 
 
+          { pay ? <View style={{flex:1,alignContent:"center",alignContent:"center"}}>
+                    <View style={{backgroundColor:"#4E5CFB",flex:0.17 ,alignItems:"flex-start"}}>
+                      <Text style={{color:"white",fontWeight:"bold",fontSize:20,left:20,top:20}}> &lt; 예매하기</Text>
+                    </View>
+                    <View style={{width:393.99,height:197.53,backgroundColor:"black",position:"absolute", left:9.01,top:104.09,borderRadius:15}}></View>
+
+                    <View style={{width:392.72,height:245.11,backgroundColor:"black",position:"absolute", left:8.99,top:345.13,borderRadius:15}}></View>
+
+                   </View> :null}
+
+
+
+
+
+
+
         {schedule ? <View style={{backgroundColor:"#F8F8F8",flex:1,alignContent:"center"}}>
 
                           <View style={{backgroundColor:"white" ,flex:0.1,marginTop:30,width:"100%",alignSelf:"center",justifyContent:"center"}}>
-                            <Text style={[styles.text16,{}]}>{name}에서 {name2} </Text>
+                            <Text style={[styles.text16,{}]}>{name} &rarr; {name2} </Text>
                           </View>
                           <View style={{backgroundColor:"#F8F8F8" ,flex:0.1,justifyContent:"center"}}>
                           {/* <TouchableOpacity style={[styles.plusBox,{width:30,height:30,alignSelf:"center",backgroundColor:"white",left:0,right:"80%"}]}>
@@ -537,35 +567,37 @@ function replay() {
 
                           <View style={{backgroundColor:"white" ,flex:0.15,width:"95%",alignSelf:"center",borderBottomColor:"#F8F8F8",borderBottomWidth:15}}>
                             <View style={{flexDirection:"row"}}>
-                                <Pressable style={[styles.KtxBox,{height:25,bottom:10,top:5,marginLeft:15,marginBottom:10}]}>
+                                <Pressable style={[styles.KtxBox,{height:25,bottom:10,top:5,marginLeft:22,marginBottom:10,backgroundColor:"#3858A2"}]}>
                                   <Text style={{color:"white", fontSize:15, left:5, fontWeight:"bold"}}>KTX</Text>
                                 </Pressable>
-                                <Text style={{color:"blue", top:7, left: 10}}>034</Text>
+                                <Text style={{color:"blue", top:7, left: 15}}>034</Text>
                               </View>
                             <View style={{flexDirection:"row"}}>
                               <Text style={{color:"black", fontSize:25, fontWeight:"bold",marginLeft:20}}>{1+parseInt(hours)}:28</Text>
                               <Text style={{color:"#636363", fontSize:25, fontWeight:"bold"}}>  &rarr;</Text>
                               <Text style={{color:"black", fontSize:25}}>  {3+parseInt(hours)}:28 </Text>
-                              <Text style={{color:"#636363"}}>2시간 6분 </Text> 
-                              <TouchableOpacity style={[styles.KtxBox,{height:25,bottom:10,top:5,marginLeft:40,marginBottom:10,backgroundColor:"#03CF5D"}]}>
-                                <Text style={{color:"white"}}>예매</Text>
-                              </TouchableOpacity>
+                              <Text style={{color:"#636363",top:10}}>2시간 6분 </Text> 
+                              <Pressable style={{width:69.78,height:37.64,borderRadius:5,borderColor:"#787878",borderWidth:2,backgroundColor:"white",justifyContent:"center",flexDirection:"row",left:20,top:10}} onPress={onPressPay}>
+                                <NaverSvg style={{alignSelf:"center"}}></NaverSvg>
+                                <Text style={{color:"black", fontWeight:"bold",alignSelf:"center",marginLeft:4}}>예매</Text>
+                              </Pressable>
                             </View>
                             <View style={{flexDirection:"row",marginTop:5}}>
                               
-                                <Text style={{borderColor:"#636363", borderWidth:1,color:"gray" ,width:30, borderRadius:5,marginLeft:20}}>일반</Text>
+                            <Pressable style={{borderColor:"#636363", borderWidth:1 ,width:35, borderRadius:3,marginLeft:20,justifyContent:"center"}}>
+                                <Text style={{color:"black",alignSelf:"center"}}>일반</Text></Pressable>
                             
                                  <Text style={{color:"#636363",marginLeft:5}}>예매가능</Text>
                            
-                              <Text style={{borderColor:"#636363", borderWidth:1,color:"gray" ,width:18, borderRadius:5,marginLeft:10}}>특</Text>
-                              
+                                 <Pressable style={{borderColor:"#636363", borderWidth:1 ,width:20, borderRadius:3,marginLeft:10,justifyContent:"center"}}>
+                                <Text style={{color:"black",alignSelf:"center"}}>특</Text></Pressable>                              
                               <Text style={{color:"red",marginLeft:5}}>매진</Text>
                             </View>
                           </View>
 
                           <View style={{backgroundColor:"white" ,flex:0.15,width:"95%",alignSelf:"center",borderBottomColor:"#F8F8F8",borderBottomWidth:15}}>
                           <View style={{flexDirection:"row"}}>
-                                <Pressable style={[styles.KtxBox,{height:25,bottom:10,top:5,marginLeft:15,marginBottom:10,width:50,backgroundColor:"orange"}]}>
+                                <Pressable style={[styles.KtxBox,{height:25,bottom:10,top:5,marginLeft:22,marginBottom:10,width:50,backgroundColor:"orange"}]}>
                                   <Text style={{color:"white", fontSize:13, left:5, fontWeight:"bold",top:2}}>무궁화</Text>
                                 </Pressable>
                                 <Text style={{color:"orange", top:7, left: 10}}>028</Text>
@@ -574,69 +606,56 @@ function replay() {
                               <Text style={{color:"black", fontSize:25, fontWeight:"bold",marginLeft:20}}>{3+parseInt(hours)}:28</Text>
                               <Text style={{color:"#636363", fontSize:25, fontWeight:"bold"}}>  &rarr;</Text>
                               <Text style={{color:"black", fontSize:25}}>  {5+parseInt(hours)}:50 </Text>
-                              <Text style={{color:"#636363"}}>2시간 6분 </Text> 
+                              <Text style={{color:"#636363",top:10}}>2시간 6분 </Text> 
+                              <Pressable style={{width:69.78,height:37.64,borderRadius:5,borderColor:"#787878",borderWidth:2,backgroundColor:"white",justifyContent:"center",flexDirection:"row",left:20,top:10}}>
+                                <NaverSvg style={{alignSelf:"center"}}></NaverSvg>
+                                <Text style={{color:"black", fontWeight:"bold",alignSelf:"center",marginLeft:4}}>예매</Text>
+                              </Pressable>
                             </View>
                             <View style={{flexDirection:"row",marginTop:5}}>
                               
-                                <Text style={{borderColor:"#636363", borderWidth:1,color:"gray" ,width:30, borderRadius:5,marginLeft:20}}>일반</Text>
+                            <Pressable style={{borderColor:"#636363", borderWidth:1 ,width:35, borderRadius:3,marginLeft:20,justifyContent:"center"}}>
+                                <Text style={{color:"black",alignSelf:"center"}}>일반</Text></Pressable>
                             
                                  <Text style={{color:"#636363",marginLeft:5}}>예매가능</Text>
                            
-                              <Text style={{borderColor:"#636363", borderWidth:1,color:"gray" ,width:18, borderRadius:5,marginLeft:10}}>특</Text>
-                              
+                                 <Pressable style={{borderColor:"#636363", borderWidth:1 ,width:20, borderRadius:3,marginLeft:10,justifyContent:"center"}}>
+                                <Text style={{color:"black",alignSelf:"center"}}>특</Text></Pressable>                              
                               <Text style={{color:"red",marginLeft:5}}>매진</Text>
                             </View>
                           </View>
 
                           <View style={{backgroundColor:"white" ,flex:0.15,width:"95%",alignSelf:"center",borderBottomColor:"#F8F8F8",borderBottomWidth:15}}>
                           <View style={{flexDirection:"row"}}>
-                                <Pressable style={[styles.KtxBox,{height:25,bottom:10,top:5,marginLeft:15,marginBottom:10}]}>
+                          <Pressable style={[styles.KtxBox,{height:25,bottom:10,top:5,marginLeft:22,marginBottom:10,backgroundColor:"#3858A2"}]}>
                                   <Text style={{color:"white", fontSize:15, left:5, fontWeight:"bold"}}>KTX</Text>
                                 </Pressable>
-                                <Text style={{color:"blue", top:7, left: 10}}>034</Text>
+                                <Text style={{color:"blue", top:7, left: 15}}>034</Text>
                               </View>
                             <View style={{flexDirection:"row"}}>
                               <Text style={{color:"black", fontSize:25, fontWeight:"bold",marginLeft:20}}>{5+parseInt(hours)}:45</Text>
                               <Text style={{color:"#636363", fontSize:25, fontWeight:"bold"}}>  &rarr;</Text>
                               <Text style={{color:"black", fontSize:25}}>  {7+parseInt(hours)}:34 </Text>
-                              <Text style={{color:"#636363"}}>2시간 6분 </Text> 
+                              <Text style={{color:"#636363",top:10}}>2시간 6분 </Text> 
+                              <Pressable style={{width:69.78,height:37.64,borderRadius:5,borderColor:"#787878",borderWidth:2,backgroundColor:"white",justifyContent:"center",flexDirection:"row",left:20,top:10}}>
+                                <NaverSvg style={{alignSelf:"center"}}></NaverSvg>
+                                <Text style={{color:"black", fontWeight:"bold",alignSelf:"center",marginLeft:4}}>예매</Text>
+                              </Pressable>
                             </View>
                             <View style={{flexDirection:"row",marginTop:5}}>
                               
-                                <Text style={{borderColor:"#636363", borderWidth:1,color:"gray" ,width:30, borderRadius:5,marginLeft:20}}>일반</Text>
+                                <Pressable style={{borderColor:"#636363", borderWidth:1 ,width:35, borderRadius:3,marginLeft:20,justifyContent:"center"}}>
+                                <Text style={{color:"black",alignSelf:"center"}}>일반</Text></Pressable>
                             
                                  <Text style={{color:"#636363",marginLeft:5}}>예매가능</Text>
                            
-                              <Text style={{borderColor:"#636363", borderWidth:1,color:"gray" ,width:18, borderRadius:5,marginLeft:10}}>특</Text>
-                              
+                                 <Pressable style={{borderColor:"#636363", borderWidth:1 ,width:20, borderRadius:3,marginLeft:10,justifyContent:"center"}}>
+                                <Text style={{color:"black",alignSelf:"center"}}>특</Text></Pressable>                              
                               <Text style={{color:"red",marginLeft:5}}>매진</Text>
                             </View>
                           </View>
-
-                          <View style={{backgroundColor:"white" ,flex:0.15,width:"95%",alignSelf:"center",borderBottomColor:"#F8F8F8",borderBottomWidth:15}}>
-                          <View style={{flexDirection:"row"}}>
-                                <Pressable style={[styles.KtxBox,{height:25,bottom:10,top:5,marginLeft:15,marginBottom:10}]}>
-                                  <Text style={{color:"white", fontSize:15, left:5, fontWeight:"bold"}}>KTX</Text>
-                                </Pressable>
-                                <Text style={{color:"blue", top:7, left: 10}}>034</Text>
-                              </View>
-                            <View style={{flexDirection:"row"}}>
-                              <Text style={{color:"black", fontSize:25, fontWeight:"bold",marginLeft:20}}>{7+parseInt(hours)}:30</Text>
-                              <Text style={{color:"#636363", fontSize:25, fontWeight:"bold"}}>  &rarr;</Text>
-                              <Text style={{color:"black", fontSize:25}}>  {9+parseInt(hours)}:35 </Text>
-                              <Text style={{color:"#636363"}}>2시간 10분 </Text> 
-                            </View>
-                            <View style={{flexDirection:"row",marginTop:5}}>
-                              
-                                <Text style={{borderColor:"#636363", borderWidth:1,color:"gray" ,width:30, borderRadius:5,marginLeft:20}}>일반</Text>
-                            
-                                 <Text style={{color:"#636363",marginLeft:5}}>예매가능</Text>
-                           
-                              <Text style={{borderColor:"#636363", borderWidth:1,color:"gray" ,width:18, borderRadius:5,marginLeft:10}}>특</Text>
-                              
-                              <Text style={{color:"red",marginLeft:5}}>매진</Text>
-                            </View>
-                          </View>
+                          <MicSvg style={{position:"absolute" ,top: 700}} onPress={replay}></MicSvg>
+                        
 
 
 
@@ -1293,7 +1312,7 @@ margin:20},
           width:40 , height : 40,justifyContent:"center", alignContent: "center", left:200, top:10
          },
         box13:{
-          width:100, height:40,backgroundColor:"#e6e6fa", borderRadius:10,margin:20, justifyContent:"center", alignSelf: "center"
+          width:100, height:40,backgroundColor:"#e6e6fa", borderRadius:10,margin:7, justifyContent:"center", alignSelf: "center"
         },
 
         KtxBox:{

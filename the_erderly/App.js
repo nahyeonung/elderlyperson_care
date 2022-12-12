@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState,component } from 'react';
 import {
   KakaoOAuthToken,
   KakaoProfile,
@@ -27,6 +27,17 @@ import test from './navigation/views/test';
 import maru from './navigation/views/maru';
 import find from './navigation/views/findWay';
 import bus from './navigation/views/bus_reservation';
+import train from './navigation/views/train';
+import train2 from './navigation/views/train2';
+import em from './navigation/views/em';
+import homepage from './navigation/views/homepage';
+
+
+
+
+
+
+
 import { Provider } from 'react-redux';
 import { Store } from './navigation/redux/store';
 
@@ -53,7 +64,10 @@ export default function App() {
             <Stack.Screen name="Test" component={test} />
             <Stack.Screen name="Find" component={find} />
             <Stack.Screen name="Bus" component={bus} />
-
+            <Stack.Screen name="Train" component={train} />
+            <Stack.Screen name="Train2" component={train2} />
+            <Stack.Screen name="Em" component={em} />
+            <Stack.Screen name="HomePage" component={homepage} />
 
            
           </Stack.Navigator>

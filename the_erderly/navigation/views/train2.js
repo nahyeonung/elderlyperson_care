@@ -4,18 +4,20 @@ import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TouchableOp
 import Sound from 'react-native-sound';
 import BackSvg from '../../src/svgFile/more.svg';
 import Micc from '../../src/svgFile/micc.svg';
+import BuySvg from '../../src/svgFile/buy.svg';
+
 let path = require('../../mp3/naver_pay.mp3');
 let music = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
     if (error) { console.log('play failed') }
 }) 
 
 
-export default function Maru({navigation}){
+export default function Train2({navigation}){
 
-  useEffect(() => {
-    music.play();
+  // useEffect(() => {
+  //   music.play();
    
-  },[])
+  // },[])
 
   const[yes,setYes] = useState(true);
   const[no,setNo] = useState(true);
@@ -35,41 +37,31 @@ export default function Maru({navigation}){
     if(no == true){
     setNo(false);
     setYes(true);
-    navigation.navigate('Train2');
+    navigation.navigate('Bus');
     }
     else if(no == false){
       setNo(true);
     }
   }
   return(
-    // <View style={{flex:1}}>
-    //   <BackSvg>    
-    //   </BackSvg>
-    //   <View><Pressable style={{backgroundColor:"white", width:120, height:40, bottom:780,left:"14%"}}>
-    //       <Text style={{color:"black"}}>오우쮓</Text>
-    //     </Pressable></View>
-    //   <Micc style={{bottom:"13%"}}></Micc>
-    // </View>
     
-//     <View style={[styles.row, styles.header]}>
-//   <ImageBackground source={require("../../src/svgFile/back.svg")} style={styles.bgImage}>
-//   <View><Pressable style={{backgroundColor:"white", width: 121, height:45.7,borderRadius:15,left:40,top:10}}><Text style={{color:"black",fontSize:20}}>기차표예매</Text></Pressable>
-//   <Text >검색창에 기차표 예매를 검색하세요!</Text>
-//   </View>
-//   </ImageBackground>
-// </View>
         <View style={{flex:1,backgroundColor:"white",}}>
-          <View style={{flex:0.5,justifyContent:'flex-end', alignContent: "center",bottom:100, left:30}}>
-            <Text style={styles.text1}>잠깐!</Text>
-            <Text style={styles.text2}>네이버페이 등록이 되어있나요??</Text>
+          <View style={{flex:0.5,justifyContent:'flex-end', alignContent: "center", left:30}}>
+            <Text style={styles.text1}>교육을 완료했어요</Text>
+            <Text style={styles.text2}>수고많으셨어요 !</Text>
+            <Text></Text>
+            <Text style={styles.text2}>아직 사용이 어렵다면,</Text>
+            <Text style={[styles.text2,{fontWeight:"bold"}]}>한번더 같이 복습해 볼까요?</Text>
 
           </View>
           <View style={{flex:1, flexDirection:"row", justifyContent:"center", alignContent: "center"}}>
             <TouchableOpacity style={[styles.box,{backgroundColor: yes ? "#787878" : "#03CF5D"}]} onPress={color}>
-              <Text style={styles.text4}>예</Text>
+              <Text style={styles.text4}>복습하기</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.box,{backgroundColor: no ? "#787878" : "#03CF5D"}]} onPress={color2}>
-            <Text style={styles.text3}>아니오</Text>
+            <Text style={styles.text3}>예매하러</Text>
+            <Text style={styles.text3}>가기</Text>
+
             </TouchableOpacity>
 
           </View>
@@ -82,35 +74,33 @@ export default function Maru({navigation}){
 const styles = StyleSheet.create({
 
   text1: {
-    color: "#4E4E4E",
+    color: "#03CF5D",
     fontWeight:"bold",
-    fontSize: 30,
+    fontSize: 25,
     marginLeft:20,
   },
 
   text2: {
     color: "#787878",
-    fontWeight:"bold",
+    
     fontSize: 18,
     marginLeft:20,
     top:40
   },
 
   text3: {
-    
+    color:"white",
     fontWeight:"bold",
     fontSize: 18,
-    justifyContent:"center", alignContent: "center",
-    marginLeft: 43
+    justifyContent:"center", alignSelf: "center",
 
   },
 
   text4: {
-    
+    color:"white",
     fontWeight:"bold",
     fontSize: 18,
-    justifyContent:"center", alignContent: "center",
-    marginLeft: 60
+    justifyContent:"center", alignSelf:"center"
 
   },
 
@@ -119,8 +109,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     fontSize: 18,
     justifyContent:"center", 
-    alignContent: "center",
-    marginLeft: 117,
+    alignSelf: "center",
 
   },
 

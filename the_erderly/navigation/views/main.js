@@ -181,7 +181,7 @@ export default function Main({navigation}){
                 <Text style={styles.text4}>교육 컨텐츠</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.Button} onPress={
-                   () => navigation.navigate('VoiceScreen')}>
+                   () => navigation.navigate('Em')}>
                 <Text style={styles.text4}>찜한교육</Text>
             </TouchableOpacity>
         </View>) : null}
