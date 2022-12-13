@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, Button, Pressable, Image, Alert } from 'react-native';
 import View2Svg from '../../src/svgFile/Naver_main.svg';
 import View2_logoSvg from '../../src/svgFile/revan_logo.svg';
+import Chips from '../../src/svgFile/chips.svg';
 import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
 import { setId } from '../redux/action';
@@ -31,10 +32,10 @@ export default function Nextpage({navigation}) {
      return(
      
       <View style={{flex:1}}>
-          <Pressable style={{backgroundColor: "#03CF5D", width:50, height:50, marginTop: 10, 
+          <Pressable style={{width:50, height:50, marginTop: 10, 
             marginLeft:'80%', borderColor: "#03CF5D",}}
             onPress={() => navigation.navigate('MyPage')}>
-            <Text style={{fontWeight:"bold",color:"black",}}>마이{'\n'}페이지</Text>
+            <Chips></Chips>
           </Pressable>
           <View style={{flex: 3,alignItems:'center', justifyContent:'center'}}>
             <View2_logoSvg/>
@@ -43,7 +44,6 @@ export default function Nextpage({navigation}) {
             <Image
               style={styles.image} 
               source={{uri : image}} />
-            <Text style={styles.text}>{id}</Text>
           </View>
           <View style={{flex: 0.5, marginLeft:30}}>
              <View2Svg/>

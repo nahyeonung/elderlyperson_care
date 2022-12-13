@@ -5,7 +5,7 @@ import { SET_SIGN } from "./action";
 const initialState = {
     id: '',
     friendId: '',
-    SET_SIGN: '',
+    sign: '',
 }
 
 function userReducer(state = initialState, action){

@@ -1,5 +1,5 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TouchableOpacity,Modal,ImageBackground,ScrollView,PermissionsAndroid,ActivityIndicator} from 'react-native';
+import {View, Text, Button, StyleSheet, Image,Pressable,SafeAreaView,Alert,TouchableOpacity,Modal,ImageBackground,ScrollView,PermissionsAndroid,ActivityIndicator} from 'react-native';
 import Mic from '../../src/svgFile/mic_Logo';
 import Sound from 'react-native-sound';
 import BackSvg from '../../src/svgFile/more.svg';
@@ -8,6 +8,8 @@ import Micc from '../../src/svgFile/micc.svg';
 import Em from '../../src/svgFile/em.svg';
 import Home from '../../src/svgFile/home.svg';
 import Home2 from '../../src/svgFile/home2.svg';
+import database from '@react-native-firebase/database';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { color } from 'react-native-reanimated';
 import GoogleCloudSpeechToText, {
@@ -37,10 +39,20 @@ const data = new Date();
 
 
 export default function HomePage({navigation}){
+const {id} = useSelector(state => state.userReducer);
+const [image,setImage] = useState('')
+const [name, setName] = useState('')
 const [modalVisible, setModalVisible] = useState(false);
 const[mic,setMiC] = useState(true);
 const [spinner, setSpinner] = useState('');
 const [transcript, setResult] = useState('');
+database()
+.ref('/users/'+id)
+.once('value')
+.then(snapshot => {
+  setImage(snapshot.val().imageUri)
+  setName(snapshot.val().name)
+});
 
 useEffect(() => {
   PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO, {
@@ -67,6 +79,9 @@ useEffect(() => {
 }, []);
 useEffect(() => {
   if(transcript == '예매'){
+    navigation.navigate('Reservation');
+  }
+  else if(transcript == '예매하기'){
     navigation.navigate('Reservation');
   }
   setSpinner('');
@@ -154,7 +169,7 @@ function onPressMic(){
           <View style={{flex:0.15,backgroundColor:"black"}}></View>
           <ScrollView style={{}}>
             <View style={{height:100,justifyContent:"center"}}>
-              <Text style={{fontSize:30,fontWeight:"bold",color:"#4E4E4E",alignSelf:"center",right:"10%"}}>000님, 안녕하세요 !</Text>
+              <Text style={{fontSize:30,fontWeight:"bold",color:"#4E4E4E",alignSelf:"center",right:"10%"}}>{name}님, 안녕하세요 !</Text>
             </View>
 
 
@@ -198,7 +213,7 @@ function onPressMic(){
               <ScrollView style={{alignSelf:"center"}}horizontal={true}>
               <Text></Text>
               <View style={{width:305,height:130.82,borderRadius:15,backgroundColor:"white",alignSelf:"center",bottom:50,justifyContent:"center",marginLeft:40}}>
-                <OneSvg style={{left:"4%",top:35}}></OneSvg>
+                <Image style={styles.image} source={{uri : image}}></Image>
                 <View style={{flexDirection:"row", alignSelf:"center",left:30,bottom:55}}>
                 <Text style={{color:'#636363',fontSize:15,alignSelf:"center",fontWeight:"bold"}}>사랑하는 우리딸</Text>
                 <Text style={{color:"#636363",fontSize:14,alignSelf:"center"}}>   읽음</Text>
@@ -210,7 +225,7 @@ function onPressMic(){
                 </TouchableOpacity>
               </View>
               <View style={{width:305,height:130.82,borderRadius:15,backgroundColor:"white",alignSelf:"center",bottom:50,justifyContent:"center",marginLeft:20}}>
-                <OneSvg style={{left:"4%",top:35}}></OneSvg>
+                <Image style={styles.image} source={{uri : image}}></Image>
                 <View style={{flexDirection:"row", alignSelf:"center",left:30,bottom:55}}>
                 <Text style={{color:'#636363',fontSize:15,alignSelf:"center",fontWeight:"bold"}}>사랑하는 우리딸</Text>
                 <Text style={{color:"#636363",fontSize:14,alignSelf:"center"}}>   읽음</Text>
@@ -222,7 +237,7 @@ function onPressMic(){
                 </TouchableOpacity>
               </View>
               <View style={{width:305,height:130.82,borderRadius:15,backgroundColor:"white",alignSelf:"center",bottom:50,justifyContent:"center",marginLeft:20}}>
-                <OneSvg style={{left:"4%",top:35}}></OneSvg>
+                <Image style={styles.image} source={{uri : image}}></Image>
                 <View style={{flexDirection:"row", alignSelf:"center",left:30,bottom:55}}>
                 <Text style={{color:'#636363',fontSize:15,alignSelf:"center",fontWeight:"bold"}}>사랑하는 우리딸</Text>
                 <Text style={{color:"#636363",fontSize:14,alignSelf:"center"}}>   읽음</Text>
@@ -258,13 +273,34 @@ function onPressMic(){
         >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Hello World!</Text>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Text style={styles.textStyle}>Hide Modal</Text>
-                </Pressable>
+                <View style={{flexDirection:'row'}}>
+                  <Image style={styles.modalImage} source={{uri: image}}></Image>
+                  <View>
+                    <Text style={{fontSize:30, fontWeight:'bold'}}>사랑하는 우리 딸</Text>
+                    <Text style={{marginLeft:10, fontWeight:'bold'}}>2022.12.06 (화) 16:00</Text>
+                  </View>
+                </View>
+                <Text style={styles.modalText}>
+                엄마, 요새 엄마가 좋아하는 임영웅 노래만{'\n'}
+                많이 듣길래 내가 다른 노래 추천해주려고!{'\n'}
+                사실 내가 좋아하는 노래 추천하는거니까{'\n'}
+                듣고 어땠는지 말해주기 !!{'\n\n'}
+                이번주에 꼭 내려갈게요! 기혁이 사랑해♥</Text>
+                <View style={{flexDirection:'row'}}>
+                  <Pressable
+                    style={[styles.button, styles.buttonMove]}
+                    onPress={() => navigation.navigate('Reservation')}
+                  >
+                    <Text style={styles.textStyle}>학습하러가기</Text>
+                  </Pressable>
+                  <Pressable
+                    style={[styles.button, styles.buttonClose, styles.gin]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>창 닫기</Text>
+                  </Pressable>
+                </View>
+
               </View>
             </View>
         </Modal>
@@ -275,6 +311,9 @@ function onPressMic(){
 }
 
 const styles = StyleSheet.create({
+  gin: {
+    marginLeft: 30
+  },
 
   text1: {
     color: "#4E4E4E",
@@ -315,7 +354,8 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize:20
   },
   modalView: {
     margin: 20,
@@ -333,12 +373,19 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   modalText: {
+    textDecorationLine: 'underline',
+    marginTop:10,
     marginBottom: 15,
-    textAlign: "center"
+    fontWeight:'bold',
+    textAlign: "left",
+    fontSize: 17
   },
   buttonClose: {
     backgroundColor: "#2196F3",
   },
+  buttonMove: {
+    backgroundColor: "#03CF5D",
+  },  
 
   text5: {
     
@@ -367,5 +414,18 @@ margin:20},
     fontWeight:"bold",
     color:"#03CF5D"
   },
+
+  image: {
+    top:30,
+    width:89.75,
+    height:89.75,
+    borderRadius:100,
+    backgroundColor:'red'
+  },
+  modalImage: {
+    width:89.75,
+    height:89.75,
+    borderRadius:100,
+  }
 
 })

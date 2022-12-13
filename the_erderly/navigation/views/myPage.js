@@ -29,6 +29,7 @@ export default function MyPage({navigation}){
 
     console.log(loading)
     const signOutWithKakao = async ()  => {
+        console.log('뭔데 이거', sign);
         try {
           if(sign == ''){
             const message = await logout();
