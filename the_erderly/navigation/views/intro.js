@@ -5,22 +5,12 @@ import Sound from 'react-native-sound';
 import BackSvg from '../../src/svgFile/more.svg';
 import Micc from '../../src/svgFile/micc.svg';
 import BuySvg from '../../src/svgFile/buy.svg';
-import ArrowSvg from '../../src/svgFile/arrow.svg';
-import XcoduSvg from '../../src/svgFile/xcodu.svg';
 
 
-let path = require('../../mp3/sugo.mp3');
-let music = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
-    if (error) { console.log('play failed') }
-}) 
 
 
-export default function Train2({navigation}){
+export default function TrainIntro({navigation}){
 
-   useEffect(() => {
-     music.play();
-   
-   },[])
 
   const[yes,setYes] = useState(true);
   const[no,setNo] = useState(true);
@@ -40,7 +30,7 @@ export default function Train2({navigation}){
     if(no == true){
     setNo(false);
     setYes(true);
-    navigation.navigate('Test');
+    navigation.navigate('Bus');
     }
     else if(no == false){
       setNo(true);
@@ -48,47 +38,45 @@ export default function Train2({navigation}){
   }
   return(
     
-        <View style={{flex:1,backgroundColor:"white",}}>
-          <View style={{flex:0.5,justifyContent:'flex-end', alignContent: "center", left:30}}>
-            <Text style={styles.text1}>교육을 완료했어요</Text>
-            <Text style={styles.text2}>수고많으셨어요 !</Text>
-            <Text></Text>
-            <Text style={styles.text2}>아직 사용이 어렵다면,</Text>
-            <Text style={[styles.text2,{fontWeight:"bold"}]}>한번더 같이 복습해 볼까요?</Text>
-
-          </View>
+        
+           
           <View style={{flex:1, flexDirection:"row", justifyContent:"center", alignContent: "center"}}>
+          <Text style={styles.text1}>기차표 예매</Text>
+            <Text style={[styles.text2,{fontWeight:"bold"}]}>교육영상을 시작하시겠습니까?</Text>
             <TouchableOpacity style={[styles.box,{backgroundColor: yes ? "#787878" : "#03CF5D"}]} onPress={color}>
-              <Text style={styles.text4}>복습하기</Text>
+              <Text style={styles.text4}>예</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.box,{backgroundColor: no ? "#787878" : "#03CF5D"}]} onPress={color2}>
-            <Text style={styles.text3}>예매하러</Text>
-            <Text style={styles.text3}>가기</Text>
+            <TouchableOpacity style={[styles.box3,{backgroundColor: no ? "#787878" : "#03CF5D"}]}>
+            <Text style={styles.text3}>아니요</Text>
 
             </TouchableOpacity>
+            
 
           </View>
 
-          
-        </View>
+       
+       
   )    
 }
 
 const styles = StyleSheet.create({
 
   text1: {
-    color: "#03CF5D",
+    color: "#4E4E4E",
     fontWeight:"bold",
     fontSize: 25,
-    marginLeft:20,
+    position:"absolute",
+    top:128.43,
+    left:70.06
   },
 
   text2: {
     color: "#787878",
     
-    fontSize: 18,
-    marginLeft:20,
-    top:40
+    fontSize: 17,
+    position:"absolute",
+    top:195.1,
+    left:70.06
   },
 
   text3: {
@@ -117,8 +105,9 @@ const styles = StyleSheet.create({
   },
 
 
-  box:{ width:139.57, height: 235.4, borderRadius:15, borderColor: "#787878",justifyContent:"center", alignContent: "center",marginTop: 80,
-margin:20},
+  box:{ width:139.57, height: 235.4, borderRadius:15, borderColor: "#787878",justifyContent:"center", alignContent: "center",position:"absolute",top:350.12,left:61.99},
+
+  box3:{ width:139.57, height: 235.4, borderRadius:15, borderColor: "#787878",justifyContent:"center", alignContent: "center",position:"absolute",top:350.12,left:210.44},
 
   box2: {
     width:288.02, height:70.66, backgroundColor:"#787878", borderRadius:30, justifyContent:"center", alignContent: "center", marginLeft: 60

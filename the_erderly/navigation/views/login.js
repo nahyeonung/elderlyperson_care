@@ -44,7 +44,8 @@ export default function Kakaologin({navigation}) {
           });
         }
         if(snapshot.val().phone == null){
-          navigation.navigate('registerScreen')
+          // navigation.navigate('registerScreen')
+          navigation.navigate('View2')
         }else navigation.navigate('View2')
       });
       //setResult(JSON.stringify(token));

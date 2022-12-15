@@ -14,10 +14,7 @@ let music2 = new Sound(path2, Sound.MAIN_BUNDLE, (error) => {
 
 export default function Education({navigation}){
   
-  useEffect(() => {
-    music.play();
-   
-  },[])
+ 
   const[color,setColor] = useState("#F8F8F8");
   const[color2,setColor2] = useState("#F8F8F8");
   const[color3,setColor3] = useState("#F8F8F8");

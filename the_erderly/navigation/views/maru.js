@@ -1,9 +1,12 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TouchableOpacity,ImageBackground} from 'react-native';
-
+import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TouchableOpacity,ImageBackground,Image} from 'react-native';
 import Sound from 'react-native-sound';
 import BackSvg from '../../src/svgFile/more.svg';
 import Micc from '../../src/svgFile/micc.svg';
+import Start from '../../src/svgFile/start.svg';
+import Train from './train';
+import TrainIntro from './intro';
+
 let path = require('../../mp3/naver_pay.mp3');
 let music = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
     if (error) { console.log('play failed') }
@@ -11,11 +14,8 @@ let music = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
 
 
 export default function Maru({navigation}){
-
-  useEffect(() => {
-    music.play();
-   
-  },[])
+  
+  
 
   const[yes,setYes] = useState(true);
   const[no,setNo] = useState(true);
@@ -58,24 +58,16 @@ export default function Maru({navigation}){
 //   </View>
 //   </ImageBackground>
 // </View>
-        <View style={{flex:1,backgroundColor:"white",}}>
-          <View style={{flex:0.5,justifyContent:'flex-end', alignContent: "center",bottom:100, left:30}}>
-            <Text style={styles.text1}>잠깐!</Text>
-            <Text style={styles.text2}>네이버페이 등록이 되어있나요??</Text>
-
-          </View>
-          <View style={{flex:1, flexDirection:"row", justifyContent:"center", alignContent: "center"}}>
-            <TouchableOpacity style={[styles.box,{backgroundColor: yes ? "#787878" : "#03CF5D"}]} onPress={color}>
-              <Text style={styles.text4}>예</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.box,{backgroundColor: no ? "#787878" : "#03CF5D"}]} onPress={color2}>
-            <Text style={styles.text3}>아니오</Text>
-            </TouchableOpacity>
-
-          </View>
-
-          
+        <View>
+          <Image
+          source={require('../../src/svgFile/start.png')}
+         />
+        <Pressable style={{width:288.02,height:55,borderRadius:15,backgroundColor:"#03CF5D",justifyContent:"center",position:"absolute",top:706.31,left:61.99}}>
+          <Text style={{fontSize:20,color:'white',alignSelf:"center",fontWeight:"bold"}} onPress={() => navigation.navigate(TrainIntro)}>예매 시작하기</Text>
+        </Pressable>
         </View>
+
+
   )    
 }
 
@@ -133,5 +125,18 @@ margin:20},
   },
   header: {flex: 1,backgroundColor:"black"},
   bgImage: {width: '100%', height: '100%',tintColor: 'gray',opacity:0.3},
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
 
 })

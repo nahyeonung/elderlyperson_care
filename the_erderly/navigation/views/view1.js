@@ -49,7 +49,7 @@ export default function HomeScreen({navigation}) {
             title="To User Screen"
               onPress={
                   // ()=> move()
-                  () => navigation.navigate('Kakaologin')
+                  () => navigation.navigate('HomePage')
               } >
              <Text style={styles.text}>이용 시작</Text>  
              

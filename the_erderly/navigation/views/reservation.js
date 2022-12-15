@@ -8,6 +8,17 @@ import Train_green from '../../src/svgFile/Train_green.svg';
 import Bus_white from '../../src/svgFile/Bus_white.svg';
 import Bus2_white from '../../src/svgFile/Bus2_white.svg';
 import Air_white from '../../src/svgFile/Air_white.svg';
+import Home from '../../src/svgFile/homelogo.svg';
+import Ar from '../../src/svgFile/ar.svg';
+import Ki_g from '../../src/svgFile/ki_g.svg';
+import Si_g from '../../src/svgFile/si_g.svg';
+import Go_g from '../../src/svgFile/gobus_g.svg';
+import Air_g from '../../src/svgFile/air_g.svg';
+
+
+
+
+
 import Sound from 'react-native-sound';
 
 let path = require('../../mp3/reservation_intro.mp3');
@@ -21,10 +32,7 @@ let music2 = new Sound(path2, Sound.MAIN_BUNDLE, (error) => {
 
 export default function Reservation({navigation}){
   
-  useEffect(() => {
-    music.play();
-   
-  },[])
+  
   
   const[color,setColor] = useState("#F8F8F8");
   const[color2,setColor2] = useState("#F8F8F8");
@@ -32,25 +40,12 @@ export default function Reservation({navigation}){
   const[color4,setColor4] = useState("#F8F8F8");
   
   const[value,setValue] = useState(1)
-  const[width,setWidth] = useState("0")
-  const[height,setHeight] = useState("0")
-  const[width2,setWidth2] = useState("100")
-  const[height2,setHeight2] = useState("100")
+  
 
-  const[width3,setWidth3] = useState("0")
-  const[height3,setHeight3] = useState("0")
-  const[width4,setWidth4] = useState("100")
-  const[height4,setHeight4] = useState("100")
-
-  const[width5,setWidth5] = useState("0")
-  const[height5,setHeight5] = useState("0")
-  const[width6,setWidth6] = useState("100")
-  const[height6,setHeight6] = useState("100")
-
-  const[width7,setWidth7] = useState("0")
-  const[height7,setHeight7] = useState("0")
-  const[width8,setWidth8] = useState("100")
-  const[height8,setHeight8] = useState("100")
+  const[train,setTrain] =useState(true);
+  const[gobus,setGobus] =useState(true);
+  const[air,setAir] =useState(true);
+  const[sibus,setSibus] =useState(true);
 
   
 
@@ -61,23 +56,8 @@ export default function Reservation({navigation}){
       setColor("#F8F8F8")
       setColor3("#F8F8F8")
       setColor4("#F8F8F8")
-      setWidth("100")
-      setHeight("100")
-      setWidth2("0")
-      setHeight2("0")
       setValue(2)
-      setWidth5("0")
-      setHeight5("0")
-      setWidth6("100")
-      setHeight6("100")
-      setWidth7("0")
-      setHeight7("0")
-      setWidth8("100")
-      setHeight8("100")
-      setWidth3("0")
-      setHeight3("0")
-      setWidth4("100")
-      setHeight4("100")
+    
 
     }
     else if (color2 == "#03CF5D"){
@@ -91,39 +71,18 @@ export default function Reservation({navigation}){
   }
 
   function onPressHandle() {
-    if(color == "#F8F8F8"){
-      setColor("#03CF5D");
-      setColor2("#F8F8F8")
-      setColor3("#F8F8F8")
-      setColor4("#F8F8F8")
-      setWidth3("100")
-      setHeight3("100")
-      setWidth4("0")
-      setHeight4("0")
-      setWidth("0")
-      setHeight("0")
-      setWidth2("100")
-      setHeight2("100")
-      setValue(1)
-      setWidth5("0")
-      setHeight5("0")
-      setWidth6("100")
-      setHeight6("100")
-      setWidth7("0")
-      setHeight7("0")
-      setWidth8("100")
-      setHeight8("100")
-      music2.play();
+
+      setTrain(!train);
+      setValue(1);
+      if(color == "#F8F8F8")
+      setColor("#03CF5D")
+      else if(color == "#03CF5D"){
+        setColor("#F8F8F8")
+      }
       
     }
-    else if (color == "#03CF5D"){
-      setColor("#F8F8F8");
-      setWidth3("0")
-      setHeight3("0")
-      setWidth4("100")
-      setHeight4("100")
-    }
-  }
+    
+  
 
   function onPressHandle3() {
     if(color3 == "#F8F8F8"){
@@ -132,30 +91,12 @@ export default function Reservation({navigation}){
       setColor("#F8F8F8")
       setColor4("#F8F8F8")
       setValue(3)
-      setWidth5("100")
-      setHeight5("100")
-      setWidth6("0")
-      setHeight6("0")
-      setWidth7("0")
-      setHeight7("0")
-      setWidth8("100")
-      setHeight8("100")
-      setWidth("0")
-      setHeight("0")
-      setWidth2("100")
-      setHeight2("100")
-      setWidth3("0")
-      setHeight3("0")
-      setWidth4("100")
-      setHeight4("100")
+    
     
     }
     else if (color3 == "#03CF5D"){
       setColor3("#F8F8F8");
-      setWidth5("0")
-      setHeight5("0")
-      setWidth6("100")
-      setHeight6("100")
+    
     }
 
   }
@@ -166,32 +107,14 @@ export default function Reservation({navigation}){
       setColor2("#F8F8F8")
       setColor("#F8F8F8")
       setColor3("#F8F8F8")
-      setWidth7("100")
-      setHeight7("100")
-      setWidth8("0")
-      setHeight8("0")
-      setWidth("0")
-      setHeight("0")
-      setWidth2("100")
-      setHeight2("100")
-      setWidth5("0")
-      setHeight5("0")
-      setWidth6("100")
-      setHeight6("100")
-      setWidth3("0")
-      setHeight3("0")
-      setWidth4("100")
-      setHeight4("100")
+    
      
       
       setValue(4)
     }
     else if (color4 == "#03CF5D"){
       setColor4("#F8F8F8");
-      setWidth7("0")
-      setHeight7("0")
-      setWidth8("100")
-      setHeight8("100")
+    
     }
   }
 
@@ -203,43 +126,40 @@ export default function Reservation({navigation}){
 
 return(
     <View style={{flex:1 , backgroundColor: "white"}}>
-       
-        <View style={{flex:1.3 , backgroundColor: "white", alignItems:'center' , justifyContent: "center"}}>
-            <Text style={styles.text1}>예매하기</Text>
-            <Text style={styles.text2}>카테고리에 맞는 교육 영상을 추천해 드려요</Text>
-        </View>
+      <Home style={{position:"absolute",top:61.32,left:348}} onPress={()=> navigation.navigate("HomePage")}></Home> 
+      <Ar style={{position:"absolute",top:59.82,left:19.63,}} onPress={()=> navigation.navigate("HomePage")}></Ar> 
 
-        <View style={{flex:1.5 , backgroundColor: "white",flexDirection: 'row', alignItems:'center' , justifyContent: "center"}}>
-          <Pressable style={[styles.Button,{backgroundColor:color}]} onPress={onPressHandle}>
-          <Trainwhite  height = {height3} width ={width3}/>
-          <Train_green  height = {height4} width ={width4}/>
-          <Text style={styles.text3 }>기차표예매</Text>
+       
+            <Text style={styles.text1}>예매하기</Text>
+            <Text style={styles.text2}>카테고리에 맞는 교육영상을 추천해드려요</Text>
+        
+
+          <Pressable style={[styles.Button,{backgroundColor:color,position:"absolute",top:254.41,left:61.99,}]} onPress={onPressHandle}>
+          { train ?<Ki_g style={{alignSelf:"center"}}/> :
+          <Trainwhite style={{alignSelf:"center"}}></Trainwhite>} 
+          { train ?<Text style={styles.text3 }>기차표예매</Text>:<Text style={[styles.text3,{color:"white"}] }>기차표예매</Text>}
           </Pressable>
-          <Pressable style={[styles.Button,{backgroundColor:color2}]} onPress={onPressHandle2}>
-          <Bus2_green height = {height2} width ={width2}/>
-          <Bus2_white height = {height} width ={width}/>
+          <Pressable style={[styles.Button,{backgroundColor:color2, position:"absolute",top:254.41,left:210.44}]} onPress={onPressHandle2}>
+
+          {gobus ?<Bus2_green  style={{alignSelf:"center"}}/> :
+          <Bus2_white  style={{alignSelf:"center"}}/>}
           <Text style={styles.text3}>고속버스 예매</Text>
           </Pressable>
-        </View>
 
-        <View style={{flex:1.5 , backgroundColor: "white",flexDirection: 'row',alignItems:'center' , justifyContent: "center"}}>
-          <Pressable style={[styles.Button,{backgroundColor:color3}]}onPress={onPressHandle3}>
-          <Air_white height = {height5} width ={width5}/>
-          <Air_green height = {height6} width ={width6}/>
-          <Text style={styles.text3}>비행기 예매</Text>
+          <Pressable style={[styles.Button,{backgroundColor:color3,position:"absolute",top:453.5,left:61.99}]}onPress={onPressHandle3}>
+            {air ?<Air_green style={{alignSelf:"center"}}/> :
+            <Air_white style={{alignSelf:"center"}}/>}
+          <Text style={[styles.text3,{top:23}]}>비행기 예매</Text>
           </Pressable>
-          <Pressable style={[styles.Button,{backgroundColor:color4}]}onPress={onPressHandle4}>
-          <Bus_white height = {height7} width ={width7}/>
-          <Bus_green height = {height8} width ={width8}/>
+          <Pressable style={[styles.Button,{backgroundColor:color4,position:"absolute",top:453.5,left:210.44}]}onPress={onPressHandle4}>
+            {sibus ?<Bus_green style={{alignSelf:"center"}}/> :
+            <Bus_white style={{alignSelf:"center"}}/>}
           <Text style={styles.text3} >시외버스 예매</Text>
           </Pressable>
-        </View>
         
-        <View style={{flex:1 ,alignItems:'center' , justifyContent: "center"}}>
               <TouchableOpacity style={styles.startBtn} onPress={onPressStart}>
                 <Text style={styles.text4}> 배워보기</Text>
               </TouchableOpacity>
-        </View>
     </View>
     
 );
@@ -250,16 +170,16 @@ return(
 
 const styles = StyleSheet.create({
 
-  text1: {fontSize:30, fontWeight:"bold", color: '#4E4E4E', marginRight: 190, marginTop: 50},
-  text2: {fontWeight:"bold", marginRight: 40, marginTop:30,color:"#C4C4C4"},
+  text1: {fontSize:25, fontWeight:"bold", color: '#4E4E4E', position:"absolute",top:128.43,left:70.06},
+  text2: {fontWeight:"bold",color:"#C4C4C4",position:"absolute",top:191.5,left:70.06,fontSize:16},
 
-  text3: {fontWeight:"bold", fontSize: 15, marginBottom: 20,color:"#787878"},
-  text4: {fontWeight:"bold", fontSize: 13},
+  text3: {fontWeight:"bold", fontSize: 17,top:30,color:"#787878",alignSelf:"center"},
+  text4: {fontWeight:"bold", fontSize: 20, alignSelf:"center",color:"white"},
  
   Button: { borderRadius: 15,  borderColor: '#F8F8F8',
            
-            width: 139.57 , height: 187.94, margin: 5 , alignItems:'center' ,justifyContent: "flex-end"}, 
+            width: 139.57 , height: 187.94,alignItems:'center' ,justifyContent: "center"}, 
 
- startBtn: { width: 288.02, height:50.66 , borderRadius: 15, backgroundColor:"#03CF5D",borderColor:"#03CF5D", alignItems:'center' , justifyContent: "center" 
- ,marginBottom: 10}          
+ startBtn: { width: 288.02, height:50.66 , borderRadius: 15, backgroundColor:"#03CF5D",borderColor:"#03CF5D", alignItems:'center' , justifyContent: "center",position:"absolute",top:705.81,left:61.99 
+ ,}          
 });
