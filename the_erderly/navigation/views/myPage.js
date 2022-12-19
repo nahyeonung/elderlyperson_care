@@ -54,7 +54,7 @@ export default function MyPage({navigation}){
       };
     return(
         <View style={{flex:1}}>
-            <Text style={{marginTop:80, marginLeft:"20%", marginBottom:10, fontSize:30,fontWeight:"bold"}}>프로필 설정</Text>
+            <Text style={{marginTop:80, marginLeft:"20%", marginBottom:10, fontSize:30,fontWeight:"bold", color:'black'}}>프로필 설정</Text>
             {loading == true? 
             <View></View>
             : 
@@ -62,7 +62,7 @@ export default function MyPage({navigation}){
                 <View style={styles.back}>
                     <View style={{flexDirection:'row', marginTop: 20, marginLeft: 10, marginBottom:30}}>
                         <Image style={styles.image} source={{uri : image}}></Image>
-                        <Text style={{fontSize:20, marginTop:50,marginLeft: 10, fontWeight:"bold"}}>{name}님</Text>
+                        <Text style={{fontSize:20, marginTop:50,marginLeft: 10, fontWeight:"bold", color:'black'}}>{name}님</Text>
                     </View>
                     <Pressable
                     onPress={signOutWithKakao}
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     text:{
         fontSize: 20,
         fontWeight:"bold",
+        color: "black"
     },
     back: {
         width:300,
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
       borderWidth: 3,
       borderColor: "#E5E5E5",
       width: 250,
-      height: 50,
+      height: 60,
       paddingHorizontal: 20,
       paddingVertical: 10,
       marginTop: 20,

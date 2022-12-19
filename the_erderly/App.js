@@ -32,6 +32,7 @@ import train2 from './navigation/views/train2';
 import em from './navigation/views/em';
 import homepage from './navigation/views/homepage';
 import intro from './navigation/views/intro';
+import presentation from './navigation/views/presentation';
 
 
 
@@ -71,6 +72,7 @@ export default function App() {
             <Stack.Screen name="Em" component={em} />
             <Stack.Screen name="HomePage" component={homepage} />
             <Stack.Screen name="TrainIntro" component={intro} />
+            <Stack.Screen name="Presentation" component={presentation} />
 
 
            

@@ -791,7 +791,7 @@ function replay(){
           {mic ?<Miclogo style={{positon:"absolute",bottom:"21%"}} onPress={replay}></Miclogo> :null}
           { text ?<View style={{}}>
           <TextInput style={{width:121,height:45,backgroundColor:"white", bottom:"1510%",left:"14%",borderRadius:12,alignItems:"center",justifyContent:"center",fontWeight:"bold",fontSize:18,color:"black"}} 
-          onChangeText={text => {if(text == "zz"){onPressText(); music1.play();}}} placeholder= "  기차표 예매" placeholderTextColor="black">
+          onChangeText={text => {if(text == "기차표예매"){onPressText(); music1.play();}}} placeholder= "  기차표 예매" placeholderTextColor="black">
           </TextInput>
           <Text style={[styles.textColor,{bottom:"1500%",left:"16%"}]}>검색창에 기차표 예매를 검색하세요!</Text></View>: null}
 

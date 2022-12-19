@@ -63,10 +63,6 @@ export default function Reservation({navigation}){
     else if (color2 == "#03CF5D"){
       setColor2("#F8F8F8");
       
-      setWidth("0")
-      setHeight("0")
-      setWidth2("100")
-      setHeight2("100")
     }
   }
 

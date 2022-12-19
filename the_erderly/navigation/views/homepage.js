@@ -58,8 +58,10 @@ database()
 .ref('/users/'+id)
 .once('value')
 .then(snapshot => {
-  setImage(snapshot.val().imageUri)
   setName(snapshot.val().name)
+  database().ref('/users/').orderByChild('phone').equalTo(snapshot.val().f_phone).once('child_added', snapshot => {
+    setImage(snapshot.val().imageUri)
+  })
 });
 
 useEffect(() => {
@@ -86,8 +88,20 @@ useEffect(() => {
   };
 }, []);
 useEffect(() => {
-  if(transcript == '예매'){
-    navigation.navigate('Reservation');
+  if(transcript == '기차표 예매'){
+    navigation.navigate('Maru');
+  }
+  else if(transcript == '기차표예매'){
+    navigation.navigate('Maru');
+  }
+  else if(transcript == '기차표예매하기'){
+    navigation.navigate('Maru');
+  }
+  else if(transcript == '기차표 예매하기'){
+    navigation.navigate('Maru');
+  }
+  else if(transcript == '기차표 예매 하기'){
+    navigation.navigate('Maru');
   }
   else if(transcript == '예매하기'){
     navigation.navigate('Reservation');
@@ -185,7 +199,7 @@ function onPressMic(){
           <ScrollView style={{}}>
           <Ddot style={{position:"absolute",top:20,left:319}}></Ddot>
           <Sam style={{position:"absolute",top:20,left:24}}></Sam>
-          <Pro style={{position:"absolute",top:20,left:360}}></Pro>
+          <Pro style={{position:"absolute",top:20,left:360}} onPress={() => navigation.navigate('MyPage')}></Pro>
             <View style={{height:100,justifyContent:"center"}}>
               <Text style={{fontSize:25,fontWeight:"bold",color:"#4E4E4E",alignSelf:"center",right:"10%",top:40}}>{name}님, 안녕하세요 !</Text>
             </View>
@@ -309,13 +323,13 @@ function onPressMic(){
               <Text style={{color:"#636363",fontSize:15,fontWeight:"400",marginTop:5}}>2022.12.14.(수) 오후 4:28</Text>
              </View>
             </View>
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>엄마, 요새 엄마가 좋아하는 임영웅 노래만</Text></View>
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>많이 듣길래 내가 다른 노래 추천해주려고!</Text></View>
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>사실 내가 좋아하는 노래 추천하는거니까</Text></View>
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,color:"#636363",alignSelf:"flex-start",color:"#636363",left:10}}>듣고 어땠는지 말해주기!!</Text></View>
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363"}}></Text></View>
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",left:10}}>이번주에 꼭 내려갈게요!</Text></View>
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",left:10}}>저녁에 맛있는거 먹으러가요♥</Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>엄마, 다음주 금요일 기차로 부산 내려오는</Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>거 기억하고 있지? 대전역에서 부산역으로 </Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>KTX타고와! 무궁화는 오래걸려서 힘들</Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,color:"#636363",alignSelf:"flex-start",color:"#636363",left:10}}>어..기차역 가서 하면 자리 없으니까 학습으</Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363"}}>로 한번해보고 폰으로 미리 예매해서 좋은</Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",left:10}}>자리 타고오세요♥!!</Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center",borderBottomWidth:1}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",left:10}}></Text></View>
             
            
             

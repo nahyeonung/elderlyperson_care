@@ -22,10 +22,11 @@ export default function Find({navigation}){
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "black",
+      backgroundColor:"white"
     },
     fullScreen: {
       position: "absolute",
+      backgroundColor:"white",
       top: 250,
       left: 0,
       bottom: 0,

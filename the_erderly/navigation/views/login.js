@@ -44,9 +44,10 @@ export default function Kakaologin({navigation}) {
           });
         }
         if(snapshot.val().phone == null){
-          // navigation.navigate('registerScreen')
-          navigation.navigate('View2')
-        }else navigation.navigate('View2')
+          //navigation.navigate('registerScreen')
+          navigation.navigate('Presentation')
+          // navigation.navigate('View2')
+        }else navigation.navigate('Presentation')
       });
       //setResult(JSON.stringify(token));
     } catch (err) {

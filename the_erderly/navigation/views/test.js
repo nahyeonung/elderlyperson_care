@@ -9,7 +9,6 @@ export default function Test({navigation}) {
       <View style={{width: "100%", height: "100%"}}>
         <WebView
           source={{uri : GOOGLE}}
-          onLoad={console.log('hi')}
           />
       </View>
     </View>

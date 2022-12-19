@@ -6,7 +6,7 @@ import MainLogoSvg from '../../src/svgFile/mainlogo.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { setId } from '../redux/action';
 
-export default function HomeScreen({navigation}) {
+export default function Presentation({navigation}) {
   const {id, friendId} = useSelector(state => state.userReducer);
   const [name, Setname] = useState('')
   // database()
@@ -48,8 +48,8 @@ export default function HomeScreen({navigation}) {
             style={styles.button}
             title="To User Screen"
               onPress={
-                  ()=> move()
-                  // () => navigation.navigate('Find')
+                  // ()=> move()
+                  () => navigation.navigate('Find')
               } >
              <Text style={styles.text}>이용 시작</Text>  
              
