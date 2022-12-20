@@ -50,24 +50,12 @@ export default function Reservation({navigation}){
   
 
 
-  function onPressHandle2() {
-    if(color2 == "#F8F8F8"){
-      setColor2("#03CF5D")
-      setColor("#F8F8F8")
-      setColor3("#F8F8F8")
-      setColor4("#F8F8F8")
-      setValue(2)
-    
 
-    }
-    else if (color2 == "#03CF5D"){
-      setColor2("#F8F8F8");
-      
-    }
-  }
 
   function onPressHandle() {
-
+      setSibus(true)
+      setGobus(true);
+      setAir(true);
       setTrain(!train);
       setValue(1);
       if(color == "#F8F8F8")
@@ -75,12 +63,38 @@ export default function Reservation({navigation}){
       else if(color == "#03CF5D"){
         setColor("#F8F8F8")
       }
-      
+      setColor2("#F8F8F8")
+      setColor3("#F8F8F8")
+      setColor4("#F8F8F8")
+    
     }
     
+    function onPressHandle2() {
+      setSibus(true)
+      setGobus(!gobus)
+      setAir(true)
+      setTrain(true)
+      if(color2 == "#F8F8F8"){
+        setColor2("#03CF5D")
+        setColor("#F8F8F8")
+        setColor3("#F8F8F8")
+        setColor4("#F8F8F8")
+        setValue(2)
+      
+  
+      }
+      else if (color2 == "#03CF5D"){
+        setColor2("#F8F8F8");
+        
+      }
+    }
   
 
   function onPressHandle3() {
+    setSibus(true)
+    setAir(!air)
+    setGobus(true)
+    setTrain(true)
     if(color3 == "#F8F8F8"){
       setColor3("#03CF5D");
       setColor2("#F8F8F8")
@@ -98,6 +112,10 @@ export default function Reservation({navigation}){
   }
 
   function onPressHandle4() {
+    setSibus(!sibus)
+    setGobus(true)
+    setTrain(true)
+    setAir(true)
     if(color4 == "#F8F8F8"){
       setColor4("#03CF5D");
       setColor2("#F8F8F8")

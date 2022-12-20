@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { StyleSheet, View, Text, Button, Pressable,TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Button, Pressable,TouchableOpacity,ScrollView } from 'react-native';
 import database from '@react-native-firebase/database';
 import View1Svg from '../../src/svgFile/Naver.svg';
 import MainLogoSvg from '../../src/svgFile/mainlogo.svg';
