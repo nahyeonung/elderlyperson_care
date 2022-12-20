@@ -170,19 +170,14 @@ let music80 = new Sound(path80, Sound.MAIN_BUNDLE, (error) => {
 
 
 
-
-
-
-
-
-
-
-
-
 export default function Train({navigation}){
 
+  
    useEffect(() => {
-      music.play();
+    setTimeout(() => {
+      music.setSpeed(0.85);
+    }, 500);
+      
     },[])
   const[text,setText] = useState(true);
   const[backText,setBackText] = useState(true);
@@ -260,7 +255,7 @@ export default function Train({navigation}){
       setDepart(false);
       setDepartTextInput(true);
       setCount(2);
-      music2.play();
+      setTimeout(()=> {music2.setSpeed(0.85)},500)
       music1.stop();
   }
   
@@ -272,7 +267,7 @@ export default function Train({navigation}){
       setArrive(true);
       setDepartColor("black");
       setCount(4);
-      music4.play();
+      setTimeout(()=> {music4.setSpeed(0.85)},1000)
       music3.stop();
   }
 
@@ -286,7 +281,7 @@ export default function Train({navigation}){
     setTime(true);
     setDepartColor2("black")
     setCount(7);
-    music7.play();
+    setTimeout(()=> {music7.setSpeed(0.85)},1000)
     music6.stop();
 }
 
@@ -297,7 +292,7 @@ function onPressArrive(){
   setBackText(false);
   setArrive(false);  
   setCount(5);
-  music5.play();
+  setTimeout(()=> {music5.setSpeed(0.85)},1000)
   music4.stop();
 }
 
@@ -307,7 +302,7 @@ function onPressTime(){
   setBackTime2(true);
   setTime(false);
   setTime2(true);
-  music8.play();
+  setTimeout(()=> {music8.setSpeed(0.85)},1000)
   music7.stop();
   setCount(8)
 }
@@ -315,7 +310,7 @@ function onPressTime(){
 function onPressTime2(){
   setCount(9);
   music8.stop();
-  music9.play();
+  setTimeout(()=> {music9.setSpeed(0.85)},1000)
   setTime2(false);
   setTime3(true);
 }
@@ -323,7 +318,7 @@ function onPressTime2(){
 function onPressTime3(){
   setCount(10);
   music9.stop();
-  music10.play();
+  setTimeout(()=> {music10.setSpeed(0.85)},1000)
   setBackTime2(false);
   setTime3(false);
   setBackAdult(true);
@@ -332,7 +327,7 @@ function onPressTime3(){
 
 function onPressCheck(){
   setCount(11);
-  music11.play();
+  setTimeout(()=> {music11.setSpeed(0.85)},1000)
   music10.stop();
   setBackCheck(true);
   setCheck(true);
@@ -342,7 +337,7 @@ function onPressCheck(){
 
 function onPressCheck2(){
   setCount(12);
-  music12.play();
+  setTimeout(()=> {music12.setSpeed(0.85)},1000)
   music11.stop();
   setBackCheck(false);
   setCheck(false);
@@ -352,7 +347,7 @@ function onPressCheck2(){
 
 function onPressBuy(){
   setCount(13);
-  music13.play();
+  setTimeout(()=> {music13.setSpeed(0.85)},1000)
   music12.stop();
   setBackCheck2(false);
   setCheck2(false);
@@ -363,7 +358,7 @@ function onPressBuy(){
 
 function onPressBuy2(){
   setCount(14);
-  music14.play();
+  setTimeout(()=> {music14.setSpeed(0.85)},1000)
   music13.stop();
   setBackBuy(true);
   setBuy(false);
@@ -375,7 +370,7 @@ function onPressBuy2(){
 function onPressSeat(){
   setAuto(true);
   setCount(80);
-  music15.play();
+  setTimeout(()=> {music15.setSpeed(0.85)},1000)
   music14.stop();
   setBackBuy(false);
   setBuy2(false);
@@ -395,7 +390,7 @@ function onPressSeat(){
 
 function onPressSeat3(){
   setCount(17);
-  music17.play();
+  setTimeout(()=> {music17.setSpeed(0.85)},1000)
   music16.stop();
   setBackSeat2(true);
   setSeat2(true);
@@ -409,7 +404,7 @@ function onPressSeat3(){
 
 function onPressSeat2(){
   setCount(16);
-  music16.play();
+  setTimeout(()=> {music16.setSpeed(0.85)},1000)
   music15.stop();
   setWindow(true);
   setPercent("140%");
@@ -420,13 +415,13 @@ function onPressAuto(){
   setWindow(false);
   setHo(true);
   music15.stop();
-  music80.play();
+  setTimeout(()=> {music80.setSpeed(0.85)},1000)
 }
 
 
 function onPressClient(){
   setCount(18);
-  music18.play();
+  setTimeout(()=> {music18.setSpeed(0.85)},1000)
   music17.stop();
   setBackSeat2(false);
   setSeat2(false);
@@ -440,7 +435,7 @@ function onPressClient2(){
   setClient(false);
   setClient2(true);
   setCount(20);
-  music20.play();
+  setTimeout(()=> {music20.setSpeed(0.85)},1000)
   music19.stop();
 }
 
@@ -449,7 +444,7 @@ function onPressClient3(){
   setClient2(false);
   setClient3(true);
   setCount(21);
-  music21.play();
+  setTimeout(()=> {music21.setSpeed(0.85)},1000)
   music20.stop();
 
 }
@@ -791,7 +786,7 @@ function replay(){
           {mic ?<Miclogo style={{positon:"absolute",bottom:"21%"}} onPress={replay}></Miclogo> :null}
           { text ?<View style={{}}>
           <TextInput style={{width:121,height:45,backgroundColor:"white", bottom:"1510%",left:"14%",borderRadius:12,alignItems:"center",justifyContent:"center",fontWeight:"bold",fontSize:18,color:"black"}} 
-          onChangeText={text => {if(text == "기차표예매"){onPressText(); music1.play();}}} placeholder= "  기차표 예매" placeholderTextColor="black">
+          onChangeText={text => {if(text == "기차표예매"){onPressText(); setTimeout(()=> {music1.setSpeed(0.85)},1000)}}} placeholder= "  기차표 예매" placeholderTextColor="black">
           </TextInput>
           <Text style={[styles.textColor,{bottom:"1500%",left:"16%"}]}>검색창에 기차표 예매를 검색하세요!</Text></View>: null}
 
@@ -848,7 +843,7 @@ function replay(){
 
 
           { departTextInput? <View>
-            <TextInput style={styles.input} placeholder='   출발역검색'  placeholderTextColor="#BCBCBC" onChangeText={text => {if(text.length == 3){ music3.play(); music2.stop();setCount(3);setName(text)}}}>
+            <TextInput style={styles.input} placeholder='   출발역검색'  placeholderTextColor="#BCBCBC" onChangeText={text => {if(text.length == 3){ setTimeout(()=> {music3.setSpeed(0.85)},1000); music2.stop();setCount(3);setName(text)}}}>
             </TextInput>
             <Text style={[styles.textColor,{bottom:1080,alignSelf:"center"}]}>역 이름을 입력해주세요!</Text>
             <DotSvg style={{position:'absolute', bottom:1070,left:"80%"}} onPress={onPressDot}></DotSvg>
@@ -858,7 +853,7 @@ function replay(){
           </View>:null}
 
           { arriveTextInput? <View>
-            <TextInput style={styles.input} placeholder='   도착역검색'  placeholderTextColor="#BCBCBC" onChangeText={text => {if(text.length == 3){ music6.play(); music5.stop();setCount(6);setName2(text)}}}>
+            <TextInput style={styles.input} placeholder='   도착역검색'  placeholderTextColor="#BCBCBC" onChangeText={text => {if(text.length == 3){ setTimeout(()=> {music6.setSpeed(0.85)},1000); music5.stop();setCount(6);setName2(text)}}}>
             </TextInput>
             <Text style={[styles.textColor,{bottom:1080,alignSelf:"center"}]}>역 이름을 입력해주세요!</Text>
             <DotSvg style={{position:'absolute', bottom:1070,left:"80%"}} onPress={onPressDot2}></DotSvg>
@@ -900,6 +895,8 @@ function replay(){
 
           </View>
           <Text style={[styles.textColor,{bottom:920,alignSelf:"center"}]}>예매 인원을 선택하세요</Text>
+          <Pressable style={[styles.textColor,{bottom:870,alignSelf:"center",backgroundColor:"#787878",width:100,height:50,borderRadius:15,justifyContent:"center"}]} onPress={() => navigation.navigate('Train2')}><Text style={{alignSelf:"center",color:"white",fontSize:20}}>건너뛰기</Text></Pressable>
+
         </View>:null}
 
         {check ? <View>
@@ -1029,7 +1026,7 @@ function replay(){
             </View>
             <View style={{flexDirection:"row",height:50,justifyContent:"center",marginTop:20}}>
               <Text style={{color:"black",fontSize:15,fontWeight:"bold",marginRight:"15%",top:10}}>예매자</Text>
-              <TextInput style={{backgroundColor:"white",borderWidth:1,borderColor:"#787878",width:183.34,height:41.44,borderRadius:5,color:"black"}} onChangeText={text => {if(text.length == 3){setPayText(false);setCount(19),music19.play(); music18.stop();}}}></TextInput>
+              <TextInput style={{backgroundColor:"white",borderWidth:1,borderColor:"#787878",width:183.34,height:41.44,borderRadius:5,color:"black"}} onChangeText={text => {if(text.length == 3){setPayText(false);setCount(19),setTimeout(()=> {music19.setSpeed(0.8)},1000); music18.stop();}}}></TextInput>
             </View>
             <View style={{flexDirection:"row",height:50,justifyContent:"center",marginTop:20}}>
               <Text style={{color:"black",fontSize:15,fontWeight:"bold",marginRight:"15%",top:10}}>연락처</Text>

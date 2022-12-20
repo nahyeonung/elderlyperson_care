@@ -7,6 +7,7 @@ import Micc from '../../src/svgFile/micc.svg';
 import BuySvg from '../../src/svgFile/buy.svg';
 import ArrowSvg from '../../src/svgFile/arrow.svg';
 import XcoduSvg from '../../src/svgFile/xcodu.svg';
+import { set } from 'react-native-reanimated';
 
 
 let path = require('../../mp3/sugo.mp3');
@@ -18,7 +19,9 @@ let music = new Sound(path, Sound.MAIN_BUNDLE, (error) => {
 export default function Train2({navigation}){
 
    useEffect(() => {
-     music.play();
+   setTimeout(() => {
+    music.setSpeed(0.85)
+   }, 500);
    
    },[])
 
