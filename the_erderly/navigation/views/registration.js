@@ -34,12 +34,14 @@ export default function Registration({navigation}) {
                     phone: pnumber,
                     name: name,
                 })
+                Alert.alert('등록이 완료되었습니다.')
+                navigation.navigate('EmLogin');
             }else{
                 database()
                 .ref('users/')
                 .on('child_added', snapshot => {
-                    console.log(snapshot);
-                    if(pnumber == snapshot.val().phone && snapshot.val().secret != '') {
+                    console.log(snapshot.val().secret);
+                    if(pnumber == snapshot.val().phone && snapshot.val().secret != undefined) {
                         Alert.alert('이미 등록되어 있습니다.')
                     }
                     else if (pnumber == snapshot.val().phone) {

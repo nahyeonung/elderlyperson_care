@@ -35,15 +35,32 @@ export default function Registration({navigation}) {
                     phone: number,
                 });
             }else{
+                database().ref('users/'+number).once('value').then(snapshot=>{
+                    if(snapshot.val().message != null){
+                        database().ref('users/'+id).update({
+                            phone:number,
+                            secret:snapshot.val().secret,
+                            message:''
+                        })
+                    }else{
+                        database().ref('users/'+id).update({
+                            phone:number,
+                            secret:snapshot.val().secret,
+                            message:snapshot.val().message,
+                        })
+                    }
+                } )
+
                 database().ref('users/'+number).remove();
-                database().ref('users/' + id).update({
-                    phone: number,
-                });
+                // database().ref('users/' + id).update({
+                //     phone: number,
+                //     secret: secret,
+                //     message: message,
+                // });
             }
         })
         
     }
-    
     return(
         <View style={{flex:1}}>
             <View style={{flex: 2,alignItems:'center', justifyContent:'center'}}>
