@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   text3: {
     color:"white",
     fontWeight:"bold",
-    fontSize: 18,
+    fontSize: 25,
     justifyContent:"center", alignSelf: "center",
 
   },
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   text4: {
     color:"white",
     fontWeight:"bold",
-    fontSize: 18,
+    fontSize: 25,
     justifyContent:"center", alignSelf:"center"
 
   },

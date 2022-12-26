@@ -629,81 +629,103 @@ else if (count == 21){
 function replay(){
   if(count == 0)
   {
-    music.play();
+    music.setSpeed(0.85);
   }
   else if(count == 1){
-    music1.play();
+    music1.setSpeed(0.85);
+
   }
 
   else if(count == 2){
-    music2.play();
+    music2.setSpeed(0.85);
+
   }
   
   else if(count == 3){
-    music3.play();
+    music3.setSpeed(0.85);
+
   }
 
   else if(count == 4){
-    music4.play();
+    music4.setSpeed(0.85);
+
   }
 
   else if(count == 5){
-    music5.play();
+    music5.setSpeed(0.85);
+
   }
 
   else if(count == 6){
-    music6.play();
+    music6.setSpeed(0.85);
+
   }
   else if(count == 7){
-    music7.play();
+    music7.setSpeed(0.85);
+
   }
   else if(count == 8){
-    music8.play();
+    music8.setSpeed(0.85);
+
   }
   else if(count == 9){
-    music9.play();
+    music9.setSpeed(0.85);
+
   }
   else if(count == 10){
-    music10.play();
+    music10.setSpeed(0.85);
+
   }
 
   else if(count == 11){
-    music11.play();
+    music11.setSpeed(0.85);
+
   }
   else if(count == 12){
-    music12.play();
+    music12.setSpeed(0.85);
+
   }
   else if(count == 13){
-    music13.play();
+    music13.setSpeed(0.85);
+
   }
 
   else if(count == 14){
-    music14.play();
+    music14.setSpeed(0.85);
+
   }
   else if(count == 15){
-    music80.play();
+    music15.setSpeed(0.85);
+
   }
   else if(count == 16){
-    music16.play();
+    music16.setSpeed(0.85);
+
   }
   else if(count == 17){
-    music17.play();
+    music17.setSpeed(0.85);
+
   }
   else if(count == 18){
-    music18.play();
+    music18.setSpeed(0.85);
+
   }
   else if(count == 19){
-    music19.play();
+    music19.setSpeed(0.85);
+
   }
   else if(count == 20){
-    music20.play();
+    music20.setSpeed(0.85);
+
   }
   else if(count == 21){
-    music21.play();
+    music21.setSpeed(0.85);
+
   }
 
   else if(count == 80){
-    music15.play();
+    music80.setSpeed(0.85);
+
   }
 }
 
