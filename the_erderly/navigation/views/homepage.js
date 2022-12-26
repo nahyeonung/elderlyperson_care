@@ -13,8 +13,7 @@ import Sta from '../../src/svgFile/sta.svg';
 import Pro from '../../src/svgFile/pro.svg';
 import Ddot from '../../src/svgFile/ddot.svg';
 import Sam from '../../src/svgFile/sam.svg';
-
-
+import axios from 'axios';
 
 import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,7 +31,8 @@ import GoogleCloudSpeechToText, {
 //     if (error) { console.log('play failed') }
 // }) 
 
-
+const client_id = 'ryy3bh3ehm';
+const client_secret = 'fHQulJQp9Pqo4e2I23e2u1kS4S0DWPh5DN3PGXaF';
 
 const data = new Date();
   const hours = String(data.getHours());
@@ -63,6 +63,34 @@ database()
     setImage(snapshot.val().imageUri)
   })
 });
+const [percent,setPercent]= useState(0);
+const [emoti,setEmoti] = useState(true);
+//감정분석 API
+function sentiment() {
+  const con= {"content":"학습으로 한번 해보고 폰으로 미리 예매해서 좋은 자리 타고오세요! 사랑해요!"};
+  axios({
+    url: 'https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze',
+    method: 'post',
+    data: JSON.stringify(con),
+    headers: {
+      'X-NCP-APIGW-API-KEY-ID': client_id,
+    'X-NCP-APIGW-API-KEY': client_secret,
+    'Content-Type': 'application/json',
+    }
+  }).then((response=> {setPercent(Math.floor(response.data.document.confidence.positive)); if(response.data.document.confidence.positive > 50){
+    setEmoti(true);
+  }
+  else if(response.data.document.confidence.positive < 50){
+    setEmoti(false);
+  }
+  console.log(response.data.document.confidence.positive);
+  }));
+
+ 
+  
+}
+
+
 
 useEffect(() => {
   PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO, {
@@ -228,7 +256,7 @@ function onPressMic(){
                 <Pressable style={styles.key}>
                   <Text style={styles.text99} >기본기능</Text>
                 </Pressable>
-                <Pressable style={styles.key}>
+                <Pressable style={styles.key} onPress={()=> {navigation.navigate("Gender")}}>
                   <Text style={styles.text99}>쇼핑</Text>
                 </Pressable>
                 <Pressable style={styles.key}>
@@ -270,13 +298,14 @@ function onPressMic(){
               </View>
               <View style={{width:305,height:130.82,borderRadius:15,backgroundColor:"white",alignSelf:"center",bottom:50,justifyContent:"center",marginLeft:20}}>
                 <Image style={styles.image} source={{uri : image}}></Image>
+                       
                 <View style={{flexDirection:"row", alignSelf:"center",left:30,bottom:55}}>
                 <Text style={{color:'#636363',fontSize:15,alignSelf:"center",fontWeight:"bold"}}>사랑하는 우리딸</Text>
                 <Text style={{color:"#636363",fontSize:14,alignSelf:"center"}}>   읽음</Text>
                 </View>
                 <Text style={{color:'black',fontSize:14,alignSelf:"center",left:46,bottom:35}}>2022. 12. 14(수) 오후:{hours}:28분</Text>
                 <TouchableOpacity style={{width:88.44,height:31.2,backgroundColor:"#03CF5D",borderRadius:8,justifyContent:"center",alignSelf:"flex-end",bottom:20, right:20}}
-                onPress={() => setModalVisible(!modalVisible)}>
+                onPress={() => {setModalVisible(!modalVisible); sentiment();}}>
                 <Text style={{fontSize:16,color:"white",alignSelf:"center"}}>편지 보기</Text>
                 </TouchableOpacity>
               </View>
@@ -317,7 +346,8 @@ function onPressMic(){
           <View style={{width:358.16,height:429.52,backgroundColor:"white",alignSelf:"center",borderTopLeftRadius:15,borderTopRightRadius:15, top:80}}>
             <View style={{height:150,flexDirection:"row"}}>
               <Xcode style={{left:320,top:10}} onPress={() => setModalVisible(!modalVisible)}></Xcode>
-             <Image style={[styles.modalImage,{position:"absolute",left:"9.51%",top:"21.64%",bottom:"73.67%"}]} source={{uri: image}}></Image>
+             { emoti ?<Text style={[styles.modalImage2,{position:"absolute",left:"9.51%",top:"21.64%",bottom:"73.67%"}]}>😊</Text> 
+             : <Text style={[styles.modalImage2,{position:"absolute",left:"9.51%",top:"21.64%",bottom:"73.67%"}]}>😭</Text> }
              <View style={{alignSelf:"flex-end",left:110,bottom:40}}>
                <Text style={{color:"#636363",fontSize:25,fontWeight:"700",}}>사랑하는 우리딸</Text>
               <Text style={{color:"#636363",fontSize:15,fontWeight:"400",marginTop:5}}>2022.12.14.(수) 오후 4:28</Text>
@@ -329,7 +359,7 @@ function onPressMic(){
             <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,color:"#636363",alignSelf:"flex-start",color:"#636363",left:10}}>어..기차역 가서 하면 자리 없으니까 학습으</Text></View>
             <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363"}}>로 한번해보고 폰으로 미리 예매해서 좋은</Text></View>
             <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",left:10}}>자리 타고오세요♥!!</Text></View>
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center",borderBottomWidth:1}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",left:10}}></Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center",borderBottomWidth:1}}><Text style={{fontSize:18,alignSelf:"flex-start",color:"#636363",left:10,fontWeight:"bold"}}>편지내용의 긍정도가 {percent}%입니다 🤗</Text></View>
             
            
             
@@ -494,6 +524,15 @@ margin:20},
     width:89.75,
     height:89.75,
     borderRadius:100,
+    resizeMode: "cover",
+  }
+,
+  modalImage2: {
+    width:89.75,
+    height:89.75,
+    borderRadius:100,
+    fontSize:60,
+    resizeMode: "cover",
   }
 
 })

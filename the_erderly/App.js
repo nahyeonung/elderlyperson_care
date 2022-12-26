@@ -31,8 +31,14 @@ import train from './navigation/views/train';
 import train2 from './navigation/views/train2';
 import em from './navigation/views/em';
 import homepage from './navigation/views/homepage';
+import gender from './navigation/views/gender';
 import intro from './navigation/views/intro';
+import age from './navigation/views/age';
 import presentation from './navigation/views/presentation';
+import digital from './navigation/views/digital';
+import active from './navigation/views/active';
+
+
 
 
 
@@ -71,8 +77,15 @@ export default function App() {
             <Stack.Screen name="Train2" component={train2} />
             <Stack.Screen name="Em" component={em} />
             <Stack.Screen name="HomePage" component={homepage} />
+            <Stack.Screen name="Gender" component={gender} />
             <Stack.Screen name="TrainIntro" component={intro} />
             <Stack.Screen name="Presentation" component={presentation} />
+            <Stack.Screen name="Age" component={age} />
+            <Stack.Screen name="Digital" component={digital} />
+            <Stack.Screen name="Active" component={active} />
+
+
+
 
 
            

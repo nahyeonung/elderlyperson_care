@@ -162,14 +162,6 @@ let music80 = new Sound(path80, Sound.MAIN_BUNDLE, (error) => {
     if (error) { console.log('play failed') }
 }) 
 
-
-
-
-
-
-
-
-
 export default function Train({navigation}){
 
   
@@ -624,8 +616,6 @@ else if (count == 21){
 }
 
 
-
-
 function replay(){
   if(count == 0)
   {
@@ -865,7 +855,7 @@ function replay(){
 
 
           { departTextInput? <View>
-            <TextInput style={styles.input} placeholder='   출발역검색'  placeholderTextColor="#BCBCBC" onChangeText={text => {if(text.length == 3){ setTimeout(()=> {music3.setSpeed(0.85)},1000); music2.stop();setCount(3);setName(text)}}}>
+            <TextInput style={styles.input} placeholder='   출발역검색'  placeholderTextColor="#BCBCBC" onChangeText={text => {{setCount(3);setName(text)}}}>
             </TextInput>
             <Text style={[styles.textColor,{bottom:1080,alignSelf:"center"}]}>역 이름을 입력해주세요!</Text>
             <DotSvg style={{position:'absolute', bottom:1070,left:"80%"}} onPress={onPressDot}></DotSvg>
@@ -875,7 +865,7 @@ function replay(){
           </View>:null}
 
           { arriveTextInput? <View>
-            <TextInput style={styles.input} placeholder='   도착역검색'  placeholderTextColor="#BCBCBC" onChangeText={text => {if(text.length == 3){ setTimeout(()=> {music6.setSpeed(0.85)},1000); music5.stop();setCount(6);setName2(text)}}}>
+            <TextInput style={styles.input} placeholder='   도착역검색'  placeholderTextColor="#BCBCBC" onChangeText={text => {{setCount(6);setName2(text)}}}>
             </TextInput>
             <Text style={[styles.textColor,{bottom:1080,alignSelf:"center"}]}>역 이름을 입력해주세요!</Text>
             <DotSvg style={{position:'absolute', bottom:1070,left:"80%"}} onPress={onPressDot2}></DotSvg>
