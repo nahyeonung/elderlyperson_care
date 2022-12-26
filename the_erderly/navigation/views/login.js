@@ -22,7 +22,7 @@ export default function Kakaologin({navigation}) {
   const [nickname, setNickname] = useState('');
   const [photo, setPhoto] = useState('');
   const [id2, setId2] = useState('');
-  console.log(id)
+  console.log('여기가 또 돌면 안돼..')
   const signInWithKakao = async ()  => {
     try {
       const token = await login();
@@ -32,10 +32,13 @@ export default function Kakaologin({navigation}) {
       setNickname(JSON.stringify(profile['nickname']));
       setPhoto(JSON.stringify(profile['profileImageUrl']))
       setId2(JSON.stringify(profile['id']))
-
+      var sum = 0;
       database()
       .ref('users/' + profile['id'])
       .on('value', snapshot => {
+        sum += 1;
+        console.log('dfsf',sum)
+        console.log('여기가..',snapshot.val())
         if(snapshot.val() == null){
           database().ref('users/' + profile['id']).set({
             name: profile['nickname'],
@@ -43,11 +46,18 @@ export default function Kakaologin({navigation}) {
             id: profile['id']
           });
         }
-        if(snapshot.val().phone == null){
+        else if(snapshot.val().phone == null){
           navigation.navigate('registerScreen')
           //navigation.navigate('Presentation')
           // navigation.navigate('View2')
-        }else navigation.navigate('Presentation')
+        }
+        else {
+          if(sum >= 2){
+          }
+          else{
+            navigation.navigate('Find')
+          }
+        }
       });
       //setResult(JSON.stringify(token));
     } catch (err) {

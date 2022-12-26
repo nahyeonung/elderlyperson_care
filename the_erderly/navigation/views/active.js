@@ -48,7 +48,7 @@ export default function Active({navigation}){
     }
     else if (color2 == "#03CF5D"){
       setColor2("#F8F8F8");
-      setText4("#787878")
+      setText2("#787878")
 
     }
   }
@@ -146,13 +146,13 @@ export default function Active({navigation}){
   }
 
   function onPressStart(){
-    if(value == 3 ){
-      navigation.navigate('Reservation');
-    }
-      else if(value == 2){
-        navigation.navigate('Find');
-      }
- 
+    // if(value == 3 ){
+    //   navigation.navigate('Reservation');
+    // }
+    //   else if(value == 2){
+    //   }
+      
+    navigation.navigate('Link');
   }
 
 return(
@@ -189,7 +189,7 @@ return(
           <Text style={[styles.text3,{color:text8}]}>음식주문</Text>
           </TouchableOpacity>
             <TouchableOpacity style={styles.startBtn} onPress={onPressStart}>
-                <Text style={styles.text4}> 완료하기</Text>
+                <Text style={styles.text4}> 다음</Text>
               </TouchableOpacity>
     </View>
     

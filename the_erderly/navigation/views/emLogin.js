@@ -71,7 +71,7 @@ export default function EmLogin({navigation}) {
                 <TextInput style={styles.input} placeholder="비밀번호" value={number}
                 onChangeText={text => onChange(text)}/>
                 <TouchableOpacity
-                    style={{backgroundColor:"#03CF5D",width:288.02,height:55,borderRadius:15,justifyContent:"center"}}
+                    style={{marginRight: 10,backgroundColor:"#03CF5D",width:288.02,height:55,borderRadius:15,justifyContent:"center"}}
                     title="To User Screen"
                         onPress={() => login()}>
                     <Text style={{alignSelf:'center',fontSize:20,fontWeight:"bold",color:"white"}}>로그인</Text>
@@ -79,7 +79,7 @@ export default function EmLogin({navigation}) {
             </View>
             <View style={{flex: 1,marginTop:'10%' ,alignItems:'center', justifyContent:'center'}}>
                 <TouchableOpacity
-                    style={{backgroundColor:"#03CF5D",width:288.02,height:55,borderRadius:15,justifyContent:"center"}}
+                    style={{marginRight: 10,backgroundColor:"#03CF5D",width:288.02,height:55,borderRadius:15,justifyContent:"center"}}
                     title="To User Screen"
                         onPress={() => navigation.navigate('Registration')}>
                     <Text style={{alignSelf:"center",fontSize:20,fontWeight:"bold",color:"white"}}>회원가입</Text>

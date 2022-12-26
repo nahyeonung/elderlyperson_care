@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 
-export default function Age({navigation}){
+export default function Link({navigation}){
   const [name, setName] = useState('')
   const {id} = useSelector(state => state.userReducer);
   useEffect(() => {
@@ -22,21 +22,27 @@ export default function Age({navigation}){
   }
   return(
     
-        
+        <View style={{flex:1}}>
            
-          <View style={{flex:1, flexDirection:"row", justifyContent:"center", alignContent: "center"}}>
-          <Text style={styles.text1}>{name}님의 {"\n"}생년월일을 알려주세요</Text>
-            <Text style={[styles.text2,{fontWeight:"bold"}]}>연령에 따라 추천 교육이 달라져요</Text>
-            <Text style={styles.text3}>생년월일 - 예시: 19701104</Text>
-                <TextInput style={styles.textInput} placeholder='               입력해주세요'>
-
-                </TextInput>
+            <View style={{flex:1, justifyContent:"center", alignContent: "center"}}>
+                <Text style={styles.text1}>{name}님과 이음을 함께 할{"\n"}사람이 있나요?</Text>
+                <Text style={[styles.text2,{fontWeight:"bold"}]}>연동을 통해 다양한 소식을 공유할 수 있{"\n"}어요</Text>
+            </View>
+            <View style={{flex:1.5, flexDirection:"row",justifyContent:"center"}}>
+                <Pressable style={{marginLeft:10,marginRight:10,width:"33%",height:"50%",borderRadius:15,backgroundColor:"#E4E4E4",justifyContent:"center"}} onPress={clickBox}>
+                    <Text style={{fontSize:20,color:'white',alignSelf:"center",fontWeight:"bold"}}>예</Text>
+                </Pressable>
+                <Pressable style={{width:"33%",height:"50%",borderRadius:15,backgroundColor:"#E4E4E4",justifyContent:"center"}} onPress={() => navigation.navigate('Find')}>
+                    <Text style={{fontSize:20,color:'white',alignSelf:"center",fontWeight:"bold"}}>아니오</Text>
+                </Pressable>
+            </View>
             
-            <Pressable style={{width:288.02,height:55,borderRadius:15,backgroundColor:"#03CF5D",justifyContent:"center",position:"absolute",top:706.31,left:61.99}} onPress={clickBox}>
+            <Pressable style={{marginLeft:5,width:288.02,height:55,borderRadius:15,backgroundColor:"#03CF5D",justifyContent:"center",position:"absolute",top:706.31,left:61.99}} onPress={clickBox}>
                 <Text style={{fontSize:20,color:'white',alignSelf:"center",fontWeight:"bold"}}>다음</Text>
              </Pressable>
 
-          </View>
+          
+        </View>
 
        
        

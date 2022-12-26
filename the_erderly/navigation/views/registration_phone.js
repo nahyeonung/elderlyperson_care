@@ -1,7 +1,8 @@
 import React, { Component, useState } from 'react';
-import { StyleSheet, View, Text, Button, Pressable, TextInput, Alert } from 'react-native';
+import { StyleSheet, View, Text, Button, Pressable, TextInput, Alert, TouchableOpacity } from 'react-native';
 import database from '@react-native-firebase/database';
-import RectangleSvg from '../../src/svgFile/Rectangle.svg';
+import Regist from '../../src/svgFile/regist.svg'
+import Protect from '../../src/svgFile/protect.svg'
 import RegisterSvg from '../../src/svgFile/register.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { setId } from '../redux/action';
@@ -11,18 +12,17 @@ export default function Registration({navigation}) {
     const {id} = useSelector(state => state.userReducer);
     const [number, setNumber] = useState('')
     const onChange = (e) => {
-        console.log(e);
         setNumber(e)
     }
     const save = () =>{
         Alert.alert('번호 확인',number+'맞습니까?',
         [
             {
-                text:'맞아요!',
+                text:'맞아요',
                 onPress: () => update(),
             },
             {
-                text:'다시 적을래요ㅠ',
+                text:'틀려요',
                 onPress: () => console.log('다시')
             }
         ])
@@ -34,6 +34,7 @@ export default function Registration({navigation}) {
                 database().ref('users/' + id).update({
                     phone: number,
                 });
+                navigation.navigate('Age');
             }else{
                 database().ref('users/'+number).once('value').then(snapshot=>{
                     if(snapshot.val().message != null){
@@ -59,26 +60,25 @@ export default function Registration({navigation}) {
                 // });
             }
         })
+        //navigation.navigate('Age');
         
     }
     return(
         <View style={{flex:1}}>
             <View style={{flex: 2,alignItems:'center', justifyContent:'center'}}>
-                <RegisterSvg />
+                <Regist style={{marginRight:'10%'}}/>
+                <Protect style={{marginRight:'24%'}}/>
             </View>
-            <View style={{flex: 3,alignItems:'center', justifyContent:'center', flexDirection:'row'}}>
-                <TextInput style={styles.input} placeholder="-없이 전화번호를 입력해주세요." value={number}
+            <View style={{flex: 3,alignItems:'center'}}>
+                <TextInput style={styles.input} placeholder="핸드폰번호를 적어주세요" value={number}
                 onChangeText={text => onChange(text)}/>
-                <Pressable
-                    style={styles.button}
+                <TouchableOpacity
+                    style={{marginRight: 10,marginTop:'10%',backgroundColor:"#787878",width:288.02,height:55,borderRadius:15,justifyContent:"center"}}
                     title="To User Screen"
                         onPress={() => save()}>
-                    <Text>다음</Text>
-                </Pressable>
+                    <Text style={{alignSelf:"center",fontSize:20,fontWeight:"bold",color:"white"}}>번호 등록하기</Text>
+                </TouchableOpacity>    
             </View>
-            <View style={{flex: 1,alignItems:'center', justifyContent:'center'}}>
-            </View>
-            <Button onPress={() => navigation.navigate('View2')} title="넘기기" />
         </View>
     )
 }
@@ -96,14 +96,17 @@ const styles = StyleSheet.create({
         fontSize: '20px',
     },
     input: {
-        width: "70%",
-        height: 50,
+        width: 288.02,
+        height: 55,
         borderColor: '#cecece',
         backgroundColor: '#cecece',
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 15,
         padding: 10,
-        marginRight: 10
+        marginRight: 10,
+        marginBottom: 15,
+        fontWeight:'bold',
+        fontSize:20
       },
     button: {
       backgroundColor: "#cecece",

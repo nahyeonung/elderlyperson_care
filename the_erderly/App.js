@@ -37,7 +37,7 @@ import age from './navigation/views/age';
 import presentation from './navigation/views/presentation';
 import digital from './navigation/views/digital';
 import active from './navigation/views/active';
-
+import link from './navigation/views/link'
 
 
 
@@ -83,6 +83,7 @@ export default function App() {
             <Stack.Screen name="Age" component={age} />
             <Stack.Screen name="Digital" component={digital} />
             <Stack.Screen name="Active" component={active} />
+            <Stack.Screen name="Link" component={link} />
 
 
 
