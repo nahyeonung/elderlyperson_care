@@ -12,7 +12,7 @@ export default function Find({navigation}){
         autoplay={true} style={styles.fullScreen}
         videoHeight={50} videoWidth={50}
         resizeMode={"cover"} hideControlsOnStart={true}
-        onEnd={() => navigation.navigate('HomePage')}
+        onEnd={() => navigation.navigate('Tutorial')}
         ></VideoPlayer>
       </View>
       

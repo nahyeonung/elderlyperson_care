@@ -30,13 +30,13 @@ export default function PhoneLink({navigation}) {
         database().ref('users/' + id).update({
             f_phone: number,
         });
-        navigation.navigate('Find');
+        navigation.navigate('Relation',{pnumber: number});
     }
     
     return(
         <View style={{flex:1}}>
             <View style={{flex: 1,alignItems:'center', justifyContent:'center'}}>
-                <Text style={styles.text1}>연동하고 싶은{'\n'} 핸드폰 번호를 적어주세요.</Text>
+                <Text style={styles.text1}>연동하고 싶은{'\n'}핸드폰 번호를 적어주세요.</Text>
             </View>
             <View style={{flex: 4,alignItems:'center', justifyContent:'center'}}>
                 <TextInput style={styles.input} placeholder="전화번호를 입력해주세요." value={number}

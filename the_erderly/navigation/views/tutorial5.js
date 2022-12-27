@@ -10,16 +10,7 @@ import Cate from '../../src/svgFile/cate.svg';
 import Eml from '../../src/svgFile/eml.svg';
 
 
-
-
-
-
-
-
-
-
-
-export default function Tutorial4({navigation}){
+export default function Tutorial5({navigation}){
   const [name, setName] = useState('')
   const [button,setButton] = useState("#787878");
   const {id} = useSelector(state => state.userReducer);
@@ -32,7 +23,8 @@ export default function Tutorial4({navigation}){
     });
   },[])
   const clickBox = () => {
-    navigation.navigate("Main");
+    // navigation.navigate("Main");
+    navigation.navigate("HomePage");
     setButton("#03CF5D")
   }
   return(
@@ -50,7 +42,7 @@ export default function Tutorial4({navigation}){
 
 
             <Pressable style={{width:288.02,height:55,borderRadius:15,backgroundColor:button,justifyContent:"center",position:"absolute",top:747.83,left:61.99}} onPress={clickBox}>
-                <Text style={{fontSize:20,color:'white',alignSelf:"center",fontWeight:"bold"}}>다음으로</Text>
+                <Text style={{fontSize:20,color:'white',alignSelf:"center",fontWeight:"bold"}}>이음 시작하기</Text>
              </Pressable>
 
           </View>
