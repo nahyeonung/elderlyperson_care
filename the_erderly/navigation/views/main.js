@@ -11,6 +11,7 @@ import GoogleCloudSpeechToText, {
   SpeechStartEvent,
 } from 'react-native-google-cloud-speech-to-text';
 import typescript from 'react-native-svg';
+import { onChange } from 'react-native-reanimated';
 // import Modal from 'react-native-simple-modal';
 
 export default function Main({navigation}){
@@ -19,9 +20,24 @@ export default function Main({navigation}){
   const [color3,setColor3] = useState(false);
   const [color4,setColor4] = useState(false);
   const [color5,setColor5] = useState(false);
-  
+  const [spinner, setSpinner] = useState('');
+  const [transcript, setResult] = useState('');
+  const [mic,setMic] = useState(true);
+  const [cate,setCate] = useState(false);
+  const [letter,setLetter] = useState("편지함가기");
+  const {id} = useSelector(state => state.userReducer);
+  const [image,setImage] = useState('')
+  const [name, setName] = useState('')
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
+  const [value, setValue] = useState('');
+  const [write, setWrite] = useState('');
+  const [id2, setId2] = useState('');
+  const data = new Date();
+  console.log(data);
 
   function boxColor () {
+    setValue('음악듣기')
     setColor(true);
     setColor2(false);
     setColor3(false);
@@ -30,6 +46,7 @@ export default function Main({navigation}){
   }
 
   function boxColor2 () {
+    setValue('길찾기')
     setColor(false);
     setColor2(true);
     setColor3(false);
@@ -38,6 +55,7 @@ export default function Main({navigation}){
   }
 
   function boxColor3 () {
+    setValue('기차표 예매')
     setColor(false);
     setColor2(false);
     setColor3(true);
@@ -46,6 +64,7 @@ export default function Main({navigation}){
   }
 
   function boxColor4 () {
+    setValue('네이버 밴드')
     setColor(false);
     setColor2(false);
     setColor3(false);
@@ -53,18 +72,6 @@ export default function Main({navigation}){
     setColor5(false);
   }
 
-  
-  
-    const [spinner, setSpinner] = useState('');
-    const [transcript, setResult] = useState('');
-    const [mic,setMic] = useState(true);
-    const [cate,setCate] = useState(false);
-    const [letter,setLetter] = useState("편지함가기");
-    const {id} = useSelector(state => state.userReducer);
-    const [image,setImage] = useState('')
-    const [name, setName] = useState('')
-    const [modalVisible, setModalVisible] = useState(false);
-    const [modalVisible2, setModalVisible2] = useState(false);
       database()
     .ref('/users/'+id)
     .once('value')
@@ -85,6 +92,14 @@ export default function Main({navigation}){
       });
     }, []);
     useEffect(() => {
+      database().ref('users/'+id)
+      .once('value').then(snapshot => {
+        database().ref('/users/').orderByChild('phone').equalTo(snapshot.val().f_phone).once('child_added', snapshot => {
+          setId2(snapshot.val().id)
+        })
+      })
+    }, [])
+    useEffect(() => {
       GoogleCloudSpeechToText.setApiKey('AIzaSyBMnUbVg1fC9fuhiffj_5OoQYYtLn6Uzvc');
       GoogleCloudSpeechToText.onVoice(onVoice);
       GoogleCloudSpeechToText.onVoiceStart(onVoiceStart);
@@ -95,6 +110,8 @@ export default function Main({navigation}){
       return () => {
         GoogleCloudSpeechToText.removeListeners();
       };
+
+
     }, []);
     useEffect(() => {
       if(transcript == '예매'){
@@ -156,7 +173,21 @@ export default function Main({navigation}){
     function set () {
         setMic(!mic);
     }
-    console.log('이동할 곳', transcript);
+    const nextModal = () =>{
+      setModalVisible(!modalVisible)
+      setModalVisible2(!modalVisible2)
+      
+    }
+    const onChange2 = (text) =>{
+      setWrite(text);
+    }
+    const send = () => {
+      database().ref('/users/'+id2+'/new')
+      .update({
+        data: write
+      })
+      setModalVisible2(!modalVisible2)
+    }
     return(
         <View style={{flex:1, backgroundColor:"white"}}>
           
@@ -188,7 +219,7 @@ export default function Main({navigation}){
             </TouchableOpacity>
         </View>
 
-        {!mic?(<View style={{flex: 1,flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
+        {/* {!mic?(<View style={{flex: 1,flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
             <Pressable style={styles.Button2} onPress={
                    () => setModalVisible(!modalVisible)
                }>
@@ -212,16 +243,19 @@ export default function Main({navigation}){
                 <Text style={styles.text7}>사랑딸</Text>
                 <Text style={styles.text8}>2022.11.26</Text>
             </Pressable>
-        </View>): null}
+        </View>): null} */}
+        {!mic? (<View style={{flex: 1.2,flexDirection: 'row', alignItems:'baseline', justifyContent:'center', marginTop:30}}>
+                  <Text>받은 편지가 없어요</Text>
+                </View>):null}
 
 
         {mic ? (<View style={{flex: 1.2,flexDirection: 'row', alignItems:'baseline', justifyContent:'center', marginTop:30}}>
             <TouchableOpacity style={styles.Button}  onPress={() => setModalVisible(!modalVisible)
                }>
-                <Text style={styles.text4}>카테고리</Text>
+                <Text style={styles.text4}>편지쓰기</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.Button} onPress={() => setModalVisible2(!modalVisible2)}>
-                <Text style={styles.text4}>편지쓰기</Text>
+                <Text style={styles.text4}>내 정보</Text>
             </TouchableOpacity>
         </View>) : null}
 
@@ -263,10 +297,10 @@ export default function Main({navigation}){
             <View style={{alignSelf:"center", position:"absolute",top:"10%",height:507.32,width:358.1,borderRadius:20,backgroundColor:"#F8F8F8"}}>
                   <Text style={{alignSelf:"center",color:"#03CF5D",fontSize:20,fontWeight:"bold",marginTop:"10%"}}>추천하실 카테고리를{"\n"}      선택해주세요</Text>
                   <Pressable style={[styles.box,{backgroundColor: color ? "#03CF5D": "lightgray"}]} onPress={boxColor}><Text style={styles.text66}>음악듣기</Text></Pressable>
-                <Pressable style={[styles.box,{backgroundColor: color2 ? "#03CF5D":  "lightgray"}]} onPress={boxColor2}><Text style={styles.text66}>길찾기</Text></Pressable>
-                <Pressable style={[styles.box,{backgroundColor: color3 ? "#03CF5D":  "lightgray"}]} onPress={boxColor3}><Text style={styles.text66}>기차표예매</Text></Pressable>
-                <Pressable style={[styles.box,{backgroundColor: color4 ? "#03CF5D":  "lightgray"}]} onPress={boxColor4}><Text style={styles.text66}>네이버 밴드</Text></Pressable>
-                <Pressable style={[styles.box,{backgroundColor:"#03CF5D",marginTop:"15%"}]} onPress={()=> setModalVisible(!modalVisible)}><Text style={[styles.text66,{fontSize:20}]}>선택</Text></Pressable>                
+                  <Pressable style={[styles.box,{backgroundColor: color2 ? "#03CF5D":  "lightgray"}]} onPress={boxColor2}><Text style={styles.text66}>길찾기</Text></Pressable>
+                  <Pressable style={[styles.box,{backgroundColor: color3 ? "#03CF5D":  "lightgray"}]} onPress={boxColor3}><Text style={styles.text66}>기차표예매</Text></Pressable>
+                  <Pressable style={[styles.box,{backgroundColor: color4 ? "#03CF5D":  "lightgray"}]} onPress={boxColor4}><Text style={styles.text66}>네이버 밴드</Text></Pressable>
+                  <Pressable style={[styles.box,{backgroundColor:"#03CF5D",marginTop:"15%"}]} onPress={()=> nextModal()}><Text style={[styles.text66,{fontSize:20}]}>선택</Text></Pressable>                
             </View>
         </Modal>
 
@@ -282,8 +316,10 @@ export default function Main({navigation}){
         >
             <View style={{alignSelf:"center", position:"absolute",top:"10%",height:507.32,width:358.1,borderRadius:20,backgroundColor:"#F8F8F8"}}>
             <Text style={{alignSelf:"center",color:"#03CF5D",fontSize:20,fontWeight:"bold",marginTop:"10%"}}>  편지내용을{"\n"}입력해주세요</Text>
-                 <TextInput style={{width:300,height:250,fontSize:15,backgroundColor:"white",alignSelf:"center",borderRadius:15,marginTop:"5%",color:"black",textAlignVertical:"top"}} placeholder="편지 내용을 입력해주세요" placeholderTextColor="gray" multiline ={true}></TextInput>
-                <Pressable style={[styles.box,{backgroundColor:"#03CF5D",marginTop:"15%"}]} onPress={()=> setModalVisible2(!modalVisible2)}><Text style={[styles.text66,{fontSize:20}]}>보내기</Text></Pressable>                
+                 <TextInput style={{width:300,height:250,fontSize:15,backgroundColor:"white",alignSelf:"center",borderRadius:15,marginTop:"5%",color:"black",textAlignVertical:"top"}} 
+                 placeholder="편지 내용을 입력해주세요" placeholderTextColor="gray" multiline ={true}
+                 onChangeText={text => onChange2(text)} value={write} ></TextInput>
+                <Pressable style={[styles.box,{backgroundColor:"#03CF5D",marginTop:"15%"}]} onPress={()=> send()}><Text style={[styles.text66,{fontSize:20}]}>보내기</Text></Pressable>                
             </View>
         </Modal>
 

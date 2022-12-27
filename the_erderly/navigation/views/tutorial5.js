@@ -11,7 +11,7 @@ import Eml from '../../src/svgFile/eml.svg';
 
 
 export default function Tutorial5({navigation}){
-  const [name, setName] = useState('')
+  const [who, setWho] = useState('')
   const [button,setButton] = useState("#787878");
   const {id} = useSelector(state => state.userReducer);
   useEffect(() => {
@@ -19,12 +19,18 @@ export default function Tutorial5({navigation}){
     .ref('/users/'+id)
     .once('value')
     .then(snapshot => {
-    setName(snapshot.val().name)
+      if(snapshot.val().who != undefined){
+        setWho(snapshot.val().who)
+      }
     });
   },[])
   const clickBox = () => {
-    // navigation.navigate("Main");
-    navigation.navigate("HomePage");
+    if(who == '자녀(딸 혹은 아들)'){
+      navigation.navigate("Main");
+    }
+    else{
+      navigation.navigate("HomePage");
+    }
     setButton("#03CF5D")
   }
   return(
