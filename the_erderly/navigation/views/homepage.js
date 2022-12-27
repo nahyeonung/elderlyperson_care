@@ -368,38 +368,7 @@ function onPressMic(){
           <Pressable style={{width:358.16,height:77.8,backgroundColor:"#03CF5D",borderBottomRightRadius:15,borderBottomLeftRadius:15,left:27,top:77,justifyContent:"center"}} onPress={() => gihyeok()}>
             <Text style={{color:"white",fontWeight:"bold",fontSize:20,alignSelf:"center"}} >학습하러 가기</Text>
           </Pressable>
-            {/* <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <View style={{flexDirection:'row'}}>
-                  <Image style={styles.modalImage} source={{uri: image}}></Image>
-                  <View>
-                    <Text style={{fontSize:30, fontWeight:'bold',color:"black"}}>사랑하는 우리 딸</Text>
-                    <Text style={{marginLeft:10, fontWeight:'bold',color:"black"}}>2022.12.06 (화) 16:00</Text>
-                  </View>
-                </View>
-                <Text style={styles.modalText}>
-                엄마, 요새 엄마가 좋아하는 임영웅 노래만
-                많이 듣길래 내가 다른 노래 추천해주려고!
-                사실 내가 좋아하는 노래 추천하는거니까
-                듣고 어땠는지 말해주{'\n'}기 !!{'\n\n'}
-                이번주에 꼭 내려갈게요! 기혁이 사랑해♥</Text>
-                <View style={{flexDirection:'row'}}>
-                  <Pressable
-                    style={[styles.button, styles.buttonMove]}
-                    onPress={() => navigation.navigate('Reservation')}
-                  >
-                    <Text style={styles.textStyle}>학습하러가기</Text>
-                  </Pressable>
-                  <Pressable
-                    style={[styles.button, styles.buttonClose, styles.gin]}
-                    onPress={() => setModalVisible(!modalVisible)}
-                  >
-                    <Text style={styles.textStyle}>창 닫기</Text>
-                  </Pressable>
-                </View>
-
-              </View>
-            </View> */}
+           
         </Modal>
 
             

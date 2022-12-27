@@ -32,7 +32,7 @@ export default function Tutorial4({navigation}){
     });
   },[])
   const clickBox = () => {
-    navigation.navigate("Tutorial5");
+    navigation.navigate("Main");
     setButton("#03CF5D")
   }
   return(

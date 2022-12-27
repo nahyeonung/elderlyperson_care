@@ -1,5 +1,5 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
-import {View, Text, Button, StyleSheet, Pressable,Image,TouchableOpacity, Modal, Animated,PermissionsAndroid,ActivityIndicator} from 'react-native';
+import {View, Text, Button, StyleSheet, Pressable,Image,TouchableOpacity, Modal, Animated,PermissionsAndroid,ActivityIndicator,TextInput} from 'react-native';
 import Mic from '../../src/svgFile/mic_Logo';
 import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,6 +14,47 @@ import typescript from 'react-native-svg';
 // import Modal from 'react-native-simple-modal';
 
 export default function Main({navigation}){
+  const [color,setColor] = useState(false);
+  const [color2,setColor2] = useState(false);
+  const [color3,setColor3] = useState(false);
+  const [color4,setColor4] = useState(false);
+  const [color5,setColor5] = useState(false);
+  
+
+  function boxColor () {
+    setColor(true);
+    setColor2(false);
+    setColor3(false);
+    setColor4(false);
+    setColor5(false);
+  }
+
+  function boxColor2 () {
+    setColor(false);
+    setColor2(true);
+    setColor3(false);
+    setColor4(false);
+    setColor5(false);
+  }
+
+  function boxColor3 () {
+    setColor(false);
+    setColor2(false);
+    setColor3(true);
+    setColor4(false);
+    setColor5(false);
+  }
+
+  function boxColor4 () {
+    setColor(false);
+    setColor2(false);
+    setColor3(false);
+    setColor4(true);
+    setColor5(false);
+  }
+
+  
+  
     const [spinner, setSpinner] = useState('');
     const [transcript, setResult] = useState('');
     const [mic,setMic] = useState(true);
@@ -23,6 +64,7 @@ export default function Main({navigation}){
     const [image,setImage] = useState('')
     const [name, setName] = useState('')
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible2, setModalVisible2] = useState(false);
       database()
     .ref('/users/'+id)
     .once('value')
@@ -104,10 +146,10 @@ export default function Main({navigation}){
 
     function lett () {
         if(letter == "편지함가기"){
-            setLetter("미션확인하기")
+            setLetter("편지보내기")
         }
 
-        else if(letter == "미션확인하기"){
+        else if(letter == "편지보내기"){
             setLetter("편지함가기")
         }
     }
@@ -174,14 +216,12 @@ export default function Main({navigation}){
 
 
         {mic ? (<View style={{flex: 1.2,flexDirection: 'row', alignItems:'baseline', justifyContent:'center', marginTop:30}}>
-            <TouchableOpacity style={styles.Button} onPress={
-                   () => navigation.navigate('Education')
+            <TouchableOpacity style={styles.Button}  onPress={() => setModalVisible(!modalVisible)
                }>
-                <Text style={styles.text4}>교육 컨텐츠</Text>
+                <Text style={styles.text4}>카테고리</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.Button} onPress={
-                   () => navigation.navigate('Em')}>
-                <Text style={styles.text4}>찜한교육</Text>
+            <TouchableOpacity style={styles.Button} onPress={() => setModalVisible2(!modalVisible2)}>
+                <Text style={styles.text4}>편지쓰기</Text>
             </TouchableOpacity>
         </View>) : null}
 
@@ -210,6 +250,7 @@ export default function Main({navigation}){
               <Button title='헬로'></Button>
             </View>
         </Modal> */}
+                
         <Modal
             animationType="slide"
             transparent={true}
@@ -219,18 +260,33 @@ export default function Main({navigation}){
               setModalVisible(!modalVisible);
             }}
         >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>Hello World!</Text>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Text style={styles.textStyle}>Hide Modal</Text>
-                </Pressable>
-              </View>
+            <View style={{alignSelf:"center", position:"absolute",top:"10%",height:507.32,width:358.1,borderRadius:20,backgroundColor:"#F8F8F8"}}>
+                  <Text style={{alignSelf:"center",color:"#03CF5D",fontSize:20,fontWeight:"bold",marginTop:"10%"}}>추천하실 카테고리를{"\n"}      선택해주세요</Text>
+                  <Pressable style={[styles.box,{backgroundColor: color ? "#03CF5D": "lightgray"}]} onPress={boxColor}><Text style={styles.text66}>음악듣기</Text></Pressable>
+                <Pressable style={[styles.box,{backgroundColor: color2 ? "#03CF5D":  "lightgray"}]} onPress={boxColor2}><Text style={styles.text66}>길찾기</Text></Pressable>
+                <Pressable style={[styles.box,{backgroundColor: color3 ? "#03CF5D":  "lightgray"}]} onPress={boxColor3}><Text style={styles.text66}>기차표예매</Text></Pressable>
+                <Pressable style={[styles.box,{backgroundColor: color4 ? "#03CF5D":  "lightgray"}]} onPress={boxColor4}><Text style={styles.text66}>네이버 밴드</Text></Pressable>
+                <Pressable style={[styles.box,{backgroundColor:"#03CF5D",marginTop:"15%"}]} onPress={()=> setModalVisible(!modalVisible)}><Text style={[styles.text66,{fontSize:20}]}>선택</Text></Pressable>                
             </View>
         </Modal>
+
+
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible2}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible2(!modalVisible2);
+            }}
+        >
+            <View style={{alignSelf:"center", position:"absolute",top:"10%",height:507.32,width:358.1,borderRadius:20,backgroundColor:"#F8F8F8"}}>
+            <Text style={{alignSelf:"center",color:"#03CF5D",fontSize:20,fontWeight:"bold",marginTop:"10%"}}>  편지내용을{"\n"}입력해주세요</Text>
+                 <TextInput style={{width:300,height:250,fontSize:15,backgroundColor:"white",alignSelf:"center",borderRadius:15,marginTop:"5%",color:"black",textAlignVertical:"top"}} placeholder="편지 내용을 입력해주세요" placeholderTextColor="gray" multiline ={true}></TextInput>
+                <Pressable style={[styles.box,{backgroundColor:"#03CF5D",marginTop:"15%"}]} onPress={()=> setModalVisible2(!modalVisible2)}><Text style={[styles.text66,{fontSize:20}]}>보내기</Text></Pressable>                
+            </View>
+        </Modal>
+
 
 
         </View>
@@ -246,6 +302,14 @@ const styles = StyleSheet.create({
   
     text3: {fontWeight:"bold", fontSize: 13, marginBottom: 20},
     text4: {fontWeight:"bold", fontSize: 25,color:"#636363"},
+    text66: {
+      color:"white",
+      fontWeight:"bold",
+      fontSize: 16,
+      alignSelf:"center"
+  
+    },
+  
     text5: {fontWeight: "bold", fontSize:20, marginRight:10,color:"#636363"},
     text6: {fontWeight: "bold", fontSize:20, color: "white"},
     text7: {fontWeight:"bold", fontSize: 17,color:"#636363"},
@@ -335,5 +399,8 @@ const styles = StyleSheet.create({
         justifyContent: "center" ,
         margin:50
       }
+,
+      box:{ width:288.02, height: 50.66, borderRadius:20, borderColor: "#787878",justifyContent:"center",alignSelf:"center",marginTop:"5%",
+      alignContent: "center",backgroundColor:"#787878"},
   
   });
