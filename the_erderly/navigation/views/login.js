@@ -22,12 +22,10 @@ export default function Kakaologin({navigation}) {
   const [nickname, setNickname] = useState('');
   const [photo, setPhoto] = useState('');
   const [id2, setId2] = useState('');
-  console.log('여기가 또 돌면 안돼..')
   const signInWithKakao = async ()  => {
     try {
       const token = await login();
       const profile = await getKakaoProfile();
-      console.log(profile)
       dispatch(setId(profile['id']));
       setNickname(JSON.stringify(profile['nickname']));
       setPhoto(JSON.stringify(profile['profileImageUrl']))
@@ -37,8 +35,6 @@ export default function Kakaologin({navigation}) {
       .ref('users/' + profile['id'])
       .on('value', snapshot => {
         sum += 1;
-        console.log('dfsf',sum)
-        console.log('여기가..',snapshot.val())
         if(snapshot.val() == null){
           database().ref('users/' + profile['id']).set({
             name: profile['nickname'],

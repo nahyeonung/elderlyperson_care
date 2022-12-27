@@ -8,6 +8,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function Link({navigation}){
   const [name, setName] = useState('')
+  const [selection, setSelection] = useState('')
+  const [value, setValue] = useState(true)
+  const [value2, setValue2] = useState(true)
   const {id} = useSelector(state => state.userReducer);
   useEffect(() => {
     database()
@@ -17,8 +20,24 @@ export default function Link({navigation}){
     setName(snapshot.val().name)
     });
   },[])
-  const clickBox = () => {
-    navigation.navigate("Digital");
+  const clickBox = (sel) => {
+    if(sel == 'yes'){
+      setSelection('yes')
+      setValue(!value)
+      if(value2 == false) setValue2(true)
+    }
+    else{
+      setSelection('no')
+      setValue2(!value2)
+      if(value == false) setValue(true)
+    }
+  }
+  const next = () =>{
+    if (selection == 'yes'){
+      navigation.navigate('PhoneLink')
+    }else{
+      navigation.navigate('Find')
+    }
   }
   return(
     
@@ -29,15 +48,15 @@ export default function Link({navigation}){
                 <Text style={[styles.text2,{fontWeight:"bold"}]}>연동을 통해 다양한 소식을 공유할 수 있{"\n"}어요</Text>
             </View>
             <View style={{flex:1.5, flexDirection:"row",justifyContent:"center"}}>
-                <Pressable style={{marginLeft:10,marginRight:10,width:"33%",height:"50%",borderRadius:15,backgroundColor:"#E4E4E4",justifyContent:"center"}} onPress={clickBox}>
+                <Pressable style={{marginLeft:10,marginRight:10,width:"33%",height:"50%",borderRadius:15,backgroundColor:value?"#E4E4E4":"#03CF5D",justifyContent:"center"}} onPress={() => clickBox('yes')}>
                     <Text style={{fontSize:20,color:'white',alignSelf:"center",fontWeight:"bold"}}>예</Text>
                 </Pressable>
-                <Pressable style={{width:"33%",height:"50%",borderRadius:15,backgroundColor:"#E4E4E4",justifyContent:"center"}} onPress={() => navigation.navigate('Find')}>
+                <Pressable style={{width:"33%",height:"50%",borderRadius:15,backgroundColor:value2?"#E4E4E4":"#03CF5D",justifyContent:"center"}} onPress={() => clickBox('no')}>
                     <Text style={{fontSize:20,color:'white',alignSelf:"center",fontWeight:"bold"}}>아니오</Text>
                 </Pressable>
             </View>
             
-            <Pressable style={{marginLeft:5,width:288.02,height:55,borderRadius:15,backgroundColor:"#03CF5D",justifyContent:"center",position:"absolute",top:706.31,left:61.99}} onPress={clickBox}>
+            <Pressable style={{marginLeft:5,width:288.02,height:55,borderRadius:15,backgroundColor:"#03CF5D",justifyContent:"center",position:"absolute",top:706.31,left:61.99}} onPress={next}>
                 <Text style={{fontSize:20,color:'white',alignSelf:"center",fontWeight:"bold"}}>다음</Text>
              </Pressable>
 
@@ -113,5 +132,6 @@ const styles = StyleSheet.create({
   },
   header: {flex: 1,backgroundColor:"black"},
   bgImage: {width: '100%', height: '100%',tintColor: 'gray',opacity:0.3},
+
 
 })

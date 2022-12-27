@@ -98,7 +98,6 @@ export default function Main({navigation}){
       });
       console.log('startRecognizing', result);
     };
-    console.log('스피너',spinner);
     const stopRecognizing = async () => {
       await GoogleCloudSpeechToText.stop();
     };

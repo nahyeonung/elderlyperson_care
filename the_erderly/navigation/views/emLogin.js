@@ -15,11 +15,9 @@ export default function EmLogin({navigation}) {
     const [pnumber,setPnumber] = useState('');
     const [number, setNumber] = useState('');
     const onChange = (e) => {
-        console.log(e);
         setNumber(e)
     }
     const onChangeP = (e) => {
-        console.log(e);
         setPnumber(e)
     }
     const login = () =>{
