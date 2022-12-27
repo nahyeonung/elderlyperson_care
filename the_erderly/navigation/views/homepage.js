@@ -247,7 +247,7 @@ function onPressMic(){
                 <Pressable style={styles.key}>
                   <Text style={styles.text99}>길찾기</Text>
                 </Pressable>
-                <Pressable style={styles.key}>
+                <Pressable style={styles.key} onPress={()=> {navigation.navigate("Tutorial")}}>
                   <Text style={styles.text99}>음악듣기</Text>
                 </Pressable>
                 <Pressable style={styles.key} onPress={() => {navigation.navigate('Reservation')}}>

@@ -38,6 +38,15 @@ import presentation from './navigation/views/presentation';
 import digital from './navigation/views/digital';
 import active from './navigation/views/active';
 import link from './navigation/views/link'
+import tutorial from './navigation/views/tutorial'
+import tutorial2 from './navigation/views/tutorial2'
+import tutorial3 from './navigation/views/tutorial3'
+import tutorial4 from './navigation/views/tutorial4'
+import tutorial5 from './navigation/views/tutorial5'
+
+
+
+
 
 
 
@@ -84,6 +93,17 @@ export default function App() {
             <Stack.Screen name="Digital" component={digital} />
             <Stack.Screen name="Active" component={active} />
             <Stack.Screen name="Link" component={link} />
+            <Stack.Screen name="Tutorial" component={tutorial} />
+            <Stack.Screen name="Tutorial2" component={tutorial2} />
+            <Stack.Screen name="Tutorial3" component={tutorial3} />
+            <Stack.Screen name="Tutorial4" component={tutorial4} />
+            <Stack.Screen name="Tutorial5" component={tutorial5} />
+
+
+
+
+
+
 
 
 
