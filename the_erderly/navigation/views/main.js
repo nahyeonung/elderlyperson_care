@@ -33,8 +33,13 @@ export default function Main({navigation}){
   const [value, setValue] = useState('');
   const [write, setWrite] = useState('');
   const [id2, setId2] = useState('');
-  const data = new Date();
-  console.log(data);
+  const date = new Date();
+  const minutes = String(date.getMinutes());
+  const hours = String(date.getHours());
+  const days = String(date.getDate());
+  const months = String(date.getMonth()+1);
+  const years = String(date.getFullYear());
+  const data = years+'년'+months+'월'+days+'일'+hours+'시'+minutes+'분'
 
   function boxColor () {
     setValue('음악듣기')
@@ -182,9 +187,16 @@ export default function Main({navigation}){
       setWrite(text);
     }
     const send = () => {
-      database().ref('/users/'+id2+'/new')
-      .update({
-        data: write
+      database().ref('/users/'+id2+'/message').once('value')
+      .then(snapshot=>{
+        var num = Object.keys(snapshot.val()).length
+        console.log(num)
+        database().ref('/users/'+id2+'/message/'+`${num}`)
+        .update({
+          date: data,
+          data: write,
+          catagory: value,
+        })
       })
       setModalVisible2(!modalVisible2)
     }
@@ -254,7 +266,7 @@ export default function Main({navigation}){
                }>
                 <Text style={styles.text4}>편지쓰기</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.Button} onPress={() => setModalVisible2(!modalVisible2)}>
+            <TouchableOpacity style={styles.Button} onPress={() => navigation.navigate('MyPage')}>
                 <Text style={styles.text4}>내 정보</Text>
             </TouchableOpacity>
         </View>) : null}
