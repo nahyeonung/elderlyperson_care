@@ -10,8 +10,10 @@ import GoogleCloudSpeechToText, {
   VoiceEvent,
   SpeechStartEvent,
 } from 'react-native-google-cloud-speech-to-text';
+import Xcode from '../../src/svgFile/xcode.svg';
 import typescript from 'react-native-svg';
 import { onChange } from 'react-native-reanimated';
+import { setCategory } from 'react-native-sound';
 // import Modal from 'react-native-simple-modal';
 
 export default function Main({navigation}){
@@ -60,7 +62,7 @@ export default function Main({navigation}){
   }
 
   function boxColor3 () {
-    setValue('기차표 예매')
+    setValue('예매')
     setColor(false);
     setColor2(false);
     setColor3(true);
@@ -181,6 +183,10 @@ export default function Main({navigation}){
     const nextModal = () =>{
       setModalVisible(!modalVisible)
       setModalVisible2(!modalVisible2)
+      setColor(false)
+      setColor2(false)
+      setColor3(false)
+      setColor4(false)
       
     }
     const onChange2 = (text) =>{
@@ -190,7 +196,6 @@ export default function Main({navigation}){
       database().ref('/users/'+id2+'/message').once('value')
       .then(snapshot=>{
         var num = Object.keys(snapshot.val()).length
-        console.log(num)
         database().ref('/users/'+id2+'/message/'+`${num}`)
         .update({
           date: data,
@@ -199,6 +204,8 @@ export default function Main({navigation}){
         })
       })
       setModalVisible2(!modalVisible2)
+      setWrite('')
+      setCategory('')
     }
     return(
         <View style={{flex:1, backgroundColor:"white"}}>
@@ -216,10 +223,10 @@ export default function Main({navigation}){
            
         <Image style={styles.image} source={{uri : image}}></Image>
             <Pressable style={styles.Button_div}>
-                <Text style={styles.text5}>사랑하는 딸</Text>
+                <Text style={styles.text5}>{name}님</Text>
                 <Text></Text>
-                <Text style={{color:"#636363"}}>오늘 엄마랑 같이 듣고 싶은 노래가 생겼어!</Text>
-                <Text style={{color:"#636363"}}>한번 들어 봐바!!</Text>
+                <Text style={{color:"#636363"}}>부모님께 추천하는 교육 카테고리를 설정한 후, 카테고리와 관련된 추억의 편지를 적어봐요. 부모님께서 편지도 읽으시고 해당 교육도 받으실 수 있어요.</Text>
+                <Text style={{color:"#636363"}}></Text>
 
             </Pressable>
         </View>
@@ -281,9 +288,6 @@ export default function Main({navigation}){
               
            
         </View>) : null}
-        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-            <Text>Open modal</Text>
-        </TouchableOpacity>
         {/* <Modal
             offset={100}
             open={state}
@@ -307,12 +311,13 @@ export default function Main({navigation}){
             }}
         >
             <View style={{alignSelf:"center", position:"absolute",top:"10%",height:507.32,width:358.1,borderRadius:20,backgroundColor:"#F8F8F8"}}>
-                  <Text style={{alignSelf:"center",color:"#03CF5D",fontSize:20,fontWeight:"bold",marginTop:"10%"}}>추천하실 카테고리를{"\n"}      선택해주세요</Text>
-                  <Pressable style={[styles.box,{backgroundColor: color ? "#03CF5D": "lightgray"}]} onPress={boxColor}><Text style={styles.text66}>음악듣기</Text></Pressable>
-                  <Pressable style={[styles.box,{backgroundColor: color2 ? "#03CF5D":  "lightgray"}]} onPress={boxColor2}><Text style={styles.text66}>길찾기</Text></Pressable>
-                  <Pressable style={[styles.box,{backgroundColor: color3 ? "#03CF5D":  "lightgray"}]} onPress={boxColor3}><Text style={styles.text66}>기차표예매</Text></Pressable>
-                  <Pressable style={[styles.box,{backgroundColor: color4 ? "#03CF5D":  "lightgray"}]} onPress={boxColor4}><Text style={styles.text66}>네이버 밴드</Text></Pressable>
-                  <Pressable style={[styles.box,{backgroundColor:"#03CF5D",marginTop:"15%"}]} onPress={()=> nextModal()}><Text style={[styles.text66,{fontSize:20}]}>선택</Text></Pressable>                
+              <Xcode style={{left:320,top:10}} onPress={() => setModalVisible(!modalVisible)}></Xcode>
+              <Text style={{alignSelf:"center",color:"#03CF5D",fontSize:20,fontWeight:"bold",marginTop:"10%"}}>추천하실 카테고리를{"\n"}      선택해주세요</Text>
+              <Pressable style={[styles.box,{backgroundColor: color ? "#03CF5D": "lightgray"}]} onPress={boxColor}><Text style={styles.text66}>음악듣기</Text></Pressable>
+              <Pressable style={[styles.box,{backgroundColor: color2 ? "#03CF5D":  "lightgray"}]} onPress={boxColor2}><Text style={styles.text66}>길찾기</Text></Pressable>
+              <Pressable style={[styles.box,{backgroundColor: color3 ? "#03CF5D":  "lightgray"}]} onPress={boxColor3}><Text style={styles.text66}>예매</Text></Pressable>
+              <Pressable style={[styles.box,{backgroundColor: color4 ? "#03CF5D":  "lightgray"}]} onPress={boxColor4}><Text style={styles.text66}>네이버 밴드</Text></Pressable>
+              <Pressable style={[styles.box,{backgroundColor:"#03CF5D",marginTop:"15%"}]} onPress={()=> nextModal()}><Text style={[styles.text66,{fontSize:20}]}>선택</Text></Pressable>                
             </View>
         </Modal>
 
@@ -327,6 +332,7 @@ export default function Main({navigation}){
             }}
         >
             <View style={{alignSelf:"center", position:"absolute",top:"10%",height:507.32,width:358.1,borderRadius:20,backgroundColor:"#F8F8F8"}}>
+            <Xcode style={{left:320,top:10}} onPress={() => setModalVisible2(!modalVisible2)}></Xcode>
             <Text style={{alignSelf:"center",color:"#03CF5D",fontSize:20,fontWeight:"bold",marginTop:"10%"}}>  편지내용을{"\n"}입력해주세요</Text>
                  <TextInput style={{width:300,height:250,fontSize:15,backgroundColor:"white",alignSelf:"center",borderRadius:15,marginTop:"5%",color:"black",textAlignVertical:"top"}} 
                  placeholder="편지 내용을 입력해주세요" placeholderTextColor="gray" multiline ={true}

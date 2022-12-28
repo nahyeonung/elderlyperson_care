@@ -12,12 +12,13 @@ import {
 import IntroView from './IntroView';
 import database from '@react-native-firebase/database';
 import { useSelector, useDispatch } from 'react-redux';
-import { setId } from '../redux/action';
+import { setId, setSign } from '../redux/action';
 import EmlogoSvg from '../../src/svgFile/emlogo.svg';
 
 
 export default function Kakaologin({navigation}) {
   const {id} = useSelector(state => state.userReducer);
+  const {sign} = useSelector(state => state.userReducer);
   const dispatch = useDispatch();
   const [nickname, setNickname] = useState('');
   const [photo, setPhoto] = useState('');
@@ -27,6 +28,7 @@ export default function Kakaologin({navigation}) {
       const token = await login();
       const profile = await getKakaoProfile();
       dispatch(setId(profile['id']));
+      dispatch(setSign(0))
       setNickname(JSON.stringify(profile['nickname']));
       setPhoto(JSON.stringify(profile['profileImageUrl']))
       setId2(JSON.stringify(profile['id']))
@@ -39,7 +41,8 @@ export default function Kakaologin({navigation}) {
           database().ref('users/' + profile['id']).set({
             name: profile['nickname'],
             imageUri: profile['profileImageUrl'],
-            id: profile['id']
+            id: profile['id'],
+            message: ""
           });
         }
         else if(snapshot.val().phone == null){

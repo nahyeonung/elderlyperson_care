@@ -33,11 +33,11 @@ export default function EmLogin({navigation}) {
                 if(snapshot.val().id == null){
                     dispatch(setId(snapshot.val().phone))
                     dispatch(setSign(1))
-                    navigation.navigate('View2')  
+                    navigation.navigate('Find')  
                 }else{
                     dispatch(setId(snapshot.val().id))
                     dispatch(setSign(1))
-                    navigation.navigate('View2')
+                    navigation.navigate('Find')
                 }
             }
             

@@ -26,12 +26,9 @@ export default function MyPage({navigation}){
     //         navigation.navigate('View1')
     //     }
     // },[msg])
-
-    console.log(loading)
     const signOutWithKakao = async ()  => {
-        console.log('뭔데 이거', sign);
         try {
-          if(sign == ''){
+          if(sign == 0){
             const message = await logout();
             dispatch(setId(''));
             dispatch(setFriendId(''));
@@ -46,7 +43,9 @@ export default function MyPage({navigation}){
               }
             });
           }else if(sign == 1){
-            Alert.alert('이음으로 로그인한 사람');
+            dispatch(setId(''));
+            dispatch(setFriendId(''));
+            navigation.navigate('View1');
           }
         } catch (err) {
           console.error('signOut error', err);
@@ -75,7 +74,7 @@ export default function MyPage({navigation}){
                     </Pressable>
                     <Pressable
                     style={styles.button}>
-                        <Text style={styles.text}>이음 변경</Text>
+                        <Text style={styles.text}>연동 변경</Text>
                     </Pressable>
                 </View>
             </View>

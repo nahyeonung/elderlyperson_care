@@ -12,6 +12,7 @@ import Xcode from '../../src/svgFile/xcode.svg';
 import Sta from '../../src/svgFile/sta.svg';
 import Pro from '../../src/svgFile/pro.svg';
 import Ddot from '../../src/svgFile/ddot.svg';
+import Group from '../../src/svgFile/group.svg'
 import Sam from '../../src/svgFile/sam.svg';
 import axios from 'axios';
 
@@ -50,6 +51,7 @@ export default function HomePage({navigation}){
 const {id} = useSelector(state => state.userReducer);
 const [image,setImage] = useState('')
 const [name, setName] = useState('')
+const [opponent, setOpponent] = useState('')
 const [modalVisible, setModalVisible] = useState(false);
 const[mic,setMiC] = useState(true);
 const [spinner, setSpinner] = useState('');
@@ -61,6 +63,7 @@ database()
   setName(snapshot.val().name)
   database().ref('/users/').orderByChild('phone').equalTo(snapshot.val().f_phone).once('child_added', snapshot => {
     setImage(snapshot.val().imageUri)
+    setOpponent(snapshot.val().name)
   })
 });
 const [percent,setPercent]= useState(0);
@@ -70,9 +73,10 @@ const [write, setWrite] = useState([]);
 const [data, setData] = useState([]);
 const [day ,setDay] = useState([]);
 const [index, setIndex] = useState(0);
+const arr = [1,2,3,4,5,6];
 //감정분석 API
-function sentiment() {
-  const con= {"content":"학습으로 한번 해보고 폰으로 미리 예매해서 좋은 자리 타고오세요! 사랑해요!"};
+function sentiment(index) {
+  const con= {"content":write[index]};
   axios({
     url: 'https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze',
     method: 'post',
@@ -199,7 +203,6 @@ const startRecognizing = async () => {
   });
   console.log('startRecognizing', result);
 };
-console.log('스피너',spinner);
 const stopRecognizing = async () => {
   await GoogleCloudSpeechToText.stop();
 };
@@ -239,13 +242,36 @@ function onPressMic(){
 
   const gihyeok = () => {
     setModalVisible(!modalVisible);
-    navigation.navigate('Reservation');
+    if(data[index] == '예매'){
+      navigation.navigate('Reservation');
+    }else{
+      Alert.alert('아직 페이지를 만드는 중이에요')
+    }
   }
   const modal = (index) => {
+    sentiment(index);
     setIndex(index)
     setModalVisible(!modalVisible)
   }
 
+  const first = () =>{
+    return  write[index].substr(0,19)
+  }
+  const second = () =>{
+    return write[index].substr(19,19)
+  }
+  const third = () =>{
+    return write[index].substr(38,19)
+  }
+  const fouth = () =>{
+    return write[index].substr(57,19)
+  }
+  const fifth = () =>{
+    return write[index].substr(76,19)
+  }
+  const six = () =>{
+    return write[index].substr(95,19)
+  }
 
   return(
       
@@ -264,9 +290,9 @@ function onPressMic(){
 
             <View style={{height:300,alignContent:"center",justifyContent:"center"}}>
               <View style={{height:184.7,width:380,borderTopRightRadius:15,borderTopLeftRadius:15,backgroundColor:"white",alignSelf:"center"}}>
-                <Text style={{color:"#636363",alignSelf:"center",top:15,fontSize:15}}>어제는 많이 바쁘셨나봐요.. 오늘은 즐거운 이음해요!!</Text>
+                <Text style={{color:"#636363",left:25,top:15,fontSize:15}}>{name}님 이음에 오신걸 환영합니다😊</Text>
                 <Text style={{color:"#636363",alignSelf:"flex-start",top:30,fontSize:20, fontWeight:"bold",left:25}}>{months}월 {days}일 이음체크</Text>
-                <Em style={{alignSelf:"center",top:"28%"}}></Em>
+                <Group style={{alignSelf:"center",top:"28%"}}></Group>
               </View>
               <Pressable style={{backgroundColor:"#03CF5D",height:65,width:380,borderBottomLeftRadius:15,borderBottomRightRadius:15,alignSelf:"center",justifyContent:"center"}} onPress={() => {navigation.navigate('Education');}}><Text style={{color:"white",fontSize:25,alignSelf:"center",fontWeight:"bold"}}>학습하러가기</Text></Pressable>
             </View>
@@ -304,14 +330,9 @@ function onPressMic(){
                   <View style={{width:305,height:130.82,borderRadius:15,backgroundColor:"white",alignSelf:"center",bottom:50,justifyContent:"center",marginLeft:40}}>
                     <Image style={styles.image} source={{uri : image}}></Image>
                     <View style={{flexDirection:"row", alignSelf:"center",left:30,bottom:55}}>
-                    <Text style={{color:'#636363',fontSize:15,alignSelf:"center",fontWeight:"bold"}}>사랑하는 우리딸</Text>
-                    <Text style={{color:"#636363",fontSize:14,alignSelf:"center"}}>   읽음</Text>
+                    <Text style={{color:'#636363',fontSize:15,alignSelf:"center",fontWeight:"bold"}}>{opponent}님의 메시지</Text>
                     </View>
-                    <Text style={{color:'black',fontSize:14,alignSelf:"center",left:46,bottom:35}}>2022. 12. 14(월) 오후:{hours}:28분</Text>
-                    <TouchableOpacity style={{width:88.44,height:31.2,backgroundColor:"#03CF5D",borderRadius:8,justifyContent:"center",alignSelf:"flex-end",bottom:20, right:20}}
-                    onPress={() => setModalVisible(!modalVisible)}>
-                    <Text style={{fontSize:16,color:"white",alignSelf:"center"}}>편지 보기</Text>
-                    </TouchableOpacity>
+                    <Text style={{color:'black',fontSize:20,alignSelf:"center",left:46,bottom:35}}>편지함이 비어있어요</Text>
                   </View>
                 ):(
                   day.map((data, index) => {
@@ -319,8 +340,7 @@ function onPressMic(){
                       <View style={{width:305,height:130.82,borderRadius:15,backgroundColor:"white",alignSelf:"center",bottom:50,justifyContent:"center",marginLeft:40}}>
                         <Image style={styles.image} source={{uri : image}}></Image>
                         <View style={{flexDirection:"row", alignSelf:"center",left:30,bottom:55}}>
-                        <Text style={{color:'#636363',fontSize:15,alignSelf:"center",fontWeight:"bold"}}>사랑하는 우리딸</Text>
-                        <Text style={{color:"#636363",fontSize:14,alignSelf:"center"}}>   읽음</Text>
+                        <Text style={{color:'#636363',fontSize:15,alignSelf:"center",fontWeight:"bold"}}>{opponent}님의 메시지</Text>
                         </View>
                         <Text style={{color:'black',fontSize:14,alignSelf:"center",left:46,bottom:35}}>{data}</Text>
                         <TouchableOpacity style={{width:88.44,height:31.2,backgroundColor:"#03CF5D",borderRadius:8,justifyContent:"center",alignSelf:"flex-end",bottom:20, right:20}}
@@ -408,11 +428,28 @@ function onPressMic(){
              { emoti ?<Text style={[styles.modalImage2,{position:"absolute",left:"9.51%",top:"21.64%",bottom:"73.67%"}]}>😊</Text> 
              : <Text style={[styles.modalImage2,{position:"absolute",left:"9.51%",top:"21.64%",bottom:"73.67%"}]}>😭</Text> }
              <View style={{alignSelf:"flex-end",left:110,bottom:40}}>
-               <Text style={{color:"#636363",fontSize:25,fontWeight:"700",}}>사랑하는 우리딸</Text>
+               <Text style={{color:"#636363",fontSize:25,fontWeight:"700",}}>{opponent}</Text>
               <Text style={{color:"#636363",fontSize:15,fontWeight:"400",marginTop:5}}>{day[index]}</Text>
              </View>
             </View>
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>{write[index]}</Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}>
+              <Text style={{fontSize:20,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>{first()}</Text>
+            </View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}>
+              <Text style={{fontSize:20,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>{second()}</Text>
+            </View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}>
+              <Text style={{fontSize:20,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>{third()}</Text>
+            </View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}>
+              <Text style={{fontSize:20,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>{fouth()}</Text>
+            </View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}>
+              <Text style={{fontSize:20,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>{fifth()}</Text>
+            </View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}>
+              <Text style={{fontSize:20,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>{six()}</Text>
+            </View>
             {/* <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>거 기억하고 있지? 대전역에서 부산역으로 </Text></View>
             <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",color:"#636363",left:10}}>KTX타고와! 무궁화는 오래걸려서 힘들</Text></View>
             <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,color:"#636363",alignSelf:"flex-start",color:"#636363",left:10}}>어..기차역 가서 하면 자리 없으니까 학습으</Text></View>
@@ -543,7 +580,7 @@ margin:20},
 
   image: {
     left:5,
-    top:37,
+    top:25,
     width:89.75,
     height:89.75,
     borderRadius:100,

@@ -100,18 +100,6 @@ export default function App() {
             <Stack.Screen name="Tutorial3" component={tutorial3} />
             <Stack.Screen name="Tutorial4" component={tutorial4} />
             <Stack.Screen name="Tutorial5" component={tutorial5} />
-
-
-
-
-
-
-
-
-
-
-
-           
           </Stack.Navigator>
       
         </NavigationContainer>
