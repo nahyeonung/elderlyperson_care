@@ -204,8 +204,8 @@ export default function Main({navigation}){
         })
       })
       setModalVisible2(!modalVisible2)
-      setWrite('')
-      setCategory('')
+      //setWrite('')
+      // setCategory('')
     }
     return(
         <View style={{flex:1, backgroundColor:"white"}}>

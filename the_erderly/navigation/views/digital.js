@@ -1,5 +1,7 @@
 import React, { Component,useEffect, useRef, useState} from 'react';
 import {View, Text, Button, StyleSheet, Pressable,SafeAreaView,Alert,TouchableOpacity,ImageBackground,TextInput} from 'react-native';
+import database from '@react-native-firebase/database';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -10,6 +12,14 @@ export default function Digital({navigation}){
   const [color3,setColor3] = useState(false);
   const [color4,setColor4] = useState(false);
   const [color5,setColor5] = useState(false);
+  const [name, setName] = useState('');
+  const {id} = useSelector(state => state.userReducer);
+
+  useEffect(() => {
+    database().ref('users/'+id).once('value').then(snapshot => {
+      setName(snapshot.val().name)
+    })
+  },[])
   
 
   function boxColor () {
@@ -60,7 +70,7 @@ export default function Digital({navigation}){
         
            
           <View style={{flex:1, flexDirection:"row", justifyContent:"center", alignContent: "center"}}>
-          <Text style={styles.text1}>000님의 {"\n"}디지털 기기 활용도를{"\n"}알려주세요</Text>
+          <Text style={styles.text1}>{name}님의 {"\n"}디지털 기기 활용도를{"\n"}알려주세요</Text>
             <Text style={[styles.text2,{fontWeight:"bold"}]}>연령에 따라 추천 교육이 달라져요</Text>
 
                 <Pressable style={[styles.box,{backgroundColor: color ? "#03CF5D": "#787878"}]} onPress={boxColor}><Text style={styles.text4}>앱 다운로드가 가능해요</Text></Pressable>

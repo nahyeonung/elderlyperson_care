@@ -56,6 +56,7 @@ const [modalVisible, setModalVisible] = useState(false);
 const[mic,setMiC] = useState(true);
 const [spinner, setSpinner] = useState('');
 const [transcript, setResult] = useState('');
+const [modale, setModale] = useState(false);
 database()
 .ref('/users/'+id)
 .once('value')
@@ -96,7 +97,7 @@ function sentiment(index) {
   }));
 
  
-  
+
 }
 useEffect(() => {
   database().ref('/users/'+id+'/message').once('value').then(snapshot => {
@@ -176,7 +177,6 @@ const onSpeechRecognized = (result) => {
   setResult(result.transcript);
   stopRecognizing();
 };
-
 const onSpeechRecognizing = (result) => {
   console.log('onSpeechRecognizing: ', result);
   // setResult(result.transcript);
@@ -249,28 +249,45 @@ function onPressMic(){
     }
   }
   const modal = (index) => {
+    setModale(true);
     sentiment(index);
     setIndex(index)
     setModalVisible(!modalVisible)
   }
 
-  const first = () =>{
-    return  write[index].substr(0,19)
+  function first(){
+    if(modale == true){
+      return  write[index].substr(0,19)
+
+    }
+    // return  write[index].substr(0,19)
   }
-  const second = () =>{
-    return write[index].substr(19,19)
+  function second (){
+    if(modale == true){
+      return write[index].substr(19,19)
+    }
   }
-  const third = () =>{
-    return write[index].substr(38,19)
+  function third  (){
+    if(modale == true){
+
+      return write[index].substr(38,19)
+    }
   }
-  const fouth = () =>{
-    return write[index].substr(57,19)
+  function fouth  () {
+    if(modale == true){
+      return write[index].substr(57,19)
+
+    }
   }
-  const fifth = () =>{
-    return write[index].substr(76,19)
+  function fifth  () {
+    if(modale == true){
+      return write[index].substr(76,19)
+    }
   }
-  const six = () =>{
-    return write[index].substr(95,19)
+  function six  () {
+    if(modale == true){
+      return write[index].substr(95,19)
+    }
   }
 
   return(
@@ -297,7 +314,7 @@ function onPressMic(){
               <Pressable style={{backgroundColor:"#03CF5D",height:65,width:380,borderBottomLeftRadius:15,borderBottomRightRadius:15,alignSelf:"center",justifyContent:"center"}} onPress={() => {navigation.navigate('Education');}}><Text style={{color:"white",fontSize:25,alignSelf:"center",fontWeight:"bold"}}>학습하러가기</Text></Pressable>
             </View>
             <View style={{height:110}}>
-              <Text style={{alignSelf:"flex-start",color:"#787878",fontWeight:"bold",fontSize:20,top:15,left:20}}>오늘의 추천 콘텐츠 키워드 !</Text>
+              <Text style={{alignSelf:"flex-start",color:"#787878",fontWeight:"bold",fontSize:20,top:15,left:20}}>추천 콘텐츠 키워드 !</Text>
               <ScrollView style={{}}horizontal={true}>
                 <Pressable style={styles.key}>
                   <Text style={styles.text99}>길찾기</Text>
@@ -421,7 +438,7 @@ function onPressMic(){
           }}
         >
 
-
+        {modale?(
           <View style={{width:358.16,height:429.52,backgroundColor:"white",alignSelf:"center",borderTopLeftRadius:15,borderTopRightRadius:15, top:80}}>
             <View style={{height:150,flexDirection:"row"}}>
               <Xcode style={{left:320,top:10}} onPress={() => setModalVisible(!modalVisible)}></Xcode>
@@ -455,15 +472,20 @@ function onPressMic(){
             <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,color:"#636363",alignSelf:"flex-start",color:"#636363",left:10}}>어..기차역 가서 하면 자리 없으니까 학습으</Text></View>
             <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363"}}>로 한번해보고 폰으로 미리 예매해서 좋은</Text></View>
             <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center"}}><Text style={{fontSize:16,alignSelf:"flex-start",color:"#636363",left:10}}>자리 타고오세요♥!!</Text></View> */}
-            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center",borderBottomWidth:1}}><Text style={{fontSize:18,alignSelf:"flex-start",color:"#636363",left:10,fontWeight:"bold"}}>편지내용의 긍정도가 {percent}%입니다 🤗</Text></View>
+            <View style={{backgroundColor:"white",borderTopWidth:1,borderColor:"#787878",height:34.32,width:317.82,alignSelf:"center",justifyContent:"center",borderBottomWidth:1}}><Text style={{fontSize:18,alignSelf:"flex-start",color:"#636363",left:10,fontWeight:"bold"}}>편지내용의 긍정도가 {percent}%입니다</Text></View>
             
            
             
   
           </View>
-          <Pressable style={{width:358.16,height:77.8,backgroundColor:"#03CF5D",borderBottomRightRadius:15,borderBottomLeftRadius:15,left:27,top:77,justifyContent:"center"}} onPress={() => gihyeok()}>
+          
+
+        ):(
+          null
+        )}
+        <Pressable style={{width:358.16,height:77.8,backgroundColor:"#03CF5D",borderBottomRightRadius:15,borderBottomLeftRadius:15,left:27,top:77,justifyContent:"center"}} onPress={() => gihyeok()}>
             <Text style={{color:"white",fontWeight:"bold",fontSize:20,alignSelf:"center"}} >학습하러 가기</Text>
-          </Pressable>
+        </Pressable>
            
         </Modal>
 

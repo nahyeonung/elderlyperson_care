@@ -37,8 +37,8 @@ export default function Relation({route,navigation}) {
                     setSelected={(val) => setSelected(val)}
                     data={data}
                     boxStyles={{width:288.02,height:55}}
-                    inputStyles={{fontSize:20}}
-                    dropdownTextStyles={{fontSize:20}}
+                    inputStyles={{color:'black',fontSize:20}}
+                    dropdownTextStyles={{color:'black',fontSize:20}}
                     defaultOption={{key:'0', value:'선택하기'}}
                     save="value" />
                 <TouchableOpacity
