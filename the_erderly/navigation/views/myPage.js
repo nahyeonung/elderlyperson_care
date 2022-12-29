@@ -37,11 +37,13 @@ export default function MyPage({navigation}){
             console.log(message);
             database()
             .ref('users/')
-            .on('value', snapshot => {
-              if(message){
+            .once('value')
+            .then(snapshot => {
+              if(snapshot.val()){
                 navigation.navigate('View1');
               }
-            });
+            })
+            // navigation.navigate('View1');
           }else if(sign == 1){
             dispatch(setId(''));
             dispatch(setFriendId(''));
