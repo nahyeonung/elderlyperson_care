@@ -33,11 +33,19 @@ export default function EmLogin({navigation}) {
                 if(snapshot.val().id == null){
                     dispatch(setId(snapshot.val().phone))
                     dispatch(setSign(1))
-                    navigation.navigate('Find')  
+                    if(snapshot.val().who == '자녀(딸 혹은 아들)'){
+                        navigation.navigate('Main')
+                    }else{
+                        navigation.navigate('Find')  
+                    }
                 }else{
                     dispatch(setId(snapshot.val().id))
                     dispatch(setSign(1))
-                    navigation.navigate('Find')
+                    if(snapshot.val().who == '자녀(딸 혹은 아들)'){
+                        navigation.navigate('Main')
+                    }else{
+                        navigation.navigate('Find')
+                    }
                 }
             }
             

@@ -225,8 +225,7 @@ export default function Main({navigation}){
             <Pressable style={styles.Button_div}>
                 <Text style={styles.text5}>{name}님</Text>
                 <Text></Text>
-                <Text style={{color:"#636363"}}>부모님께 추천하는 교육 카테고리를 설정한 후, 카테고리와 관련된 추억의 편지를 적어봐요. 부모님께서 편지도 읽으시고 해당 교육도 받으실 수 있어요.</Text>
-                <Text style={{color:"#636363"}}></Text>
+                <Text style={{color:"#636363"}}>부모님께 추천하는 교육 카테고리를 설정한 후, 카테고리와 관련된 추억의 편지를 적어봐요.</Text>
 
             </Pressable>
         </View>
@@ -351,7 +350,7 @@ export default function Main({navigation}){
 
 const styles = StyleSheet.create({
 
-    text1: {fontSize:30, fontWeight:"bold", color: 'black', marginRight: 100, marginTop: 0,color:"#636363"},
+    text1: {fontSize:30, fontWeight:"bold", color: 'black', marginRight: 40, marginTop: 0,color:"#636363"},
     text2: {fontWeight:"bold", marginRight: 40, marginTop:30},
   
     text3: {fontWeight:"bold", fontSize: 13, marginBottom: 20},
@@ -432,7 +431,7 @@ const styles = StyleSheet.create({
                                    
      Button_div: { borderRadius: 15,  borderColor: '', backgroundColor:"#F8F8F8", 
              
-              width: 140, height: 150, margin: 5 , alignItems:'center' ,justifyContent: "center",marginRight:60 ,marginTop:40},                    
+              width: 140, height: 150, margin: 35 , alignItems:'center' ,justifyContent: "center",marginRight:60 ,marginTop:40},                    
     
     
      Button_letter: { borderBottomLeftRadius:15, borderBottomRightRadius:15, borderColor: '', backgroundColor:"#03CF5D", 
@@ -444,14 +443,15 @@ const styles = StyleSheet.create({
         width:412  , height:168.18 , borderRadius:20 , backgroundColor: "#F8F8F8" 
     },
     image:{
-        width: 110,
-        height: 110,
+        width: 120,
+        height: 120,
         resizeMode: "cover",
         borderRadius: 100,
         borderWidth: 3,
         alignItems:'center' ,
         justifyContent: "center" ,
-        margin:50
+        marginLeft:50,
+        marginTop:50,
       }
 ,
       box:{ width:288.02, height: 50.66, borderRadius:20, borderColor: "#787878",justifyContent:"center",alignSelf:"center",marginTop:"5%",
