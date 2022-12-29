@@ -12,7 +12,7 @@ import Xcode from '../../src/svgFile/xcode.svg';
 import Sta from '../../src/svgFile/sta.svg';
 import Pro from '../../src/svgFile/pro.svg';
 import Ddot from '../../src/svgFile/ddot.svg';
-import Group from '../../src/svgFile/group.svg'
+import Eumcheck from '../../src/svgFile/eumcheck.svg'
 import Sam from '../../src/svgFile/sam.svg';
 import axios from 'axios';
 
@@ -309,7 +309,7 @@ function onPressMic(){
               <View style={{height:184.7,width:380,borderTopRightRadius:15,borderTopLeftRadius:15,backgroundColor:"white",alignSelf:"center"}}>
                 <Text style={{color:"#636363",left:25,top:15,fontSize:15}}>{name}님 이음에 오신걸 환영합니다😊</Text>
                 <Text style={{color:"#636363",alignSelf:"flex-start",top:30,fontSize:20, fontWeight:"bold",left:25}}>{months}월 {days}일 이음체크</Text>
-                <Group style={{alignSelf:"center",top:"28%"}}></Group>
+                <Eumcheck style={{alignSelf:"center",top:"28%"}}></Eumcheck>
               </View>
               <Pressable style={{backgroundColor:"#03CF5D",height:65,width:380,borderBottomLeftRadius:15,borderBottomRightRadius:15,alignSelf:"center",justifyContent:"center"}} onPress={() => {navigation.navigate('Education');}}><Text style={{color:"white",fontSize:25,alignSelf:"center",fontWeight:"bold"}}>학습하러가기</Text></Pressable>
             </View>
