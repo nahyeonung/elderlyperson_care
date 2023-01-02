@@ -15,3 +15,25 @@
 
 # :bar_chart: Flow-chart
 ![플로우](https://user-images.githubusercontent.com/70554776/210027665-52e2a486-6abb-46cb-847a-1cf81a31552c.svg)
+
+# :four_leaf_clover: Member
+|이름|역할|
+|--|--|
+|이진주|Leader|
+|김소현|Designer|
+|김기혁|Developer|
+|나현웅|Developer|
+|남수민|Designer|
+|소정현|Product Manager|
+|정영호|Liaison|
+|정지운|3D Designer|
+
+# :four_leaf_clover: Video
+<h>Prototype(1:26:21) : </h> <https://youtu.be/yVNZEqiKkiY?t=5181>
+
+<h>Prototype Discription(3D video) : </h> <https://www.youtube.com/watch?v=kaKJB32TFgc>
+
+# :four_leaf_clover: Introduce
+![이음 소개](https://user-images.githubusercontent.com/70554776/210189637-bcdc01cb-904a-40dc-8437-1992513e1085.svg)
+![교육 기능](https://user-images.githubusercontent.com/70554776/210189664-3e4caf36-ae7d-4157-98b6-09d85992c9fc.svg)
+![편지 기능](https://user-images.githubusercontent.com/70554776/210189671-4e31a4de-38eb-4bbc-844e-97c6c7599360.svg)
