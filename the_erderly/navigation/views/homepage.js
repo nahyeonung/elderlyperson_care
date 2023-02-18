@@ -134,7 +134,7 @@ useEffect(() => {
   });
 }, []);
 useEffect(() => {
-  GoogleCloudSpeechToText.setApiKey('AIzaSyBMnUbVg1fC9fuhiffj_5OoQYYtLn6Uzvc');
+  GoogleCloudSpeechToText.setApiKey('api키 입력');
   GoogleCloudSpeechToText.onVoice(onVoice);
   GoogleCloudSpeechToText.onVoiceStart(onVoiceStart);
   GoogleCloudSpeechToText.onVoiceEnd(onVoiceEnd);
